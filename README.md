@@ -20,6 +20,8 @@ O projeto OCS-Magento-Brasil é uma iniciativa que visa o desenvolvimento de um 
 * Denis Spalenza
 
 <h2>Novidades</h2>
+Obs: O módulo foi totalmente rescrito visando a padronização e o aumento das conversões e performance.
+
 * Validação do CPF/CNPJ cross browser;
 * Validação de e-mail já registrado;
 * Validação de CFP/CNPJ já registrado;
