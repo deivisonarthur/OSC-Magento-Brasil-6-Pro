@@ -9,7 +9,10 @@ O projeto OCS-Magento-Brasil é uma iniciativa para traduzir e adaptar o módulo
 
 **Versão 6.0 é a mais recente do projeto One Step Checkout 2014**
 
-[Site Oficial do projeto](http://onestepcheckout.com.br)
+<h2>Links</h2>
+* [Blog Deivison.com.br](http://www.deivison.com.br)
+* [Startup Inovarti](http://www.inovarti.com.br)
+* [Site Oficial do projeto](http://onestepcheckout.com.br)
 
 <h2>Developers Mantenedores</h2>
 
