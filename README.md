@@ -58,43 +58,45 @@ O projeto OCS-Magento-Brasil é uma iniciativa para traduzir e adaptar o módulo
 <img src="http://www.inovarti.com.br/osc/OSC6-Informacoes-da-conta.png" alt="One Step Checkout Informações da Conta" title="One Step Checkout Informações da Conta" />
 
 
-<h1>Faça sempre backup antes de realizar qualquer modificação!</h1>
+
+<img src="http://www.inovarti.com.br/osc/atencao.png" alt="Atenção! Faça sempre backup antes de realizar qualquer modificação! E sempre teste em um ambiente de desenvolvimento!" title="Atenção! Faça sempre backup antes de realizar qualquer modificação! E sempre teste em um ambiente de desenvolvimento!" />
+
 
 <h2>Tutoriais e Observações</h2>
 
 **A - Habilitando os campos de endereços**
 **********************************************************************************************
-**A-1 - Visite a página:**
+**A1 - Visite a página:**
 Admin : Sistema > Configuração > Clientes > Configuração > "Opções de Nome e Endereço" > 
 
-**A-2 - Aletera para:**
+**A2 - Aletera para:**
 * Número de Linhas p/ Endereço:4
 * Exibir Data de Nascimento:Opcional
 * Exibir CPF/CNPJ:Obrigatorio
 * Exibir Sexo:Opcional
 
-**Ou seja, ficará assim:**
-1 street1 = endereço
-2 street2 = numero
-3 street3 = complemento
-4 street4 = bairro
+Ou seja, ficará assim:
+- street1 = endereço
+- street2 = numero
+- street3 = complemento
+- street4 = bairro
 
 
 **B - Habilite o Estado como obrigatório:**
 **********************************************************************************************
-**B-1 - Visite a página:**
+**B1 - Visite a página:**
 Admin : Sistema > Configuração "Aba Geral " > Opção de estado "Estado é necessário para" >
 
-**B-2 - Selecione:**
+**B2 - Selecione:**
 Brasil
 
 
 **C - Habilite o taxvat e coloque como obrigatório:**
 **********************************************************************************************
-**C-1 - Visite a página:**
+**C1 - Visite a página:**
 Admin : Sistema > Configuração > Clientes > Configuração > "Opções ao Criar Nova Conta"
 
-**C-2 - Selecione:**
+**C2 - Selecione:**
 Exibir CPF/CNPJ no Frontend: Sim
 
 
