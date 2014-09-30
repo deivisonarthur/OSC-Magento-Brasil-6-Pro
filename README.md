@@ -34,6 +34,8 @@ O projeto OCS-Magento-Brasil é uma iniciativa para traduzir e adaptar o módulo
 * Padronização de todo o código fonte;
 * Responsivo com Bootstrap;
 
+<img src="http://www.inovarti.com.br/osc/atencao2.png" alt="Atenção! Faça sempre backup antes de realizar qualquer modificação! E sempre teste em um ambiente de desenvolvimento!" title="Atenção! Faça sempre backup antes de realizar qualquer modificação! E sempre teste em um ambiente de desenvolvimento!" />
+
 <h2>Visões de demostração do OSC 6</h2>
 
 **1 - Registro(Cadastro)**
