@@ -1,6 +1,8 @@
 <h1>One Step Checkout Brasil 6 Pro</h1>
 **by Inovarti**
 
+O projeto OCS-Magento-Brasil é uma iniciativa para traduzir e adaptar o módulo de OSC(One Step Checkout) do Magento incluindo opções básicas para o funcionamento nas lojas brasileiras. 
+
 **Versão 6.0 é a mais recente do projeto One Step Checkout 2014**
 
 [Site Oficial do projeto](http://onestepcheckout.com.br)
@@ -18,6 +20,9 @@
 * Validação de CFP/CNPJ já registrado;
 * CPF/CNPJ usando o Taxvat;
 * Seleção do tipo pessoa;
+* Adição de todos os estados do Brasil;
+* Uso do campo Fax como Celular;
+* Formatação dos campos do Telefone e Celular cross browser; 
 * Uso do campo firstname como Razão Social para seleção de PJ;
 * Uso do campo lastname como Nome Fantansia para seleção de PJ;
 * Opção de autenticação antes de ir para o checkout;
@@ -52,78 +57,46 @@
 **7 - Informações da Conta**
 <img src="http://www.inovarti.com.br/osc/OSC6-Informacoes-da-conta.png" alt="One Step Checkout Informações da Conta" title="One Step Checkout Informações da Conta" />
 
-<h2>Tutorial e Observações</h2>
 
-<blockquote>
-street1 = endereço
-street2 = numero
-street3 = complemento
-street4 = bairro
-</blockquote>
+<h1>Faça sempre backup antes de realizar qualquer modificação!</h1>
+
+<h2>Tutoriais e Observações</h2>
+
+**A - Habilitando os campos de endereços**
 **********************************************************************************************
-Primeiro passo
+**A-1 - Visite a página:**
+Admin : Sistema > Configuração > Clientes > Configuração > "Opções de Nome e Endereço" > 
+
+**A-2 - Aletera para:**
+* Número de Linhas p/ Endereço:4
+* Exibir Data de Nascimento:Opcional
+* Exibir CPF/CNPJ:Obrigatorio
+* Exibir Sexo:Opcional
+
+**Ou seja, ficará assim:**
+1 street1 = endereço
+2 street2 = numero
+3 street3 = complemento
+4 street4 = bairro
 
 
-Habilitar o Estado como obrigatorio
-
-Admin : Sistema > Configuração "Aba Geral " > Opção de estado "Estado é necessário para" > seleciona Brasil
-
-==============================
-Campo Fax estou usando como Celular
-
+**B - Habilite o Estado como obrigatório:**
 **********************************************************************************************
-Segundo passo
+**B-1 - Visite a página:**
+Admin : Sistema > Configuração "Aba Geral " > Opção de estado "Estado é necessário para" >
 
-Habilitar o taxvat em clientes em:
+**B-2 - Selecione:**
+Brasil
 
-Sistema > Configuração > Clientes > Configuração > "Opções ao Criar Nova Conta" > Exibir CPF/CNPJ no Frontend:Sim
-Sistema > Configuração > Clientes > Configuração > "Opções de Nome e Endereço" > 
-    Número de Linhas p/ Endereço:4
-    Exibir Data de Nascimento:Opcional
-    Exibir CPF/CNPJ:Obrigatorio
-    Exibir Sexo:Opcional
 
+**C - Habilite o taxvat e coloque como obrigatório:**
 **********************************************************************************************
-OBSERVAÇÕES
+**C-1 - Visite a página:**
+Admin : Sistema > Configuração > Clientes > Configuração > "Opções ao Criar Nova Conta"
+
+**C-2 - Selecione:**
+Exibir CPF/CNPJ no Frontend: Sim
 
 
 
-**********************************************************************************************
-CRIDO UM RADIO E OCULTADO O TIPO DE PESSOAS, O QUE CADASTRA É O TIPO DE PESSOA O RADIO É APENAS VISUAL
-**********************************************************************************************
-PARA BILLING OU SHIPPING
 
-<blockquote>
-<?php $_tipopessoa = $this->getLayout()->createBlock('customer/widget_tipopessoa') ?>
-<?php if ($_tipopessoa->isEnabled()): ?>
-<li class="control"><?php echo $_tipopessoa->setTipopessoa($this->getDataFromSession('tipopessoa'))->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?></li>
-<?php endif ?>
-</blockquote>
-
-
-OU SIMPLESMENTE
-
-<?php $_tipopessoa = $this->getLayout()->createBlock('customer/widget_tipopessoa') ?>
-
-<?php if ($_tipopessoa->isEnabled()): ?><li><?php echo $_tipopessoa->setTipopessoa($this->getCustomer()->getTipopessoa())->toHtml() ?></li><?php endif ?>
-**********************************************************************************************
-Campo celular
-
-<?php $_celular = $this->getLayout()->createBlock('customer/widget_celular') ?>
-
-<?php if ($_celular->isEnabled()): ?>
-
-    <div class="field">
-        <?php echo $_celular->setDate($this->getQuote()->getCustomerCelular())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?>
-    </div>
-
-<?php endif ?>
-
-**********************************************************************************************
-CNPJ
-
-firstname= Razão social
-
-lastname = Nome Fantansia
-
-**********************************************************************************************
