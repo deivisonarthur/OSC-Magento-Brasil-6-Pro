@@ -122,6 +122,8 @@ Admin : Sistema > Configuração > Clientes > Configuração > "Opções ao Cria
 **C2 - Selecione:**
 Exibir CPF/CNPJ no Frontend: Sim
 
+<img src="http://www.inovarti.com.br/osc/atencao2.png" alt="Atenção! Faça sempre backup antes de realizar qualquer modificação! E sempre teste em um ambiente de desenvolvimento!" title="Atenção! Faça sempre backup antes de realizar qualquer modificação! E sempre teste em um ambiente de desenvolvimento!" />
+
 
 <img src="http://www.inovarti.com.br/gostou.png" alt="Faça uma doação" title="Faça uma doação" />
 **********************************************************************************************
