@@ -1,7 +1,7 @@
 <h1>One Step Checkout Brasil 6 Pro</h1>
 **[powered by](http://www.inovarti.com.br)**
 
-![](http://www.inovarti.com.br/osc/inovarti.png)
+![http://www.inovarti.com.br/osc/inovarti.png](http://www.inovarti.com.br)
 
 
 O projeto OCS-Magento-Brasil é uma iniciativa para traduzir e adaptar o módulo de OSC(One Step Checkout) do Magento incluindo opções básicas para o funcionamento nas lojas brasileiras. 
@@ -49,6 +49,7 @@ O projeto OCS-Magento-Brasil é uma iniciativa para traduzir e adaptar o módulo
     $ modgit add pagarme git@github.com:deivisonarthur/OSC-Magento-Brasil-6-Pro.git
 
 **Instalação manual enviando os arquivos**
+
 *Baixe a ultima versão aqui, descompacte o arquivo baixado e copie as pastas app, js e skin para dentro do diretório principal do Magento
 *Limpe a cache em Sistema > Gerenciamento de Cache
 
