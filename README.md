@@ -3,7 +3,7 @@
 
 <img src="http://www.inovarti.com.br/osc/inovarti.png" alt="Inovarti One Step Checkout Brasil 6" title="Inovarti One Step Checkout Brasil 6" />
 
-O projeto OCS-Magento-Brasil é uma iniciativa para traduzir e adaptar o módulo de OSC(One Step Checkout) do Magento incluindo opções básicas para o funcionamento nas lojas brasileiras. 
+O projeto OCS-Magento-Brasil é uma iniciativa que visa o desenvolvimento de um módulo de OSC (One Step Checkout) para o Magento incluindo opções e configurações básicas para o funcionamento nas lojas brasileiras, tais como: validações, formatações, CPF, CNPJ, Celular, busca CEP,...
 
 **Versão 6.0 é a mais recente do projeto One Step Checkout 2014**
 
