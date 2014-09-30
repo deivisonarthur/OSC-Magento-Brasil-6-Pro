@@ -12,17 +12,27 @@
 * Michel Brito
 * Denis Spalenza
 
-<h2>Visão demo estilizada do OSC 6</h2>
+<h2>Visões de demostração do OSC 6</h2>
 
-<img src="http://cl.ly/image/3v453g010u2E" alt="One Step Checkout estilizado" title="One Step Checkout estilizado" />
+**Registro(Cadastro)**
+* Com validação do CPF/CNPJ;
+* Validação de e-mail já registrado;
+* Validação de CFP/CNPJ já registrado;
+* CPF/CNPJ usando o Taxvat;
+* Seleção do tipo pessoa;
 
+<img src="http://www.inovarti.com.br/osc/OSC6-Cadastro.png" alt="One Step Checkout estilizado" title="One Step Checkout estilizado" />
+**Verificação se o e-mail, CPF e CNPJ são únicos, ou seja, se já possui registro**
+<img src="http://www.inovarti.com.br/osc/OSC6-Cadastro-Validacao.png" alt="Verificação se o e-mail, CPF e CNPJ são únicos, ou seja, se já possui registro" title="Verificação se o e-mail, CPF e CNPJ são únicos, ou seja, se já possui registro" />
 
 <h2>Tutorial e Observações</h2>
 
+<blockquote>
 street1 = endereço
 street2 = numero
 street3 = complemento
 street4 = bairro
+</blockquote>
 **********************************************************************************************
 Primeiro passo
 
@@ -56,12 +66,12 @@ CRIDO UM RADIO E OCULTADO O TIPO DE PESSOAS, O QUE CADASTRA É O TIPO DE PESSOA 
 **********************************************************************************************
 PARA BILLING OU SHIPPING
 
-
-	<?php $_tipopessoa = $this->getLayout()->createBlock('customer/widget_tipopessoa') ?>
-    <?php if ($_tipopessoa->isEnabled()): ?>
-    <li class="control"><?php echo $_tipopessoa->setTipopessoa($this->getDataFromSession('tipopessoa'))->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?></li>
-    <?php endif ?>
-
+<blockquote>
+<?php $_tipopessoa = $this->getLayout()->createBlock('customer/widget_tipopessoa') ?>
+<?php if ($_tipopessoa->isEnabled()): ?>
+<li class="control"><?php echo $_tipopessoa->setTipopessoa($this->getDataFromSession('tipopessoa'))->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?></li>
+<?php endif ?>
+</blockquote>
 
 
 OU SIMPLESMENTE
