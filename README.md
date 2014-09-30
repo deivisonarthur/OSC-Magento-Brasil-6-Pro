@@ -106,7 +106,7 @@ Admin : Sistema > Configuração > Clientes > Configuração > "Opções ao Cria
 Exibir CPF/CNPJ no Frontend: Sim
 
 
-<h2>Gostou do módulo?</h2>
+<img src="http://www.inovarti.com.br/gostou.png" alt="Faça uma doação" title="Faça uma doação" />
 **********************************************************************************************
 Se você gostou, se foi útil para você, se fez você economizar aquela grana pois estava prestes a pagar caro por aquele módulo pago, pois não achava um solução gratuita que te atendesse e queira prestigiar o trabalho feito efetuando uma doação de qualquer valor, não vou negar e vou ficar grato, você pode fazer isso utilizando o Pagseguro no site ofical do projeto: [Site Oficial do projeto](http://onestepcheckout.com.br)
 
