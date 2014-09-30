@@ -42,6 +42,8 @@ O projeto OCS-Magento-Brasil é uma iniciativa para traduzir e adaptar o módulo
 
 <h2>Instalação</h2>
 
+<img src="http://www.inovarti.com.br/osc/atencao2.png" alt="Atenção! Faça sempre backup antes de realizar qualquer modificação! E sempre teste em um ambiente de desenvolvimento!" title="Atenção! Faça sempre backup antes de realizar qualquer modificação! E sempre teste em um ambiente de desenvolvimento!" />
+
 **Instalar usando o modgit:**
 
     $ cd /path/to/magento
@@ -54,7 +56,7 @@ O projeto OCS-Magento-Brasil é uma iniciativa para traduzir e adaptar o módulo
 *Limpe a cache em Sistema > Gerenciamento de Cache
 
 
-<img src="http://www.inovarti.com.br/osc/atencao2.png" alt="Atenção! Faça sempre backup antes de realizar qualquer modificação! E sempre teste em um ambiente de desenvolvimento!" title="Atenção! Faça sempre backup antes de realizar qualquer modificação! E sempre teste em um ambiente de desenvolvimento!" />
+<img src="http://www.inovarti.com.br/osc/atencao.png" alt="Atenção! Faça sempre backup antes de realizar qualquer modificação! E sempre teste em um ambiente de desenvolvimento!" title="Atenção! Faça sempre backup antes de realizar qualquer modificação! E sempre teste em um ambiente de desenvolvimento!" />
 
 <h2>Visões de demostração do OSC 6</h2>
 
