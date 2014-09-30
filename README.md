@@ -1,7 +1,22 @@
-Inovarti_osc
-============
+<h1>One Step Checkout Brasil 6 Pro by Inovarti</h1>
 
-Observações
+**Versão 6.0 é a mais recente do projeto One Step Checkout 2014**
+
+[Site Oficial do projeto](http://onestepcheckout.com.br)
+
+<h2>Developers Mantenedores</h2>h2>
+
+* Deivison Arthur
+* Isaac Lopes
+* Michel Brito
+* Denis Spalenza
+
+<h2>Visão demo estilizada do OSC 6</h2>
+
+<img src="http://www.inovarti.com.br/osc.png" alt="One Step Checkout estilizado" title="One Step Checkout estilizado" />
+
+
+<h2>Tutorial e Observações<h2>
 
 street1 = endereço
 street2 = numero
@@ -40,13 +55,13 @@ CRIDO UM RADIO E OCULTADO O TIPO DE PESSOAS, O QUE CADASTRA É O TIPO DE PESSOA 
 **********************************************************************************************
 PARA BILLING OU SHIPPING
 
-<?php $_tipopessoa = $this->getLayout()->createBlock('customer/widget_tipopessoa') ?>
 
-<?php if ($_tipopessoa->isEnabled()): ?>
+	<?php $_tipopessoa = $this->getLayout()->createBlock('customer/widget_tipopessoa') ?>
+    <?php if ($_tipopessoa->isEnabled()): ?>
+    <li class="control"><?php echo $_tipopessoa->setTipopessoa($this->getDataFromSession('tipopessoa'))->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?></li>
+    <?php endif ?>
 
-	<li class="control"><?php echo $_tipopessoa->setTipopessoa($this->getDataFromSession('tipopessoa'))->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?></li>
 
-<?php endif ?>
 
 OU SIMPLESMENTE
 
