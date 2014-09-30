@@ -1,10 +1,11 @@
-<h1>One Step Checkout Brasil 6 Pro by Inovarti</h1>
+<h1>One Step Checkout Brasil 6 Pro</h1>
+**by Inovarti**
 
 **Versão 6.0 é a mais recente do projeto One Step Checkout 2014**
 
 [Site Oficial do projeto](http://onestepcheckout.com.br)
 
-<h2>Developers Mantenedores</h2>h2>
+<h2>Developers Mantenedores</h2>
 
 * Deivison Arthur
 * Isaac Lopes
@@ -16,7 +17,7 @@
 <img src="http://www.inovarti.com.br/osc.png" alt="One Step Checkout estilizado" title="One Step Checkout estilizado" />
 
 
-<h2>Tutorial e Observações<h2>
+<h2>Tutorial e Observações</h2>
 
 street1 = endereço
 street2 = numero
