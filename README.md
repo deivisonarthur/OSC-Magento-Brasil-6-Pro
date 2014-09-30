@@ -14,7 +14,7 @@
 
 <h2>Visão demo estilizada do OSC 6</h2>
 
-<img src="http://www.inovarti.com.br/osc.png" alt="One Step Checkout estilizado" title="One Step Checkout estilizado" />
+<img src="http://cl.ly/image/3v453g010u2E" alt="One Step Checkout estilizado" title="One Step Checkout estilizado" />
 
 
 <h2>Tutorial e Observações</h2>
