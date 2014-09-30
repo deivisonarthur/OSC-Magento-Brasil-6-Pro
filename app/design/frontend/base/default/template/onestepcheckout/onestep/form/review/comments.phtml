@@ -1,0 +1,19 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Onestepcheckout
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?><?php if ($this->canShow()): ?>
+<div id="onestepcheckout-review-comments">
+   <?php echo $this->getChildHtml('simple');?>
+</div>
+<script type="text/javascript">
+    var OSCReviewComments = new OnestepcheckoutReviewComments({
+        containerSelector: "#onestepcheckout-review-comments",
+        newRowCount: 5,
+        saveValuesUrl: <?php echo Zend_Json::encode($this->getSaveFormValuesUrl());?>
+    });
+</script>
+<?php endif;?>

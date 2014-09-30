@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <onestepcheckout_index_index translate="label">
+        <label>One Step Checkout</label>
+        <remove name="left"/>
+        <remove name="right"/>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="head">
+            <action method="addJs"><script>onestepcheckout/validation.js</script></action>
+            <action method="addJs"><script>onestepcheckout/onestepcheckout.js</script></action>
+            <action method="addJs"><script>onestepcheckout/login.js</script></action>
+            <action method="addJs"><script>onestepcheckout/address.js</script></action>
+            <action method="addJs"><script>onestepcheckout/shipment.js</script></action>
+            <action method="addJs"><script>onestepcheckout/payment.js</script></action>
+            <action method="addJs"><script>onestepcheckout/review.js</script></action>
+            <action method="addJs"><script>onestepcheckout/form.js</script></action>
+            <action method="addItem"><type>skin_css</type><name>onestepcheckout/css/onestepcheckout.css</name></action>
+
+        </reference>
+        <reference name="content">
+            <block type="onestepcheckout/onestep" name="onestepcheckout.onestep" template="onestepcheckout/onestep.phtml">
+                <!-- ROWS -->
+                <block type="onestepcheckout/onestep_title" name="onestepcheckout.onestep.title" as="title" template="onestepcheckout/onestep/title.phtml"/>
+                <block type="onestepcheckout/onestep_authentification" name="onestepcheckout.onestep.auth" as="auth" template="onestepcheckout/onestep/authentification.phtml"/>
+
+                <!-- LEFT COLUMN -->
+                <block type="onestepcheckout/onestep_form_address" name="onestepcheckout.onestep.form.address" as="address" template="onestepcheckout/onestep/form/address.phtml">
+                    <block type="onestepcheckout/onestep_form_address_billing" name="onestepcheckout.onestep.form.address.billing" as="billing" template="onestepcheckout/onestep/form/address/billing.phtml">
+                        <block type="core/text_list" name="onestepcheckout.onestep.form.address.billing.extra" as="extra"/>
+                    </block>
+                    <block type="onestepcheckout/onestep_form_address_shipping" name="onestepcheckout.onestep.form.address.shipping" as="shipping" template="onestepcheckout/onestep/form/address/shipping.phtml">
+                        <block type="core/text_list" name="onestepcheckout.onestep.form.address.shipping.extra" as="extra"/>
+                    </block>
+                </block>
+
+
+                <!-- MIDDLE COLUMN -->
+                <block type="onestepcheckout/onestep_form_shippingmethod" name="onestepcheckout.onestep.form.shippingmethod" as="shippingmethod" template="onestepcheckout/onestep/form/shipping_method.phtml">
+                    <block type="core/text_list" name="onestepcheckout.onestep.form.shippingmethod.extra" as="extra"/>
+                </block>
+                <block type="onestepcheckout/onestep_form_paymentmethod" name="onestepcheckout.onestep.form.paymentmethod" as="paymentmethod" template="onestepcheckout/onestep/form/payment_method.phtml">
+                    <block type="core/text_list" name="onestepcheckout.onestep.form.paymentmethod.extra" as="extra"/>
+                </block>
+
+                <!-- RIGHT COLUMN -->
+                <block type="onestepcheckout/onestep_form_review_cart" name="onestepcheckout.onestep.form.review.cart" as="review.cart" template="onestepcheckout/onestep/form/review/cart.phtml">
+                    <action method="addItemRender">
+                        <type>default</type>
+                        <block>checkout/cart_item_renderer</block>
+                        <template>onestepcheckout/onestep/form/review/cart/renderer/item.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>grouped</type>
+                        <block>checkout/cart_item_renderer_grouped</block>
+                        <template>onestepcheckout/onestep/form/review/cart/renderer/item.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>configurable</type>
+                        <block>checkout/cart_item_renderer_configurable</block>
+                        <template>onestepcheckout/onestep/form/review/cart/renderer/item.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>bundle</type>
+                        <block>bundle/checkout_cart_item_renderer</block>
+                        <template>onestepcheckout/onestep/form/review/cart/renderer/item.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>downloadable</type>
+                        <block>downloadable/checkout_cart_item_renderer</block>
+                        <template>onestepcheckout/onestep/form/review/cart/renderer/downloadable.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>subscription_simple</type>
+                        <block>sarp/checkout_cart_item_renderer_simple</block>
+                        <template>onestepcheckout/onestep/form/review/cart/renderer/item.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>subscription_configurable</type>
+                        <block>sarp/checkout_cart_item_renderer_configurable</block>
+                        <template>onestepcheckout/onestep/form/review/cart/renderer/item.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>subscription_downloadable</type>
+                        <block>sarp/checkout_cart_item_renderer_downloadable</block>
+                        <template>onestepcheckout/onestep/form/review/cart/renderer/downloadable.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>subscription_grouped</type>
+                        <block>sarp/checkout_cart_item_renderer_grouped</block>
+                        <template>onestepcheckout/onestep/form/review/cart/renderer/item.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>subscription_virtual</type>
+                        <block>sarp/checkout_cart_item_renderer_virtual</block>
+                        <template>onestepcheckout/onestep/form/review/cart/renderer/item.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>bookable</type>
+                        <block>booking/checkout_cart_item_renderer</block>
+                        <template>onestepcheckout/onestep/form/review/cart/renderer/item.phtml</template>
+                    </action>
+                    <block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="onestepcheckout/onestep/form/review/cart/totals.phtml"/>
+                </block>
+                <block type="onestepcheckout/onestep_form_review_coupon" name="onestepcheckout.onestep.form.review.coupon" as="review.coupon" template="onestepcheckout/onestep/form/review/coupon.phtml"/>
+                <block type="onestepcheckout/onestep_form_review_comments" name="onestepcheckout.onestep.form.review.comments" as="review.comments" template="onestepcheckout/onestep/form/review/comments.phtml">
+                    <!-- Simple comments block !-->
+                    <block type="onestepcheckout/onestep_form_review_comments_simple" name="onestepcheckout.onestep.form.review.comments.simple" as="simple" template="onestepcheckout/onestep/form/review/comments/simple.phtml"/>
+                    <!-- DDAN block !-->
+                </block>
+                <block type="onestepcheckout/onestep_form_review_newsletter" name="onestepcheckout.onestep.form.review.newsletter" as="review.newsletter" template="onestepcheckout/onestep/form/review/newsletter.phtml">
+                    <!-- Native Magento newsletter !-->
+                    <block type="onestepcheckout/onestep_form_review_newsletter_simple" name="onestepcheckout.onestep.form.review.newsletter.simple" as="mage.newsletter" template="onestepcheckout/onestep/form/review/newsletter/simple.phtml"/>
+                </block>
+                <block type="onestepcheckout/onestep_form_review_terms" name="onestepcheckout.onestep.form.review.terms" as="review.terms" template="onestepcheckout/onestep/form/review/terms.phtml"/>
+                <block type="core/text_list" name="onestepcheckout.onestep.form.review.extra" as="review.extra"/>
+            </block>
+        </reference>
+    </onestepcheckout_index_index>
+    <customer_account_edit translate="label">
+        <reference name="head">
+            <action method="addJs"><script>onestepcheckout/validation.js</script></action>
+            <action method="addItem"><type>skin_css</type><name>onestepcheckout/css/onestepcheckout.css</name></action>
+        </reference>
+        <reference name="customer_edit">
+            <action method="setTemplate"><template>onestepcheckout/customer/form/edit.phtml</template></action>
+        </reference>
+    </customer_account_edit>
+
+    <customer_address_form translate="label">
+        <reference name="head">
+            <action method="addJs"><script>onestepcheckout/validation.js</script></action>
+            <action method="addItem"><type>skin_css</type><name>onestepcheckout/css/onestepcheckout.css</name></action>
+        </reference>
+        <reference name="customer_address_edit">
+            <action method="setTemplate"><template>onestepcheckout/customer/address/edit.phtml</template></action>
+        </reference>
+    </customer_address_form>
+    <customer_account_create>
+        <reference name="head">
+            <action method="addJs"><script>onestepcheckout/validation.js</script></action>
+            <action method="addItem"><type>skin_css</type><name>onestepcheckout/css/onestepcheckout.css</name></action>
+        </reference>
+        <reference name="customer_form_register">
+            <action method="setTemplate"><template>onestepcheckout/persistent/customer/form/register.phtml</template></action>
+        </reference>
+    </customer_account_create>
+</layout>

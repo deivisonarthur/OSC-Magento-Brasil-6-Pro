@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Inovarti_Onestepcheckout>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Inovarti_Onestepcheckout>
+    </modules>
+</config>

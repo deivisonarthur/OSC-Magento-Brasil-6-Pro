@@ -1,0 +1,15 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Onestepcheckout
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?><?php if ($this->getCanUseRewardPoints()): ?>
+<dl class="sp-methods checkout-reward checkout-onepage-payment-additional-reward" id="reward_placer">
+    <dt>
+        <input type="checkbox" name="payment[use_reward_points]" value="1" id="use_reward_points"<?php echo $this->useRewardPoints()?' checked="checked"':'' ?> class="checkbox" />
+        <label for="use_reward_points"><?php echo Mage::helper('enterprise_reward')->__('Use my reward points, %s available', Mage::helper('enterprise_reward')->formatReward($this->getPointsBalance(), $this->getCurrencyAmount())); ?></label>
+    </dt>
+</dl>
+<?php endif; ?>

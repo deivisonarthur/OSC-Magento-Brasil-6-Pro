@@ -1,0 +1,74 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Onestepcheckout
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?><div id="onestepcheckout-address" class="onestepcheckout-add-loader-into-this-block">
+    <div id="onestepcheckout-address-billing-wrapper">
+        <?php $blockNumber = $this->getBlockNumber();?>
+        <?php $blockNumberClass = (!is_null($blockNumber))?"onestepcheckout-number-{$blockNumber}":"";?>
+        <?php if(Mage::getStoreConfig('onestepcheckout/general/is_show_titles')): ?><div class="step-title"><span class="number onestepcheckout-number <?php echo $blockNumberClass;?>"><?php echo $blockNumber; ?></span><h2><?php echo $this->__('BILLING ADDRESS'); ?></h2></div><?php endif;?>
+        <div class="step a-item">
+            <?php echo $this->getChildHtml('billing'); ?>
+        </div>
+    </div>
+    <?php if (!$this->isUseBillingAsShipping()): ?>
+        <div id="onestepcheckout-address-shipping-wrapper" style="overflow: hidden;height: 0px;display:none;">
+            <?php $blockNumber = $this->getBlockNumber();?>
+            <?php $blockNumberClass = (!is_null($blockNumber))?"onestepcheckout-number-{$blockNumber}":"";?>
+            <?php if(Mage::getStoreConfig('onestepcheckout/general/is_show_titles')): ?><div class="step-title"><span class="number onestepcheckout-number <?php echo $blockNumberClass;?>"><?php echo $blockNumber; ?></span><h2><?php echo $this->__('SHIPPING ADDRESS'); ?></h2></div><?php endif;?>
+            <div class="step a-item">
+                <?php echo $this->getChildHtml('shipping'); ?>
+            </div>
+        </div>
+    <?php endif;?>
+</div>
+<script type="text/javascript">
+    var OSCAddress = new OnestepcheckoutAddress({
+        containerSelector: '#onestepcheckout-address',
+        useBillingAsShippingCheckboxId: "billing:use_for_shipping",
+        billing: {
+            containerSelector: '#onestepcheckout-address-billing-wrapper',
+            pleaseWaitPostcodSelector: '.onestepcheckout-postcod-process',
+            changeAddressSelectSelector: '#billing-address-select',
+            newAddressContainerSelector: '#onestepcheckout-billing-address-list',
+            createAccountInputId: 'billing:create_account',
+            passwordContainerSelector: '#osc-billing-password-area',
+            postcodeInputElement:'billing:postcode',
+            addressChangeTriggerElementsIds: [
+                'billing:country_id',
+                'billing:region',
+                'billing:region_id',
+                'billing:city',
+                'billing:postcode'
+            ],
+            addressCountryRegionElementsIds: {
+                'countryId' : 'billing:country_id',
+                'region'    : 'billing:region',
+                'regionId'  : 'billing:region_id'
+            }
+        },
+        shipping: {
+            containerSelector: '#onestepcheckout-address-shipping-wrapper',
+            changeAddressSelectSelector: '#shipping-address-select',
+            newAddressContainerSelector: '#onestepcheckout-shipping-address-list',
+            postcodeInputElement:'shipping:postcode',
+            addressChangeTriggerElementsIds: [
+                'shipping:country_id',
+                'shipping:region',
+                'shipping:region_id',
+                'shipping:city',
+                'shipping:postcode'
+            ],
+            addressCountryRegionElementsIds: {
+                'countryId' : 'shipping:country_id',
+                'region'    : 'shipping:region',
+                'regionId'  : 'shipping:region_id'
+            }
+        },
+        addressChangedUrl: <?php echo Zend_Json::encode($this->getAddressChangedUrl());?>,
+        saveAddressUrl: <?php echo Zend_Json::encode($this->getSaveFormValuesUrl());?>
+    });
+</script>

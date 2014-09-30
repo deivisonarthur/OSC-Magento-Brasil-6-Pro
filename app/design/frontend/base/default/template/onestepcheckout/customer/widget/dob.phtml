@@ -1,0 +1,59 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Onestepcheckout
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?>
+<label for="<?php echo $this->getFieldId('month')?>"<?php if ($this->isRequired()) { echo ' class="required"'; } ?>><?php echo $this->__('Date of Birth') ?></label>
+<div class="input-box customer-dob">
+  <div class="dob-day">
+    <select name="<?php echo $this->getFieldName('day'); ?>" id="<?php echo $this->getFieldId('day'); ?>">
+      <option value=""><?php echo $this->__('DD'); ?></option>
+      <?php for ($i = 1; $i <= 31; $i++): ?>
+      <?php $day = (strlen($i) == 1) ? "0" . $i : $i; ?>
+        <option value="<?php echo $day; ?>" <?php echo ($i==$this->getDay()) ? "selected" : ""; ?>><?php echo $day; ?></option>
+      <?php endfor; ?>
+    </select>
+  </div>
+  <div class="dob-month">
+    <select name="<?php echo $this->getFieldName('month'); ?>" id="<?php echo $this->getFieldId('month'); ?>">
+      <option value=""><?php echo $this->__('MM'); ?></option>
+      <?php for ($i = 1; $i <= 12; $i++): ?>
+      <?php $month = (strlen($i) == 1) ? "0".$i : $i; ?>
+        <option value="<?php echo $month; ?>" <?php echo ($i==$this->getMonth()) ? "selected" : ""; ?>><?php echo $month; ?></option>
+      <?php endfor; ?>
+    </select>
+  </div>
+  <div class="dob-year">
+    <?php $currentYear = intval(date("Y")); ?>
+    <select name="<?php echo $this->getFieldName('year'); ?>" id="<?php echo $this->getFieldId('year'); ?>">
+      <option value=""><?php echo $this->__('YYYY'); ?></option>
+      <?php for ($i = $currentYear; $i >= $currentYear - 100; $i--): ?>
+        <option value="<?php echo $i; ?>" <?php echo ($i==$this->getYear()) ? "selected" : ""; ?>><?php echo $i; ?></option>
+      <?php endfor; ?>
+    </select>
+  </div>
+  <div class="dob-full" style="display:none;">
+    <input type="hidden" id="<?php echo $this->getFieldId('dob')?>" name="<?php echo $this->getFieldName('dob')?>" />
+  </div>
+  <div class="validation-advice" style="display:none;"></div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    var DOBSelects = Class.create(Varien.DOB, {
+       initialize: function(selector, required, format) {
+            var el = $$(selector)[0];
+            var container       = {};
+            container.day       = Element.select(el, '.dob-day select')[0];
+            container.month     = Element.select(el, '.dob-month select')[0];
+            container.year      = Element.select(el, '.dob-year select')[0];
+            container.full      = Element.select(el, '.dob-full input')[0];
+            container.advice    = Element.select(el, '.validation-advice')[0];
+            new Varien.DateElement('container', container, required, format);
+        }      
+    });
+    var customer_dob = new DOBSelects('.customer-dob', <?php echo $this->isRequired() ? 'true' : 'false' ?>, '<?php echo $this->getDateFormat() ?>');
+//]]>
+</script>

@@ -1,0 +1,18 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Onestepcheckout
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?>
+<label for="<?php echo $this->getFieldId('tipopessoa')?>"<?php if ($this->isRequired()) echo ' class="required"' ?>><?php if ($this->isRequired()) echo '<em>*</em>' ?><?php echo $this->__('Tipo Pessoa') ?></label>
+<div class="input-box">
+    <select onchange="setTipopessoaArea(this.options[this.selectedIndex].innerHTML)" id="<?php echo $this->getFieldId('tipopessoa')?>" name="<?php echo $this->getFieldName('tipopessoa')?>" title="<?php echo $this->__('Tipo Pessoa') ?>"<?php if ($this->isRequired()):?> class="validate-select"<?php endif; ?> <?php echo $this->getFieldParams() ?>>
+        <?php $options = Mage::getResourceSingleton('customer/customer')->getAttribute('tipopessoa')->getSource()->getAllOptions();?>
+        <?php $value = $this->getTipopessoa();?>
+        <?php foreach ($options as $option):?>
+            <option value="<?php echo $option['value'] ?>"<?php if ($option['value'] == $value) echo ' selected="selected"' ?>><?php echo $option['label'] ?></option>
+        <?php endforeach;?>
+    </select>
+</div>

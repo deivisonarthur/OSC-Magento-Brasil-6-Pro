@@ -1,0 +1,188 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Onestepcheckout
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?>
+<div id="onestepcheckout-address-shipping">
+    <ul class="form-list">
+        <?php if ($this->customerHasAddresses()): ?>
+            <li class="wide">
+                <label for="shipping-address-select"><?php echo $this->__('Select a shipping address from your address book or enter a new address.') ?></label>
+                <div class="input-box">
+                    <?php echo $this->getAddressesHtmlSelect('shipping') ?>
+                </div>
+            </li>
+        <?php endif; ?>
+        <li>
+            <ul id="onestepcheckout-shipping-address-list"<?php if ($this->customerHasAddresses()): ?> style="display:none;overflow: hidden;height: 0px;"<?php endif; ?>>
+                <li class="customer-name fields">
+                    <?php echo $this->getCustomerWidgetName()->toHtml(); ?>
+                </li>
+                <li class="fields">
+                    <div class="field">
+                        <label for="shipping:telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="shipping[telephone]" title="<?php echo $this->__('Telephone') ?>" class="input-text <?php echo $this->getAttributeValidationClass('telephone') ?>" id="shipping:telephone" value="<?php echo $this->getDataFromSession('telephone'); ?>"  placeholder="(XX) xxxx-xxxx" />
+                        </div>
+                    </div>
+                    <?php if ($this->getConfig()->isFax()): ?>
+                        <div class="field">
+                            <label for="shipping:fax"><?php echo $this->__('Fax') ?></label>
+                            <div class="input-box">
+                                <input type="text" name="shipping[fax]" title="<?php echo $this->__('Fax') ?>" class="input-text <?php echo $this->getAttributeValidationClass('fax') ?>" id="shipping:fax" value="<?php echo $this->getDataFromSession('fax'); ?>"  placeholder="(XX) xxxx-xxxx" />
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </li>
+                <?php if ($this->getConfig()->isCompany()): ?>
+                    <li class="wide">
+                        <label for="shipping:company"><?php echo $this->__('Company') ?></label>
+                        <div class="input-box">
+                            <input type="text" id="shipping:company" name="shipping[company]" title="<?php echo $this->__('Company') ?>" class="input-text <?php echo $this->getAttributeValidationClass('company') ?>" value="<?php echo $this->getDataFromSession('company'); ?>" />
+                        </div>
+                    </li>
+                <?php endif; ?>
+                <li class="fields">
+                    <div class="field">
+                        <label for="shipping:postcode" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
+                        <div class="input-box">
+                            <input type="text" title="<?php echo $this->__('Zip/Postal Code') ?>" name="shipping[postcode]" id="shipping:postcode" class="input-text validate-zip-international validate-number <?php echo $this->getAttributeValidationClass('postcode') ?>" value="<?php echo $this->getDataFromSession('postcode') ?>" maxlength="8" onblur="buscaCep('shipping');"/>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>&nbsp;</label>        
+                        <div class="input-box">
+                            <div class="onestepcheckout-postcod-process onestepcheckout-overlay-16">&nbsp;</div>
+                            <a class="nao-sei-cep" href="#" onclick="popWin('http://m.correios.com.br/movel/buscaCep.do', 'I forgot my zipcode', 'width=360,height=370,left=200,top=50,location=no,status=yes,scrollbars=yes,resizable=yes'); return false;"><?php echo $this->__('What is my postcode?') ?></a>
+                        </div>
+                    </div>
+                </li>
+                <?php $_streetValidationClass = $this->getAttributeValidationClass('street'); ?>
+                <?php $streetValues = $this->getDataFromSession('street'); ?>
+                <li class="wide">
+                    <label for="shipping:street1" class="required"><em>*</em><?php echo $this->__('Street Address') ?></label>
+                    <div class="input-box">
+                        <input type="text" title="<?php echo $this->__('Street Address') ?>" name="shipping[street][]" id="shipping:street1" class="input-text <?php echo $_streetValidationClass ?>" value="<?php echo (isset($streetValues[0])) ? $streetValues[0] : ''; ?>" autocomplete="off"/>
+                    </div>
+                </li>
+                <?php $_streetValidationClass = trim(str_replace('required-entry', '', $_streetValidationClass)); ?>
+                <?php for ($_i = 2, $_n = $this->helper('customer/address')->getStreetLines(); $_i <= $_n; $_i++): ?>
+                    <li class="wide">
+                        <label for="shipping:street<?php echo $_i ?>" <?php if ($_i != 3): ?> class="required" <?php endif; ?>><?php if ($_i != 3): ?> <em>*</em> <?php endif; ?><?php echo $this->__('Street Address ' . $_i) ?></label>
+                        <div class="input-box">
+                            <input type="text" title="<?php echo $this->__('Street Address ' . $_i) ?>" name="shipping[street][<?php echo $_i ?>]" id="shipping:street<?php echo $_i ?>" class="input-text <?php if ($_i != 3): ?>required-entry<?php endif; ?>" value="<?php echo $streetValues[$_i]; ?>" autocomplete="off"/>
+                        </div>
+                    </li>
+                <?php endfor; ?>
+                <li class="fields">
+                    <div class="field">
+                        <label for="shipping:city" class="required"><em>*</em><?php echo $this->__('City') ?></label>
+                        <div class="input-box">
+                            <input type="text" title="<?php echo $this->__('City') ?>" name="shipping[city]" class="input-text <?php echo $this->getAttributeValidationClass('city') ?>" id="shipping:city" value="<?php echo $this->getDataFromSession('city') ?>" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="shipping:region_id" class="required"><em>*</em><?php echo $this->__('State/Province') ?></label>
+                        <div class="input-box">
+                            <select id="shipping:region_id" name="shipping[region_id]" title="<?php echo $this->__('State/Province') ?>" class="validate-select" style="display:none;">
+                                <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                            </select>
+                            <input type="text" id="shipping:region" name="shipping[region]" title="<?php echo $this->__('State/Province') ?>" class="input-text <?php echo $this->getAttributeValidationClass('region') ?>" style="display:none;"  value="<?php echo $this->getDataFromSession('region') ?>" />
+                            <script type="text/javascript">
+                                //<![CDATA[
+                                $('shipping:region_id').setAttribute('defaultValue',  "<?php echo $this->getDataFromSession('region_id') ?>");
+                                //]]>
+                            </script>
+                        </div>
+                    </div>
+                </li>
+                <li class="wide">
+                    <label for="shipping:country_id" class="required"><em>*</em><?php echo $this->__('Country') ?></label>
+                    <div class="input-box">
+                        <?php echo $this->getCountryHtmlSelect('shipping') ?>
+                    </div>
+                </li>
+                <?php if ($this->isVatAttributeVisible()) : ?>
+                    <li class="wide">
+                        <label for="shipping:vat_id"><?php echo $this->__('VAT Number') ?></label>
+                        <div class="input-box">
+                            <input type="text" id="shipping:vat_id" name="shipping[vat_id]" title="<?php echo $this->__('VAT Number') ?>" class="input-text <?php echo $this->getAttributeValidationClass('vat_id'); ?>" value="<?php echo $this->getDataFromSession('vat_id'); ?>" />
+                        </div>
+                    </li>
+                <?php endif; ?>
+                <?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses()): ?>
+                    <li class="control">
+                        <label for="shipping:save_in_address_book"><input type="checkbox" name="shipping[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="shipping:save_in_address_book"<?php if ($this->getDataFromSession('save_in_address_book')): ?> checked="checked"<?php endif; ?> class="checkbox" /><?php echo $this->__('Save in address book') ?></label>
+                    </li>
+                <?php else: ?>
+                    <li class="no-display"><input type="hidden" name="shipping[save_in_address_book]" value="1" /></li>
+                <?php endif; ?>
+            </ul>
+        </li>
+    </ul>
+    <?php echo $this->getChildHtml('extra'); ?>
+</div>
+<script type="text/javascript">
+    //<![CDATA[
+    if ($('shipping:firstname')) {
+        $('shipping:firstname').observe('keypress', function(event) {
+            this.maxLength = 20;
+        });
+    }
+    if ($('shipping:lastname')) {
+        $('shipping:lastname').observe('keypress', function(event) {
+            this.maxLength = 30;
+        });
+    }
+    if ($('shipping:telephone')) {
+        $('shipping:telephone').addClassName('validate-phone-br');
+        $('shipping:telephone').observe('keypress', function(event) {
+            this.maxLength = 15;
+            mascara(this, mtel);
+        });
+    }
+    if ($('shipping:fax')) {
+        $('shipping:fax').addClassName('validate-phone-br');
+        $('shipping:fax').observe('keypress', function(event) {
+            this.maxLength = 15;
+            mascara(this, mtel);
+        });
+    }
+    if ($('shipping:postcode')) {
+        $('shipping:postcode').addClassName('validate-zip-br');
+        $('shipping:postcode').observe('keyup', function(event) {
+            this.maxLength = 8;
+            mascara(this, sonumeros);
+        });
+    }
+    if ($('shipping:street1')) {
+        $('shipping:street1').observe('keypress', function(event) {
+            this.maxLength = 40;
+        });
+    }
+    if ($('shipping:street2')) {
+        $('shipping:street2').observe('keypress', function(event) {
+            this.maxLength = 5;
+        });
+    }
+    if ($('shipping:street3')) {
+        $('shipping:street3').observe('keypress', function(event) {
+            this.maxLength = 20;
+        });
+    }
+    if ($('shipping:street4')) {
+        $('shipping:street4').observe('keypress', function(event) {
+            this.maxLength = 20;
+        });
+    }
+    if ($('shipping:city')) {
+        $('shipping:city').observe('keypress', function(event) {
+            this.maxLength = 30;
+        });
+    }
+    var shippingRegionUpdater = new RegionUpdater('shipping:country_id', 'shipping:region', 'shipping:region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'shipping:postcode');
+    //]]>
+</script>

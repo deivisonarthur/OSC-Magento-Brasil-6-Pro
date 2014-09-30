@@ -1,0 +1,67 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Onestepcheckout
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?>
+<?php if ($this->canShip()) : ?>
+    <?php $blockNumber = $this->getBlockNumber(); ?>
+    <?php $blockNumberClass = (!is_null($blockNumber)) ? "onestepcheckout-number-{$blockNumber}" : ""; ?>
+    <?php if(Mage::getStoreConfig('onestepcheckout/general/is_show_titles')): ?><div class="step-title"><span class="number onestepcheckout-number <?php echo $blockNumberClass; ?>"><?php echo $blockNumber; ?></span><h2><?php echo $this->__('SHIPPING METHOD'); ?></h2></div><?php endif; ?>
+    <div class="step a-item">
+        <div id="onestepcheckout-shipping-method" class="onestepcheckout-add-loader-into-this-block">
+            <?php $_shippingRateGroups = $this->getShippingRates(); ?>
+            <?php if (!$_shippingRateGroups) : ?>
+                <p><?php echo $this->__('Sorry, no quotes are available for this order at this time.') ?></p>
+            <?php else : ?>
+                <dl class="sp-methods">
+                    <?php
+                    $_sole = count($_shippingRateGroups) == 1;
+                    foreach ($_shippingRateGroups as $code => $_rates):
+                        ?>
+                        <dt><?php echo $this->escapeHtml($this->getCarrierName($code)) ?></dt>
+                        <dd>
+                            <ul>
+                                <?php
+                                $_sole = $_sole && count($_rates) == 1;
+                                foreach ($_rates as $_rate):
+                                    ?>
+                                    <li>
+                                        <?php if ($_rate->getErrorMessage()): ?>
+                                            <ul class="messages"><li class="error-msg"><ul><li><?php echo $this->escapeHtml($_rate->getErrorMessage()) ?></li></ul></li></ul>
+                                        <?php else: ?>
+                                            <?php if ($_sole) : ?>
+                                                <span class="no-display"><input name="shipping_method" type="radio" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_rate->getCode() ?>" checked="checked" /></span>
+                                            <?php else: ?>
+                                                <input name="shipping_method" type="radio" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_rate->getCode() ?>"<?php if ($_rate->getCode() === $this->getAddressShippingMethod()) echo ' checked="checked"' ?> class="radio"/>
+                                            <?php endif; ?>
+                                            <label for="s_method_<?php echo $_rate->getCode() ?>"><?php echo $this->escapeHtml($_rate->getMethodTitle()) ?>
+                                                <?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
+                                                <?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
+                                                <?php echo $_excl; ?>
+                                                <?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
+                                                    (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
+                                                <?php endif; ?>
+                                            </label>
+                                        <?php endif ?>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </dd>
+                    <?php endforeach; ?>
+                </dl>
+                <div class="validation-advice" style="display: none;"></div>
+                <script type="text/javascript">
+                    var OSCShipment = new OnestepcheckoutShipment({
+                        containerSelector: "#onestepcheckout-shipping-method",
+                        switchMethodInputsSelector: "input[type='radio'][name='shipping_method']",
+                        saveShipmentUrl: <?php echo Zend_Json::encode($this->getSaveShipmentUrl()); ?>
+                    });
+                </script>
+            <?php endif; ?>
+            <?php echo $this->getChildHtml('extra'); ?>
+        </div>
+    </div>
+<?php endif; ?>

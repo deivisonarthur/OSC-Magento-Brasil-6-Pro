@@ -1,0 +1,59 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Onestepcheckout
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?>
+<?php $blockNumber = $this->getBlockNumber(); ?>
+<?php $blockNumberClass = (!is_null($blockNumber)) ? "onestepcheckout-number-{$blockNumber}" : ""; ?>
+<?php if(Mage::getStoreConfig('onestepcheckout/general/is_show_titles')): ?><div class="step-title"><span class="number onestepcheckout-number <?php echo $blockNumberClass; ?>"><?php echo $blockNumber; ?></span><h2><?php echo $this->__('PAYMENT METHOD'); ?></h2></div><?php endif; ?>
+<div class="step a-item">
+    <div id="onestepcheckout-payment-method" class="onestepcheckout-add-loader-into-this-block">
+        <?php echo $this->getEnterpriseRewardHtml(); ?>
+        <dl class="sp-methods" id="checkout-payment-method-load">
+            <?php $methods = $this->getMethods(); ?>
+            <?php $oneMethod = count($methods) <= 1; ?>
+            <?php foreach ($methods as $_method): ?>
+                <?php $_code = $_method->getCode(); ?>
+                <dt rel="<?php echo $_code ?>">
+                <?php if (!$oneMethod): ?>
+                    <input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>"<?php if ($this->getSelectedMethodCode() == $_code): ?> checked="checked"<?php endif; ?> class="radio" />
+                <?php else: ?>
+                    <span class="no-display"><input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked="checked" class="radio" /></span>
+                    <?php $oneMethod = $_code; ?>
+                <?php endif; ?>
+                <label for="p_method_<?php echo $_code ?>"><?php echo $this->escapeHtml($this->getMethodTitle($_method)) ?> <?php echo $this->getMethodLabelAfterHtml($_method) ?></label>
+                </dt>
+                <?php if ($html = $this->getPaymentMethodFormHtml($_method)): ?>
+                    <dd>
+                        <?php echo $html; ?>
+                    </dd>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </dl>
+        <div class="validation-advice" style="display: none;"></div>
+        <?php echo $this->getChildChildHtml('additional'); ?>
+        <div class="tool-tip" id="payment-tool-tip" style="display:none;">
+            <div class="btn-close"><a href="#" id="payment-tool-tip-close" title="<?php echo $this->__('Close') ?>"><?php echo $this->__('Close') ?></a></div>
+            <div class="tool-tip-content"><img src="<?php echo $this->getSkinUrl('images/cvv.gif') ?>" alt="<?php echo $this->__('Card Verification Number Visual Reference') ?>" title="<?php echo $this->__('Card Verification Number Visual Reference') ?>" /></div>
+        </div>
+        <script type="text/javascript">
+            var OSCPayment = new OnestepcheckoutPayment({
+                containerSelector: "#onestepcheckout-payment-method",
+                wrapContainerSelector: "#onestepcheckout-payment-method-wrapper",
+                switchMethodInputsSelector: "input[name='payment[method]']",
+                enterpriseRewardsSelector: 'use_reward_points',
+                methodAdditionalContainerIdPrefix: "payment_form_",
+                cvv: {
+                    tooltipSelector: "#payment-tool-tip",
+                    closeElSelector: "#payment-tool-tip-close",
+                    triggerElsSelector: ".cvv-what-is-this"
+                },
+                savePaymentUrl: <?php echo Zend_Json::encode($this->getSavePaymentUrl()); ?>
+            });
+        </script>
+        <?php echo $this->getChildHtml('extra'); ?>
+    </div>
+</div>

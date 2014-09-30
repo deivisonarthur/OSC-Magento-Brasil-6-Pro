@@ -1,0 +1,384 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Onestepcheckout
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?>
+<div id="onestepcheckout-address-billing">
+    <ul class="form-list">
+        <?php if ($this->customerHasAddresses()): ?>
+            <li class="wide">
+                <label for="billing-address-select"><?php echo $this->__('Select a billing address from your address book or enter a new address.') ?></label>
+                <div class="input-box">
+                    <?php echo $this->getAddressesHtmlSelect('billing') ?>
+                </div>
+            </li>
+        <?php endif; ?>
+        <li>
+            <ul id="onestepcheckout-billing-address-list"<?php if ($this->customerHasAddresses()): ?> style="overflow: hidden;height: 0px;display:none"<?php endif; ?>>
+                <li><p class="required"><?php echo $this->__('* Required Fields') ?></p></li>
+                <?php if (!$this->isCustomerLoggedIn()) : ?>
+                    <?php $_tipopessoa = $this->getLayout()->createBlock('onestepcheckout/widget_tipopessoa') ?>
+                    <?php if ($_tipopessoa->isEnabled()): ?>
+                        <li class="control tipopessoa">
+                            <input type="radio" name="billing[radio_tipopessoa]" value="Física" id="billing:fisica" class="radio" title="CPF" <?php if ($this->getDataFromSession('radio_tipopessoa') == 'Física'): ?> checked="checked"<?php endif; ?>/><label for="billing:fisica"><?php echo $this->__('Pessoa Física') ?></label>
+                            <input type="radio" name="billing[radio_tipopessoa]" value="Jurídica" id="billing:juridica" class="radio" title="CNPJ" <?php if ($this->getDataFromSession('radio_tipopessoa') == 'Jurídica'): ?> checked="checked"<?php endif; ?>/><label for="billing:juridica"><?php echo $this->__('Pessoa Jurídica') ?></label>
+                        </li>
+                        <li class="wide hidden">
+                            <?php echo $_tipopessoa->setTipopessoa($this->getDataFromSession('tipopessoa'))->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?>
+                        </li>
+                    <?php endif ?>
+                <?php endif ?>
+                <?php if (!$this->isCustomerLoggedIn()) : ?>
+                    <?php if(Mage::getStoreConfig('onestepcheckout/general/is_show_titles')): ?><li class="osc-title"><?php echo $this->__('Access Information') ?></li><?php endif; ?>
+                    <li class="wide">
+                        <label for="billing:email" class="required"><em>*</em><?php echo $this->__('Email') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="billing[email]" id="billing:email" title="<?php echo $this->__('Email') ?>" class="input-text validate-email validate-email-exist required-entry" value="<?php echo $this->getDataFromSession('email'); ?>" />
+                        </div>
+                    </li>
+                    <li>
+                        <ul id="osc-billing-password-area" style="overflow: hidden;<?php if (!$this->getDataFromSession('create_account') && $this->customerMustBeRegistered()): ?>height: 0px;display:none<?php endif; ?>">
+                            <li class="fields">
+                                <div class="field">
+                                    <label for="billing:customer_password" class="required"><em>*</em><?php echo $this->__('Password') ?></label>
+                                    <div class="input-box">
+                                        <input type="password" name="billing[customer_password]" id="billing:customer_password" title="<?php echo $this->__('Password') ?>" class="input-text required-entry validate-password" />
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label for="billing:confirm_password" class="required"><em>*</em><?php echo $this->__('Confirm Password') ?></label>
+                                    <div class="input-box">
+                                        <input type="password" name="billing[confirm_password]" title="<?php echo $this->__('Confirm Password') ?>" id="billing:confirm_password" class="input-text required-entry validate-cpassword" />
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="control">
+                        <?php if ($this->customerMustBeRegistered()): ?>
+                            <input type="checkbox" name="billing[create_account]" value="1" title="<?php echo $this->__('Create Account') ?>" id="billing:create_account" class="checkbox"<?php if ($this->getDataFromSession('create_account')): ?> checked="checked"<?php endif; ?>/><label for="billing:create_account"><?php echo $this->__('Create Account') ?></label>
+                        <?php else: ?>
+                            <input type="hidden" name="billing[create_account]" value="1" id="billing:create_account" />
+                        <?php endif ?>
+                    </li>
+                    <?php if(Mage::getStoreConfig('onestepcheckout/general/is_show_titles')): ?><li class="osc-title"><?php echo $this->__('Personal Information') ?></li><?php endif; ?>
+                    <?php if (!$this->isCustomerLoggedIn()): ?>
+                        <?php if ($this->isTaxvatEnabled()): ?>
+                            <li class="wide">
+                                <?php echo $this->getTaxvatHtml() ?>
+                            </li>
+                        <?php endif; ?>
+                        <li>
+                            <ul id="osc-billing-tipopessoa-area"  style="overflow: hidden;display:block;">
+                                <li class="wide">
+                                    <?php $_dateOfBirthWidget = $this->getCustomerWidgetDateOfBirth(); ?>
+                                    <?php if ($_dateOfBirthWidget->isEnabled()): ?>
+                                        <?php echo $_dateOfBirthWidget->toHtml() ?>
+                                    <?php endif; ?>
+                                </li>
+                                <li class="wide">
+                                    <?php $_genderWidget = $this->getCustomerWidgetGender(); ?>
+                                    <?php if ($_genderWidget->isEnabled()): ?>
+                                        <?php echo $_genderWidget->toHtml() ?>
+                                    <?php endif ?>                                    
+                                </li>
+                            </ul>
+                        </li>
+                    <?php endif; ?>
+                    <?php if ($this->getConfig()->isCompany()): ?>
+                        <li class="wide">
+                            <label for="billing:company"><?php echo $this->__('Company') ?></label>
+                            <div class="input-box">
+                                <input type="text" id="billing:company" name="billing[company]" title="<?php echo $this->__('Company') ?>" class="input-text <?php echo $this->getAttributeValidationClass('company') ?>" value="<?php echo $this->getDataFromSession('company'); ?>" />
+                            </div>
+                        </li>
+                    <?php endif; ?>
+                <?php endif ?>
+                <li class="fields">
+                    <?php echo $this->getCustomerWidgetName()->toHtml(); ?>
+                </li>
+                <li class="fields">
+                    <div class="field">
+                        <label for="billing:telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="billing[telephone]" title="<?php echo $this->__('Telephone') ?>" class="input-text validate-phone-br <?php echo $this->getAttributeValidationClass('telephone') ?>" id="billing:telephone" value="<?php echo $this->getDataFromSession('telephone'); ?>" placeholder="(xx) 4567-8900" />
+                        </div>
+                    </div>
+                     <?php if ($this->getConfig()->isFax()): ?>
+                        <div class="field">
+                            <label for="billing:fax"><?php echo $this->__('Fax') ?></label>
+                            <div class="input-box">
+                                <input type="text" name="billing[fax]" title="<?php echo $this->__('Fax') ?>" class="input-text validate-phone-br <?php echo $this->getAttributeValidationClass('fax') ?>" id="billing:fax" value="<?php echo $this->getDataFromSession('fax'); ?>"  placeholder="(xx) x4567-8900" />
+                            </div>
+                        </div>
+                    <?php endif ?>
+                </li>
+                <?php if(Mage::getStoreConfig('onestepcheckout/general/is_show_titles')): ?><li class="osc-title"><?php echo $this->__('Billing Address') ?></li><?php endif ?>
+                <li class="fields">
+                    <div class="field">
+                        <label for="billing:postcode" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
+                        <div class="input-box">
+                            <input type="text" title="<?php echo $this->__('Zip/Postal Code') ?>" name="billing[postcode]" id="billing:postcode" class="input-text validate-number <?php echo $this->getAttributeValidationClass('postcode') ?>" value="<?php echo $this->getDataFromSession('postcode') ?>" maxlength="8" onblur="buscaCep('billing');" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>&nbsp;</label>        
+                        <div class="input-box">
+                            <div class="onestepcheckout-postcod-process onestepcheckout-overlay-16">&nbsp;</div>
+                            <a class="nao-sei-cep" href="#" onclick="popWin('http://m.correios.com.br/movel/buscaCep.do', 'I forgot my zipcode', 'width=360,height=370,left=200,top=50,location=no,status=yes,scrollbars=yes,resizable=yes'); return false;"><?php echo $this->__('What is my postcode?') ?></a>
+                        </div>
+                    </div>
+                </li>
+                <?php $_streetValidationClass = $this->getAttributeValidationClass('street'); ?>
+                <?php $streetValues = $this->getDataFromSession('street'); ?>
+                <li class="wide">
+                    <label for="billing:street1" class="required"><em>*</em><?php echo $this->__('Street Address') ?></label>
+                    <div class="input-box">
+                        <input type="text" title="<?php echo $this->__('Street Address') ?>" name="billing[street][]" id="billing:street1" class="input-text <?php echo $_streetValidationClass ?>" value="<?php echo (isset($streetValues[0])) ? $streetValues[0] : ''; ?>" autocomplete="off"/>
+                    </div>
+                </li>
+                <?php $_streetValidationClass = trim(str_replace('required-entry', '', $_streetValidationClass)); ?>
+                <?php for ($_i = 2, $_n = $this->helper('customer/address')->getStreetLines(); $_i <= $_n; $_i++): ?>
+                    <li class="wide">
+                        <label for="billing:street<?php echo $_i ?>" <?php if ($_i != 3): ?> class="required" <?php endif; ?>><?php if ($_i != 3): ?> <em>*</em> <?php endif; ?><?php echo $this->__('Street Address ' . $_i) ?></label>
+                        <div class="input-box">
+                            <input type="text" title="<?php echo $this->__('Street Address ' . $_i) ?>" name="billing[street][<?php echo $_i ?>]" id="billing:street<?php echo $_i ?>" class="input-text <?php if ($_i != 3): ?>required-entry<?php endif; ?>" value="<?php echo $streetValues[$_i]; ?>" autocomplete="off"/>
+                        </div>
+                    </li>
+                <?php endfor; ?>
+                <?php if ($this->isVatAttributeVisible()) : ?>
+                    <li class="wide">
+                        <label for="billing:vat_id"><?php echo $this->__('VAT Number') ?></label>
+                        <div class="input-box">
+                            <input type="text" id="billing:vat_id" name="billing[vat_id]" title="<?php echo $this->__('VAT Number') ?>" class="input-text <?php echo $this->getAttributeValidationClass('vat_id'); ?>" value="<?php echo $this->getDataFromSession('vat_id'); ?>" />
+                        </div>
+                    </li>
+                <?php endif; ?>
+                <li class="fields">
+                    <div class="field">
+                        <label for="billing:city" class="required"><em>*</em><?php echo $this->__('City') ?></label>
+                        <div class="input-box">
+                            <input type="text" title="<?php echo $this->__('City') ?>" name="billing[city]" class="input-text <?php echo $this->getAttributeValidationClass('city') ?>" id="billing:city" value="<?php echo $this->getDataFromSession('city') ?>" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="billing:region_id" class="required"><em>*</em><?php echo $this->__('State/Province') ?></label>
+                        <div class="input-box">
+                            <select id="billing:region_id" name="billing[region_id]" title="<?php echo $this->__('State/Province') ?>" class="validate-select" style="display:none;">
+                                <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                            </select>
+                            <script type="text/javascript">
+                                //<![CDATA[
+                                $('billing:region_id').setAttribute('defaultValue',  "<?php echo $this->getDataFromSession('region_id') ?>");
+                                //]]>
+                            </script>
+                            <input type="text" id="billing:region" name="billing[region]" value="<?php echo $this->getAttributeValidationClass('region') ?>"  title="<?php echo $this->__('State/Province') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('region') ?>" style="display:none;" />
+                        </div>
+                    </div>
+                </li>
+                <li class="wide">
+                    <label for="billing:country_id" class="required"><em>*</em><?php echo $this->__('Country') ?></label>
+                    <div class="input-box">
+                        <?php echo $this->getCountryHtmlSelect('billing') ?>
+                    </div>
+                </li>
+                <?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses()): ?>
+                    <li class="control">
+                        <label for="billing:save_in_address_book"><input type="checkbox" name="billing[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="billing:save_in_address_book" onchange="if(window.shipping) shipping.setSameAsBilling(false);"<?php if ($this->getDataFromSession('save_in_address_book')): ?> checked="checked"<?php endif; ?> class="checkbox" /><?php echo $this->__('Save in address book') ?></label>
+                    </li>
+                <?php else: ?>
+                    <li class="no-display"><input type="hidden" name="billing[save_in_address_book]" value="1" /></li>
+                <?php endif; ?>
+            </ul>
+        </li>    
+        <?php if (!$this->isUseBillingAsShipping() && $this->canShip()): ?>
+            <?php if(Mage::getStoreConfig('onestepcheckout/general/is_show_titles')): ?><li class="osc-title"><?php echo $this->__('Shipping Address') ?></li><?php endif; ?>
+            <li class="control">
+                <label for="billing:use_for_shipping"> <input type="checkbox" name="billing[use_for_shipping]" value="1" title="<?php echo $this->__('Ship to same address') ?>" id="billing:use_for_shipping" <?php if ($this->isUseBillingAsShippingChecked()): ?> checked="checked"<?php endif; ?> class="checkbox" /><?php echo $this->__('Ship to same address') ?></label>
+            </li>
+        <?php else : ?>
+            <li class="no-display"><input type="hidden" name="billing[use_for_shipping]" value="1" /></li>
+        <?php endif; ?>
+    </ul>
+    <?php echo $this->getChildHtml('extra'); ?>
+</div>
+<script type="text/javascript">
+    //<![CDATA[
+    var billingRegionUpdater = new RegionUpdater('billing:country_id', 'billing:region', 'billing:region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'billing:postcode');
+    <?php if (!$this->isCustomerLoggedIn()) : ?>
+        $$("[name*=billing[radio_tipopessoa]]").invoke('on', 'click',function(){
+            var sel = $('billing:tipopessoa');
+            setTipopessoaArea(this.value);
+            for(var i=0; i<sel.options.length; i++){
+                if(sel.options[i].text == this.value){
+                    sel.options[i].selected=true;
+                }
+            }
+            
+        });
+        function setTipopessoaArea(arg){
+            if(arg=='Jurídica') {
+                if ($('billing:taxvat')) {
+                    $$('label[for="billing:taxvat"]').first().update('<em>*</em>CNPJ');
+                    $('billing:taxvat').maxLength=18;
+                    $$('label[for="billing:firstname"]').first().update('<em>*</em>Razão social');
+                    $$('label[for="billing:lastname"]').first().update('<em>*</em>Nome Fantansia');
+                    $('osc-billing-tipopessoa-area').hide();
+                }
+            }else{
+                if ($('billing:taxvat')) {
+                    $('billing:taxvat').maxLength=14;
+                    $$('label[for="billing:taxvat"]').first().update('<em>*</em>CPF');
+                    $$('label[for="billing:taxvat"]').first().update('<em>*</em>CPF');
+                    $$('label[for="billing:firstname"]').first().update('<em>*</em>Nome');
+                    $$('label[for="billing:lastname"]').first().update('<em>*</em>Sobrenome');
+                    $('osc-billing-tipopessoa-area').show();
+                }
+            }
+        }
+        <?php if (is_null($this->getDataFromSession('radio_tipopessoa'))): ?>
+            $$('[name*=billing[radio_tipopessoa]]')[0].click();
+        <?php else: ?>
+            if ($('billing:tipopessoa')) {
+                setTipopessoaArea('<?php echo $this->getDataFromSession('radio_tipopessoa') ?>');
+            }
+        <?php endif; ?>
+    Validation.add('validate-email-exist', '<?php echo $this->__('Please enter a valid email address. For example johndoe@domain.com.') ?>', function(value) {
+        if (checkMail(value)) {
+            var ok = false;
+            var url = '/onestepcheckout/ajax/check_email/';
+            new Ajax.Request(url, {
+                method: 'post',
+                asynchronous: false,
+                parameters: 'email=' + encodeURIComponent(value),
+                onSuccess: function(transport) {
+                    var obj = response = eval('(' + transport.responseText + ')');
+                    validateTrueEmailMsg = obj.status_desc;
+                        if (obj.result !== 'clean') {
+                            Validation.get('validate-email-exist').error = 'Email já cadastrado';
+                                ok = false;
+                        } else {
+                                ok = true;
+                        }
+                    },
+                    onComplete: function() {
+                        if ($('advice-validate-email-exist-billing:email')) {
+                          $('advice-validate-email-exist-billing:email').remove();
+                        }
+                    }
+                });
+            return ok;
+        }else{
+            Validation.get('validate-email').error = '<?php echo $this->__('Please enter a valid email address. For example johndoe@domain.com.') ?>';
+        }
+    });
+    Validation.add('validate-taxvat', '<?php echo $this->__('This is a required field.') ?>', function(value) {
+        if (validaCPF(value,0)) {
+            var ok = false;
+            var url = '/onestepcheckout/ajax/check_taxvat/';
+            new Ajax.Request(url, {
+                method: 'post',
+                asynchronous: false,
+                parameters: 'taxvat=' + encodeURIComponent(value),
+                onSuccess: function(transport) {
+                    var obj = response = eval('(' + transport.responseText + ')');
+                    validateTrueEmailMsg = obj.status_desc;
+                    if (obj.result !== 'clean') {
+                        Validation.get('validate-taxvat').error = 'CPF/CNPJ já cadastrado';
+                            ok = false;
+                    } else {
+                            ok = true;
+                    }
+                },
+                onComplete: function() {
+                    if ($('advice-validate-taxvat-billing:taxvat')) {
+                        $('advice-validate-taxvat-billing:taxvat').remove();
+                    }
+                }
+            });
+            return ok;
+         }else{
+                 Validation.get('validate-taxvat').error = 'O CPF/CNPJ informado \xE9 inválido';
+         }
+    });
+    <?php endif; ?>
+    Validation.add('validate-zip-br', '<?php echo $this->__('Please enter a valid zip code. e.g. 12345678.') ?>', function(v) {
+        return Validation.get('IsEmpty').test(v) || /(^\d{8}$)|(^\d{5}-\d{3}$)/.test(v);
+    });
+    Validation.add('validate-phone-br', '<?php echo $this->__('Please enter a valid phone number. for example, (xx) x4567-8900.') ?>', function(v) {
+        return Validation.get('IsEmpty').test(v) || /^(\()?\d{2}(\))?(-|\s)?\d{5}(-|\s)\d{4}|(\()?\d{2}(\))?(-|\s)?\d{4}(-|\s)\d{4}$/.test(v);
+    });
+    
+    if ($('billing:taxvat')) {
+        $('billing:taxvat').addClassName('validate-taxvat');
+        $('billing:taxvat').observe('keypress', function(event) {
+            mascara(this, mdocumento);
+        });
+    }
+    
+    if ($('billing:telephone')) {
+        $('billing:telephone').addClassName('validate-phone-br');
+        $('billing:telephone').observe('keypress', function(event) {
+            this.maxLength = 15;
+            mascara(this, mtel);
+        });
+    }
+    if ($('billing:fax')) {
+        $('billing:fax').addClassName('validate-phone-br');
+        $('billing:fax').observe('keypress', function(event) {
+            this.maxLength = 15;
+            mascara(this, mtel);
+        });
+    }
+    if ($('billing:postcode')) {
+        $('billing:postcode').addClassName('validate-zip-br');
+        $('billing:postcode').observe('keyup', function(event) {
+            this.maxLength = 8;
+            mascara(this, sonumeros);
+        });
+    }
+    if ($('billing:street1')) {
+        $('billing:street1').observe('keypress', function(event) {
+            this.maxLength = 40;
+        });
+    }
+    if ($('billing:street2')) {
+        $('billing:street2').observe('keypress', function(event) {
+            this.maxLength = 5;
+        });
+    }
+    if ($('billing:street3')) {
+        $('billing:street3').observe('keypress', function(event) {
+            this.maxLength = 20;
+        });
+    }
+    if ($('billing:street4')) {
+        $('billing:street4').observe('keypress', function(event) {
+            this.maxLength = 20;
+        });
+    }
+    if ($('billing:city')) {
+        $('billing:city').observe('keypress', function(event) {
+            this.maxLength = 30;
+        });
+    }
+    if ($('billing:day')) {
+        $('billing:day').observe('keypress', function(event) {
+            this.maxLength = 2;
+            mascara(this, sonumeros);
+        });
+        $('billing:month').observe('keypress', function(event) {
+            this.maxLength = 2;
+            mascara(this, sonumeros);
+        });
+        $('billing:year').observe('keypress', function(event) {
+            this.maxLength = 4;
+            mascara(this, sonumeros);
+
+        });
+    }
+    //]]>
+</script>

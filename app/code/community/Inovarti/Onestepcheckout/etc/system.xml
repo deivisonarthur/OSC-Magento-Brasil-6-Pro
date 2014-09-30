@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <inovarti translate="label" module="onestepcheckout">
+            <label>Inovarti</label>
+            <sort_order>299</sort_order>
+        </inovarti>
+    </tabs>
+    <sections>
+        <onestepcheckout translate="label" module="onestepcheckout">
+            <label>One Step Checkout</label>
+            <tab>inovarti</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[<a href="http://www.inovarti.com.br" target="_blank"><img title="Inovarti" alt="Inovarti" src="//www.inovarti.com.br/inovarti_logo.php"/></a></span>]]></comment>
+                    <fields>
+                        <is_enabled translate="label">
+                            <label>Enable One Step Checkout</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </is_enabled>
+                        <is_use_billing_as_shipping translate="label">
+                            <label>Always Use Billing Address as a Shipping Address</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </is_use_billing_as_shipping>
+
+                        <is_authenticate_before translate="label comment">
+                            <label>Authenticate Before</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Go to your site's admin. Click System. Go to Configuration -> Sales -> Checkout -> Checkout Options and set Allow Guest Checkout to "No"</comment>
+                        </is_authenticate_before>
+
+                        <is_show_titles translate="label">
+                            <label>Show Titles</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </is_show_titles>
+
+                        <title translate="label">
+                            <label>One Step Checkout Page Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <description translate="label">
+                            <label>One Step Checkout Description</label>
+                            <frontend_type>textarea</frontend_type>
+                            <comment>HTML allowed</comment>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </description>
+                        <is_block_numbering translate="label">
+                            <label>Show Blocks Numbering</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </is_block_numbering>
+                        <default_payment_method translate="label">
+                            <label>Default Payment Method</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>onestepcheckout/source_payment_methods</source_model>
+                        </default_payment_method>
+                        <default_shipping_method translate="label">
+                            <label>Default Shipping Method</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>onestepcheckout/source_shipping_methods</source_model>
+                        </default_shipping_method>
+                        <is_cart_editable translate="label">
+                            <label>Cart editable at checkout</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </is_cart_editable>
+                    </fields>
+                </general>
+                <exclude_include_fields translate="label">
+                    <label>Exclude / Include Fields</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <is_company translate="label">
+                            <label>Company</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>onestepcheckout/source_enableddisabled</source_model>
+                        </is_company>
+                        <is_fax translate="label">
+                            <label>Fax</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>onestepcheckout/source_enableddisabled</source_model>
+                        </is_fax>
+                        <is_coupon translate="label">
+                            <label>Discount Code</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>onestepcheckout/source_enableddisabled</source_model>
+                        </is_coupon>
+                        <is_comments translate="label comment">
+                            <label>Comments</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>onestepcheckout/source_enableddisabled</source_model>
+                        </is_comments>
+                        <is_newsletter translate="label comment">
+                            <label>Newsletter Subscription</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>onestepcheckout/source_enableddisabled</source_model>
+                        </is_newsletter>
+                    </fields>
+                </exclude_include_fields>
+                <frontend translate="label">
+                    <label>Frontend Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <display_apply_coupon_button translate="label">
+                            <label>Display "Apply Coupon" Button</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </display_apply_coupon_button>
+                    </fields>
+                </frontend>
+            </groups>
+        </onestepcheckout>
+    </sections>
+</config>

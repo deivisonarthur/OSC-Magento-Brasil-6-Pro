@@ -1,0 +1,46 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Onestepcheckout
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?><div id="onestepcheckout-review-cart">
+    <div id="onestepcheckout-review-table-cart-wrapper">
+        <?php echo $this->getHelperTimerBlockHtml();?>
+        <table class="onestepcheckout-cart-table">
+            <?php if ($this->isCartEditable()):?><col width="1" /><?php endif;?>
+            <col />
+            <col width="1" />
+            <col width="1" />
+            <thead>
+                <tr>
+                    <?php if ($this->isCartEditable()):?><th>&nbsp;</th><?php endif;?>
+                    <th class="name"><?php echo $this->__('Product Name') ?></th>
+                    <th class="qty"><?php echo $this->__('Qty') ?></th>
+                    <th class="total"><?php echo $this->__('Subtotal') ?></th>
+                </tr>
+            </thead>
+            <?php echo $this->getChildHtml('totals'); ?>
+            <tbody>
+                <?php foreach($this->getItems() as $_item): ?>
+                    <?php echo $this->getItemHtml($_item)?>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    var OSCReviewCartBlock = new OnestepcheckoutReviewCart({
+        containerSelector: "#onestepcheckout-review-cart",
+        relatedBlockContainerSelector: "#onestepcheckout-related",
+        useForShippingCheckboxContainerSelector: "#onestepcheckout-billing-use-for-shipping",
+        removeLinkSelector: ".onestepcheckout-cart-table a.btn-remove2",
+        urlToUpdateBlocksAfterACP: <?php echo Zend_Json::encode($this->getUrlToUpdateBlocksAfterACP()); ?>,
+        overlayConfig: {
+            '48px': 'onestepcheckout-overlay onestepcheckout-overlay-48',
+            '24px': 'onestepcheckout-overlay onestepcheckout-overlay-24',
+            '16px': 'onestepcheckout-overlay onestepcheckout-overlay-16'
+        }
+    });
+</script>

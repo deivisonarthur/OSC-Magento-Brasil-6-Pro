@@ -1,0 +1,20 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Onestepcheckout
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?><?php if ($this->canShow()): ?>
+<div id="onestepcheckout-review-newsletter-simple">
+    <input type="checkbox" name="is_subscribed" id="newsletter_simple" value="1" title="<?php echo $this->__('Sign up for Newsletter') ?>" class="checkbox"<?php if ($this->getIsSubscribed()): ?> checked="checked"<?php endif; ?> />
+    <label for="newsletter_simple"><?php echo $this->__('Sign up for Newsletter') ?></label>
+</div>
+<script type="text/javascript">
+    var OSCReviewNewsletter = new OnestepcheckoutReviewNewsletter({
+        containerSelector: "#onestepcheckout-review-newsletter-simple",
+        generalInputSelector: "#onestepcheckout-review-newsletter-simple input",
+        saveValuesUrl: <?php echo Zend_Json::encode($this->getSaveFormValuesUrl());?>
+    });
+</script>
+<?php endif;?>

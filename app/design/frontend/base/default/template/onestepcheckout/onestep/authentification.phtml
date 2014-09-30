@@ -1,0 +1,80 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Onestepcheckout
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?><?php if ($this->canShow()): ?>
+<div id="onestepcheckout-authentification">
+    <div id="onestepcheckout-authentification-container">
+        <form id="onestepcheckout-login-form" action="<?php echo $this->getLoginAjaxAction() ?>" method="post">
+            <div class="form-list">
+                <div class="onestepcheckout-auth-form-block">
+                    <label for="login-email" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+                    <div class="input-box">
+                        <input type="text" class="input-text required-entry validate-email" id="login-email" name="login[username]" value="<?php echo $this->getUsername() ?>" />
+                    </div>
+                </div>
+                <div class="onestepcheckout-auth-form-block">
+                    <label for="login-password" class="required"><em>*</em><?php echo $this->__('Password') ?></label>
+                    <div class="input-box">
+                        <input type="password" class="input-text required-entry validate-password" id="login-password" name="login[password]" />
+                    </div>
+                </div>
+                <div class="onestepcheckout-auth-form-block">
+                    <button type="submit" class="button" id="onestepcheckout-login-submit-btn">
+                        <span><span><?php echo $this->__('Login') ?></span></span>
+                    </button>
+                </div>
+                <div class="onestepcheckout-auth-form-block">
+                    <a id="onestepcheckout-login-forgot-link" href="javascript:void(0);"><?php echo $this->__('Forgot your password?') ?></a>
+                </div>
+            </div>
+        </form>
+        <form id="onestepcheckout-forgot-password-form" action="<?php echo $this->getForgotPasswordAjaxAction() ?>" method="post">
+            <div class="form-list">
+                <p><?php echo $this->__('Please enter your email below and we will send you a new password.');?></p>
+                <div class="onestepcheckout-auth-form-block">
+                    <label for="forgot-password-email" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+                    <div class="input-box">
+                        <input type="text" class="input-text required-entry validate-email" id="forgot-password-email" name="email" value="<?php echo $this->getUsername() ?>" />
+                    </div>
+                </div>
+                <div class="onestepcheckout-auth-form-block">
+                    <button type="submit" class="button" id="onestepcheckout-forgot-password-submit-btn">
+                        <span><span><?php echo $this->__('Submit') ?></span></span>
+                    </button>
+                </div>
+                <div class="onestepcheckout-auth-form-block">
+                    <a class="onestepcheckout-forgot-password-back" href="javascript:void(0);"><?php echo $this->__('Return to Login') ?></a>
+                </div>
+            </div>
+        </form>
+        <div id="onestepcheckout-forgot-password-success">
+            <p><?php echo $this->__('If there is an account associated with email address you will receive an email with a link to reset your password.');?></p>
+            <p><?php echo $this->__('Click the link below to return to login.');?></p>
+            <div class="onestepcheckout-auth-form-block">
+                <a class="onestepcheckout-forgot-password-back" href="javascript:void(0);"><?php echo $this->__('Return to Login') ?></a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var OSCLoginBlock = new OnestepcheckoutLogin({
+        containerSelector: '#onestepcheckout-authentification-container',
+        forgotPasswordLinkSelector: '#onestepcheckout-login-forgot-link',
+        backToLoginLinkSelector: '.onestepcheckout-forgot-password-back',
+        loginFormSelector: '#onestepcheckout-login-form',
+        forgotPasswordFormSelector: '#onestepcheckout-forgot-password-form',
+        forgotPasswordSuccessBlockSelector: '#onestepcheckout-forgot-password-success',
+        errorMessageBoxCssClass: 'onestepcheckout-error-msg ',
+        overlayConfig: {
+            '48px': 'onestepcheckout-overlay onestepcheckout-overlay-48',
+            '24px': 'onestepcheckout-overlay onestepcheckout-overlay-24',
+            '16px': 'onestepcheckout-overlay onestepcheckout-overlay-16'
+        },
+        jsErrorMsg: <?php echo Zend_Json::encode($this->__("Oops something's wrong")); ?>
+    });
+</script>
+<?php endif;?>

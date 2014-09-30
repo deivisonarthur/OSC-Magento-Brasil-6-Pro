@@ -1,0 +1,73 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Onestepcheckout
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?><?php if ($this->canShow()): ?>
+<div id="onestepcheckout-review-terms">
+    <ol>
+    <?php foreach($this->getAgreements() as $_a): ?>
+        <li>
+            <input type="checkbox" name="inovarti_osc_agreement[<?php echo $_a->getId();?>]"
+                   id="onestepcheckout-review-terms-agreement-<?php echo $_a->getId();?>"
+                   class="osc-agreement-checkbox-<?php echo $_a->getId();?>" value="1" class="checkbox" />
+            <?php $label = '<a href="javascript:void(0)" title="' . $this->htmlEscape($_a->getCheckboxText()) . '">' .
+                $this->htmlEscape($_a->getCheckboxText()) . '</a>';
+            ?>
+            <label for="onestepcheckout-review-terms-agreement-<?php echo $_a->getId();?>"><?php echo $this->__('I accept the %s', $label) ?></label>
+            <div class="onestepcheckout-review-terms-description-container">
+                <?php if ($_a->getIsHtml()):?>
+                    <?php echo $_a->getContent() ?>
+                <?php else:?>
+                    <?php echo nl2br($this->htmlEscape($_a->getContent())) ?>
+                <?php endif; ?>
+            </div>
+        </li>
+        <script type="text/javascript">
+            Validation.add(
+                'osc-agreement-checkbox-<?php echo $_a->getId();?>',
+                <?php echo Zend_Json::encode($this->__('You must accept the "%s"', $this->htmlEscape($_a->getCheckboxText()))); ?>,
+                function(v) {
+                    return !Validation.get('IsEmpty').test(v);
+                }
+            );
+        </script>
+    <?php endforeach;?>
+    </ol>
+    <div id="onestepcheckout-review-terms-popup" class="onestepcheckout-popup" style="display:none">
+        <div id="onestepcheckout-review-terms-popup-content" class="onestepcheckout-popup-content"></div>
+        <div id="onestepcheckout-review-terms-popup-accept" class="onestepcheckout-popup-accept">
+            <button type="button"><?php echo $this->__('ACCEPT');?></button>
+            <a href="javascript:void(0)"><?php echo $this->__('Close');?></a>
+        </div>
+    </div>
+    <div id="onestepcheckout-review-terms-overlay" class="onestepcheckout-popup-overlay" style="display:none"></div>
+</div>
+<script type="text/javascript">
+    var OSCReviewTerms = new OnestepcheckoutReviewTerms({
+        containerSelector: "#onestepcheckout-review-terms",
+        itemsSelector: "#onestepcheckout-review-terms ol li",
+        linkFromItemSelector: "label a",
+        checkboxFromItemSelector: "input[type=checkbox]",
+        descriptionContainerFromItemSelector: ".onestepcheckout-review-terms-description-container",
+        popup: {
+            overlaySelector: "#onestepcheckout-review-terms-overlay",
+            containerSelector: "#onestepcheckout-review-terms-popup",
+            contentContainerSelector: "#onestepcheckout-review-terms-popup-content",
+            acceptContainerSelector: "#onestepcheckout-review-terms-popup-accept",
+            buttons: {
+                accept:{
+                    selector: "#onestepcheckout-review-terms-popup-accept button",
+                    enabled: true
+                },
+                close:{
+                    selector: "#onestepcheckout-review-terms-popup-accept a",
+                    enabled: true
+                }
+            }
+        }
+    });
+</script>
+<?php endif;?>

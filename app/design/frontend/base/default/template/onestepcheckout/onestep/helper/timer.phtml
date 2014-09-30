@@ -1,0 +1,27 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Onestepcheckout
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?><div <?php if ($this->getBlockId()):?>id="<?php echo $this->getBlockId();?>"<?php endif;?> class="onestepcheckout-timer">
+    <div class="onestepcheckout-timer-title">
+        <h1><?php echo $this->__($this->getTitleText(), $this->getTimerClockElement());?></h1>
+    </div>
+    <div class="onestepcheckout-timer-description">
+        <p><?php echo $this->__($this->getDescriptionText());?></p>
+    </div>
+    <div class="onestepcheckout-timer-actions">
+        <div class="onestepcheckout-timer-actions-left">
+            <a href="javascript:void(0)" <?php if ($this->getRedirectNowActionHtmlId()):?>id="<?php echo $this->getRedirectNowActionHtmlId();?>"<?php endif;?>>
+                <?php echo $this->__($this->getRedirectNowActionText());?>
+            </a>
+        </div>
+        <div class="onestepcheckout-timer-actions-right">
+            <a href="javascript:void(0)" <?php if ($this->getCancelActionHtmlId()):?>id="<?php echo $this->getCancelActionHtmlId();?>"<?php endif;?>>
+                <?php echo $this->__($this->getCancelActionText());?>
+            </a>
+        </div>
+    </div>
+</div>

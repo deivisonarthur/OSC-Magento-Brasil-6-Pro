@@ -1,0 +1,43 @@
+**********************************************************************************************
+Admin > Sistema > Geral - Geral
+**********************************************************************************************
+ -> Opções de Países
+	"Código Postal é Opcional nos seguintes países":Selecionar todos menos brasil
+ -> Opções de Estados
+	" Não exibir Estado": Sim ou " Exibição não requerida Estado": Sim
+********************************************************************************************** 
+Admin > Sistema > Clientes - Configuração do cliente
+**********************************************************************************************
+
+ -> Opções de Nome e Endereço
+ "Número de linhas em um endereço de rua":4
+
+street1 = endereço
+street2 = numero
+street3 = complemento
+street4 = bairro
+
+**********************************************************************************************
+VERIFICAR ID CRIADO POIS NA OSC ESTAMOS USANDO "RADIO"
+**********************************************************************************************
+/*PARA BILLING OU SHIPPING*/
+<?php $_tipopessoa = $this->getLayout()->createBlock('customer/widget_tipopessoa') ?>
+<?php if ($_tipopessoa->isEnabled()): ?>
+	<li class="control">
+		<?php echo $_tipopessoa->setDate($this->getQuote()->getCustomerTipopessoa())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?>
+	</li>
+<?php endif ?>
+/*OU SIMPLESMENTE*/
+<?php $_tipopessoa = $this->getLayout()->createBlock('customer/widget_tipopessoa') ?>
+<?php if ($_tipopessoa->isEnabled()): ?>
+	<li><?php echo $_tipopessoa->setTipopessoa($this->getCustomer()->getTipopessoa())->toHtml() ?></li>
+<?php endif ?>
+**********************************************************************************************
+CNPJ
+firstname= Razão social
+lastname = Nome Fantansia
+
+**********************************************************************************************
+Criar conta
+**********************************************************************************************
+

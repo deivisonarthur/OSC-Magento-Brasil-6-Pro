@@ -1,0 +1,42 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Onestepcheckout
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?><div id="onestepcheckout-review-coupon">
+<?php if ($this->canShow()): ?>
+    <div class="coupon-message-container" style="overflow:hidden;height:0px;"></div>
+    <div class="coupon-code-form">
+        <label for="coupon_code"><?php echo $this->__('Coupon Code') ?></label>
+        <div class="input-box field-row">
+            <input class="input-text<?php if ($this->getConfig()->isApplyCouponButton()) : ?> with-buttons<?php endif; ?>" id="coupon_code" name="coupon_code" value="<?php echo $this->getCouponCode(); ?>" />
+            <?php if ($this->getConfig()->isApplyCouponButton()) : ?>
+                <button type="submit" class="button" id="onestepcheckout-coupon-code-apply-btn" onclick="return false;"<?php if ($this->getCouponCode()) : ?> style="display:none;"<?php endif; ?>>
+                    <span><span><?php echo $this->__('Apply Coupon'); ?></span></span>
+                </button>
+                <button type="submit" class="button" id="onestepcheckout-coupon-code-cancel-btn" onclick="return false;"<?php if (!$this->getCouponCode()) : ?> style="display:none;"<?php endif; ?>>
+                    <span><span><?php echo $this->__('Cancel Coupon'); ?></span></span>
+                </button>
+            <?php endif; ?>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var OSCReviewCoupon = new OnestepcheckoutReviewCoupon({
+            isCouponApplied: <?php echo ($this->getCouponCode()) ? 'true' : 'false'; ?>,
+            isApplyCouponButton: <?php echo ($this->getConfig()->isApplyCouponButton()) ? 'true' : 'false'; ?>,
+            applyCouponButtonSelector: '#onestepcheckout-coupon-code-apply-btn',
+            cancelCouponButtonSelector: '#onestepcheckout-coupon-code-cancel-btn',
+            msgContainerSelector: '.coupon-message-container',
+            applyCouponUrl: '<?php echo $this->getApplyCouponAjaxUrl(); ?>',
+            cancelCouponUrl: '<?php echo $this->getCancelCouponAjaxUrl(); ?>',
+            couponCodeInput: 'coupon_code',
+            successMessageBoxCssClass: 'onestepcheckout-success-msg',
+            errorMessageBoxCssClass: 'onestepcheckout-error-msg',
+            jsErrorMsg: <?php echo Zend_Json::encode($this->__("Oops something's wrong")); ?>,
+            jsSuccessMsg: <?php echo Zend_Json::encode($this->__("Ok")); ?>
+        });
+    </script>
+<?php endif; ?>
+</div>
