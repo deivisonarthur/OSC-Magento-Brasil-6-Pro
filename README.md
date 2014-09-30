@@ -12,18 +12,45 @@
 * Michel Brito
 * Denis Spalenza
 
-<h2>Visões de demostração do OSC 6</h2>
-
-**Registro(Cadastro)**
+<h2>Novidades</h2>
 * Com validação do CPF/CNPJ;
 * Validação de e-mail já registrado;
 * Validação de CFP/CNPJ já registrado;
 * CPF/CNPJ usando o Taxvat;
 * Seleção do tipo pessoa;
+* Uso do campo firstname como Razão Social para seleção de PJ;
+* Uso do campo lastname como Nome Fantansia para seleção de PJ;
+* Opção de autenticação antes de ir para o checkout;
+* Responsivo com Bootstrap;
+* Uso do CSS padrão da theme Default do Magento;
+* Padronização de todo o código fonte;
+* Homologado em projetos com grande volume de vendas;
+* Suporte as versões acima da 1.6+;
+* Busca do CEP para auto complete;
+* Bloqueio da edição do e-mail, CPF, CNPJ na tela de edição de endereços;
 
+<h2>Visões de demostração do OSC 6</h2>
+
+**1 - Registro(Cadastro)**
 <img src="http://www.inovarti.com.br/osc/OSC6-Cadastro.png" alt="One Step Checkout estilizado" title="One Step Checkout estilizado" />
+
 **Verificação se o e-mail, CPF e CNPJ são únicos, ou seja, se já possui registro**
 <img src="http://www.inovarti.com.br/osc/OSC6-Cadastro-Validacao.png" alt="Verificação se o e-mail, CPF e CNPJ são únicos, ou seja, se já possui registro" title="Verificação se o e-mail, CPF e CNPJ são únicos, ou seja, se já possui registro" />
+
+**2 - Tela do OSC Estilizada 1**
+<img src="http://www.inovarti.com.br/osc/OSC6-Estilizado-Responsivo-1.png" alt="One Step Checkout estilizado 1" title="One Step Checkout estilizado 1" />
+
+**3 - Tela do OSC Estilizada 2**
+<img src="http://www.inovarti.com.br/osc/OSC6-Estilizado-Responsivo-2.png" alt="One Step Checkout estilizado 2" title="One Step Checkout estilizado 2" />
+
+**4 - Tela do OSC Estilizada 3**
+<img src="http://www.inovarti.com.br/osc/OSC6-Estilizado-Responsivo-3.png" alt="One Step Checkout estilizado 3" title="One Step Checkout estilizado 3" />
+
+**5 - Edição do Endereço**
+<img src="http://www.inovarti.com.br/osc/OSC6-Editar-Enderecos.png" alt="One Step Checkout Edição do Endereço" title="One Step Checkout Edição do Endereço" />
+
+**5 - Informações da Conta**
+<img src="http://www.inovarti.com.br/osc/OSC6-Informacoes-da-conta.png" alt="One Step Checkout Informações da Conta" title="One Step Checkout Informações da Conta" />
 
 <h2>Tutorial e Observações</h2>
 
