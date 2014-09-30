@@ -2,7 +2,7 @@
 **powered by**
 
 
-<a href="http://www.inovarti.com.br"><img src="http://www.inovarti.com.br/logo-transparente.png" alt="Inovarti Soluções Avançadas em E-commerce" title="Inovarti Soluções Avançadas em E-commerce" /></a>
+<img src="http://www.inovarti.com.br/osc/inovarti.png" alt="Inovarti Soluções Avançadas em E-commerce" title="Inovarti Soluções Avançadas em E-commerce" />
 
 
 O projeto OCS-Magento-Brasil é uma iniciativa para traduzir e adaptar o módulo de OSC(One Step Checkout) do Magento incluindo opções básicas para o funcionamento nas lojas brasileiras. 
