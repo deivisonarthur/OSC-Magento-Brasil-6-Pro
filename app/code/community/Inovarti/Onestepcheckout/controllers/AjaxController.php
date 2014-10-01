@@ -64,6 +64,8 @@ class Inovarti_Onestepcheckout_AjaxController extends Mage_Checkout_Controller_A
                 $result['success'] = false;
                 $result['messages'][] = $this->__('Login and password are required.');
             }
+        }  elseif ($customerSession->isLoggedIn()) {
+            $this->_redirect(Mage::helper('checkout/url')->getCheckoutUrl());
         }
         $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($result));
     }
