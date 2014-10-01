@@ -8,6 +8,14 @@
  */
 $installer = $this;
 $installer->startSetup();
+
+/*Remover atributos tipopessoa do OSC 4*/
+if ($this->getAttribute('customer', 'tipopessoa', 'attribute_id')) {
+    $this->removeAttribute('customer', 'tipopessoa');
+    $this->removeAttribute('customer_address', 'tipopessoa');
+}
+
+
 if (!$this->getAttribute('customer', 'tipopessoa', 'attribute_id')) {
     $installer->addAttribute('customer', 'tipopessoa', array(
         'type' => 'int',
