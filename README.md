@@ -50,7 +50,7 @@ O projeto OCS-Magento-Brasil é uma iniciativa que visa o desenvolvimento de um 
 
     $ cd /path/to/magento
     $ modgit init
-    $ modgit add pagarme git@github.com:deivisonarthur/OSC-Magento-Brasil-6-Pro.git
+    $ modgit add oscbrasil6 git@github.com:deivisonarthur/OSC-Magento-Brasil-6-Pro.git
 
 **Instalação manual enviando os arquivos**
 
