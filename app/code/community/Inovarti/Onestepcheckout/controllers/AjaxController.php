@@ -405,7 +405,6 @@ class Inovarti_Onestepcheckout_AjaxController extends Mage_Checkout_Controller_A
             Mage::logException($e);
             Mage::helper('checkout')->sendPaymentFailedEmail($this->getOnepage()->getQuote(), $e->getMessage());
             $result['success'] = false;
-            $result['messages'][] = $this->__('There was an error processing your order. Please contact us or try again later.');
             $result['messages'][] = $e->getMessage();
         }
         if ($result['success']) {
