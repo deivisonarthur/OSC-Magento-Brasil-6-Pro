@@ -133,6 +133,7 @@
                 <is_use_billing_as_shipping>0</is_use_billing_as_shipping>
                 <title>One Step Checkout</title>
                 <description>Por favor, informe seus dados abaixo para concluir a compra.</description>
+                <is_jquery>1</is_jquery>
                 <is_block_numbering>1</is_block_numbering>
                 <is_show_titles>1</is_show_titles>
                 <default_payment_method></default_payment_method>

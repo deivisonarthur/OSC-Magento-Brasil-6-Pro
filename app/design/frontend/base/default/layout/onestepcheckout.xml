@@ -9,6 +9,7 @@
             <action method="setTemplate"><template>page/1column.phtml</template></action>
         </reference>
         <reference name="head">
+            <action method="addJs" ifconfig="onestepcheckout/general/is_jquery"><script>onestepcheckout/jquery.min.js</script></action>
             <action method="addJs"><script>onestepcheckout/validation.js</script></action>
             <action method="addJs"><script>onestepcheckout/onestepcheckout.js</script></action>
             <action method="addJs"><script>onestepcheckout/login.js</script></action>
@@ -121,30 +122,33 @@
     </onestepcheckout_index_index>
     <customer_account_edit translate="label">
         <reference name="head">
-            <action method="addJs"><script>onestepcheckout/validation.js</script></action>
-            <action method="addItem"><type>skin_css</type><name>onestepcheckout/css/onestepcheckout.css</name></action>
+            <action method="addJs" ifconfig="onestepcheckout/general/is_jquery"><script>onestepcheckout/jquery.min.js</script></action>
+            <action method="addJs" ifconfig="onestepcheckout/general/is_enabled"><script>onestepcheckout/validation.js</script></action>
+            <action method="addItem" ifconfig="onestepcheckout/general/is_enabled"><type>skin_css</type><name>onestepcheckout/css/onestepcheckout.css</name></action>
         </reference>
         <reference name="customer_edit">
-            <action method="setTemplate"><template>onestepcheckout/customer/form/edit.phtml</template></action>
+            <action method="setTemplate" ifconfig="onestepcheckout/general/is_enabled"><template>onestepcheckout/customer/form/edit.phtml</template></action>
         </reference>
     </customer_account_edit>
 
     <customer_address_form translate="label">
         <reference name="head">
-            <action method="addJs"><script>onestepcheckout/validation.js</script></action>
-            <action method="addItem"><type>skin_css</type><name>onestepcheckout/css/onestepcheckout.css</name></action>
+            <action method="addJs" ifconfig="onestepcheckout/general/is_jquery"><script>onestepcheckout/jquery.min.js</script></action>
+            <action method="addJs" ifconfig="onestepcheckout/general/is_enabled"><script>onestepcheckout/validation.js</script></action>
+            <action method="addItem" ifconfig="onestepcheckout/general/is_enabled"><type>skin_css</type><name>onestepcheckout/css/onestepcheckout.css</name></action>
         </reference>
         <reference name="customer_address_edit">
-            <action method="setTemplate"><template>onestepcheckout/customer/address/edit.phtml</template></action>
+            <action method="setTemplate" ifconfig="onestepcheckout/general/is_enabled"><template>onestepcheckout/customer/address/edit.phtml</template></action>
         </reference>
     </customer_address_form>
     <customer_account_create>
         <reference name="head">
-            <action method="addJs"><script>onestepcheckout/validation.js</script></action>
-            <action method="addItem"><type>skin_css</type><name>onestepcheckout/css/onestepcheckout.css</name></action>
+            <action method="addJs" ifconfig="onestepcheckout/general/is_jquery"><script>onestepcheckout/jquery.min.js</script></action>
+            <action method="addJs" ifconfig="onestepcheckout/general/is_enabled"><script>onestepcheckout/validation.js</script></action>
+            <action method="addItem" ifconfig="onestepcheckout/general/is_enabled"><type>skin_css</type><name>onestepcheckout/css/onestepcheckout.css</name></action>
         </reference>
         <reference name="customer_form_register">
-            <action method="setTemplate"><template>onestepcheckout/persistent/customer/form/register.phtml</template></action>
+            <action method="setTemplate" ifconfig="onestepcheckout/general/is_enabled"><template>onestepcheckout/persistent/customer/form/register.phtml</template></action>
         </reference>
     </customer_account_create>
 </layout>
