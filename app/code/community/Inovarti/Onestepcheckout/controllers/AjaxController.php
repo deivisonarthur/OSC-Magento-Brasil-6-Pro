@@ -699,7 +699,7 @@ class Inovarti_Onestepcheckout_AjaxController extends Mage_Checkout_Controller_A
             $taxvat = $this->getRequest()->getPost('taxvat', false);
             $flag = 0;
             $data['result'] = 'clean';
-            $cli = Mage::getModel('customer/customer')->getCollection()->addAttributeToFilter('taxvat', array('eq' => $taxvat));
+            $cli = Mage::getModel('customer/customer')->setWebsiteId(Mage::app()->getStore()->getWebsiteId())->getCollection()->addAttributeToFilter('taxvat', array('eq' => $taxvat));
             foreach ($cli as $customer) {
                 $dataTaxvat = $customer->getTaxvat();
                 if ($dataTaxvat == $taxvat)
@@ -709,7 +709,7 @@ class Inovarti_Onestepcheckout_AjaxController extends Mage_Checkout_Controller_A
                 $data['result'] = 'exists';
             } else {
                 $taxvat = preg_replace("/[^0-9]/", "", $taxvat);
-                $cli = Mage::getModel('customer/customer')->getCollection()->addAttributeToFilter('taxvat', array('eq' => $taxvat));
+                $cli = Mage::getModel('customer/customer')->setWebsiteId(Mage::app()->getStore()->getWebsiteId())->getCollection()->addAttributeToFilter('taxvat', array('eq' => $taxvat));
                 foreach ($cli as $customer) {
                     $dataTaxvat = $customer->getTaxvat();
                     if ($dataTaxvat == $taxvat)
@@ -724,7 +724,7 @@ class Inovarti_Onestepcheckout_AjaxController extends Mage_Checkout_Controller_A
             $taxvat = $this->getRequest()->getQuery('taxvat', false);
             $flag = 0;
             $data['result'] = 'clean';
-            $cli = Mage::getModel('customer/customer')->getCollection()->addAttributeToFilter('taxvat', array('eq' => $taxvat));
+            $cli = Mage::getModel('customer/customer')->setWebsiteId(Mage::app()->getStore()->getWebsiteId())->getCollection()->addAttributeToFilter('taxvat', array('eq' => $taxvat));
             foreach ($cli as $customer) {
                 $dataTaxvat = $customer->getTaxvat();
                 if ($dataTaxvat == $taxvat)
@@ -734,7 +734,7 @@ class Inovarti_Onestepcheckout_AjaxController extends Mage_Checkout_Controller_A
                 $data['result'] = 'exists';
             } else {
                 $taxvat = preg_replace("/[^0-9]/", "", $taxvat);
-                $cli = Mage::getModel('customer/customer')->getCollection()->addAttributeToFilter('taxvat', array('eq' => $taxvat));
+                $cli = Mage::getModel('customer/customer')->setWebsiteId(Mage::app()->getStore()->getWebsiteId())->getCollection()->addAttributeToFilter('taxvat', array('eq' => $taxvat));
                 foreach ($cli as $customer) {
                     $dataTaxvat = $customer->getTaxvat();
                     if ($dataTaxvat == $taxvat)
