@@ -128,25 +128,25 @@
 <script type="text/javascript">
     //<![CDATA[
     if ($('shipping:firstname')) {
-        $('shipping:firstname').observe('keypress', function(event) {
+        $('shipping:firstname').observe('keyup', function(event) {
             this.maxLength = 20;
         });
     }
     if ($('shipping:lastname')) {
-        $('shipping:lastname').observe('keypress', function(event) {
+        $('shipping:lastname').observe('keyup', function(event) {
             this.maxLength = 30;
         });
     }
     if ($('shipping:telephone')) {
         $('shipping:telephone').addClassName('validate-phone-br');
-        $('shipping:telephone').observe('keypress', function(event) {
+        $('shipping:telephone').observe('keyup', function(event) {
             this.maxLength = 15;
             mascara(this, mtel);
         });
     }
     if ($('shipping:fax')) {
         $('shipping:fax').addClassName('validate-phone-br');
-        $('shipping:fax').observe('keypress', function(event) {
+        $('shipping:fax').observe('keyup', function(event) {
             this.maxLength = 15;
             mascara(this, mtel);
         });
@@ -159,27 +159,27 @@
         });
     }
     if ($('shipping:street1')) {
-        $('shipping:street1').observe('keypress', function(event) {
+        $('shipping:street1').observe('keyup', function(event) {
             this.maxLength = 40;
         });
     }
     if ($('shipping:street2')) {
-        $('shipping:street2').observe('keypress', function(event) {
+        $('shipping:street2').observe('keyup', function(event) {
             this.maxLength = 5;
         });
     }
     if ($('shipping:street3')) {
-        $('shipping:street3').observe('keypress', function(event) {
+        $('shipping:street3').observe('keyup', function(event) {
             this.maxLength = 20;
         });
     }
     if ($('shipping:street4')) {
-        $('shipping:street4').observe('keypress', function(event) {
+        $('shipping:street4').observe('keyup', function(event) {
             this.maxLength = 20;
         });
     }
     if ($('shipping:city')) {
-        $('shipping:city').observe('keypress', function(event) {
+        $('shipping:city').observe('keyup', function(event) {
             this.maxLength = 30;
         });
     }

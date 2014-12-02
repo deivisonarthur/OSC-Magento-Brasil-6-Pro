@@ -218,20 +218,31 @@
         function setTipopessoaArea(arg) {
             if (arg == 'Jurídica') {
                 if ($('taxvat')) {
-                    $$('label[for="taxvat"]').first().update('<em>*</em>CNPJ');
                     $('taxvat').maxLength = 18;
+                    $('ie').maxLength = 30;
+                    $$('label[for="ie"]').first().update('<em>*</em>IE (Inscrição Estadual)');
+                    $$('label[for="taxvat"]').first().update('<em>*</em>CNPJ');
                     $$('label[for="firstname"]').first().update('<em>*</em>Razão social');
                     $$('label[for="lastname"]').first().update('<em>*</em>N. Fantasia');
+                    $$('input[name="taxvat"]').first().writeAttribute('title','CNPJ');
+                    $$('input[name="ie"]').first().writeAttribute('title','IE (Inscrição Estadual)');
+                    $$('input[name="firstname"]').first().writeAttribute('title','Razão social');
+                    $$('input[name="lastname"]').first().writeAttribute('title','N. Fantasia');
                     $('tipopessoa-area').hide();
                     $('tipojuridica-area').show();
                 }
             } else {
                 if ($('taxvat')) {
                     $('taxvat').maxLength = 14;
+                    $('ie').maxLength = 30;
                     $$('label[for="taxvat"]').first().update('<em>*</em>CPF');
-                    $$('label[for="taxvat"]').first().update('<em>*</em>CPF');
+                    $$('label[for="ie"]').first().update('<em>*</em>RG');
                     $$('label[for="firstname"]').first().update('<em>*</em>Nome');
                     $$('label[for="lastname"]').first().update('<em>*</em>Sobrenome');
+                    $$('input[name="taxvat"]').first().writeAttribute('title','CPF');
+                    $$('input[name="ie"]').first().writeAttribute('title','RG');
+                    $$('input[name="firstname"]').first().writeAttribute('title','Nome');
+                    $$('input[name="lastname"]').first().writeAttribute('title','Sobrenome');
                     $('tipopessoa-area').show();
                     $('tipojuridica-area').hide();
                 }
@@ -311,21 +322,21 @@
 
         if ($('taxvat')) {
             $('taxvat').addClassName('validate-taxvat');
-            $('taxvat').observe('keypress', function(event) {
+            $('taxvat').observe('keyup', function(event) {
                 mascara(this, mdocumento);
             });
         }
 
         if ($('telephone')) {
             $('telephone').addClassName('validate-phone-br');
-            $('telephone').observe('keypress', function(event) {
+            $('telephone').observe('keyup', function(event) {
                 this.maxLength = 15;
                 mascara(this, mtel);
             });
         }
         if ($('fax')) {
             $('fax').addClassName('validate-phone-br');
-            $('fax').observe('keypress', function(event) {
+            $('fax').observe('keyup', function(event) {
                 this.maxLength = 15;
                 mascara(this, mtel);
             });
@@ -339,27 +350,27 @@
                 });
             }
             if ($('street1')) {
-                $('street1').observe('keypress', function(event) {
+                $('street1').observe('keyup', function(event) {
                     this.maxLength = 40;
                 });
             }
             if ($('street2')) {
-                $('street2').observe('keypress', function(event) {
+                $('street2').observe('keyup', function(event) {
                     this.maxLength = 5;
                 });
             }
             if ($('street3')) {
-                $('street3').observe('keypress', function(event) {
+                $('street3').observe('keyup', function(event) {
                     this.maxLength = 20;
                 });
             }
             if ($('street4')) {
-                $('street4').observe('keypress', function(event) {
+                $('street4').observe('keyup', function(event) {
                     this.maxLength = 20;
                 });
             }
             if ($('city')) {
-                $('city').observe('keypress', function(event) {
+                $('city').observe('keyup', function(event) {
                     this.maxLength = 30;
                 });
             }

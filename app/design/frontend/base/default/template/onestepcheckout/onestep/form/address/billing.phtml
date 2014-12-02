@@ -314,21 +314,21 @@
     
     if ($('billing:taxvat')) {
         $('billing:taxvat').addClassName('validate-taxvat');
-        $('billing:taxvat').observe('keypress', function(event) {
+        $('billing:taxvat').observe('keyup', function(event) {
             mascara(this, mdocumento);
         });
     }
     
     if ($('billing:telephone')) {
         $('billing:telephone').addClassName('validate-phone-br');
-        $('billing:telephone').observe('keypress', function(event) {
+        $('billing:telephone').observe('keyup', function(event) {
             this.maxLength = 15;
             mascara(this, mtel);
         });
     }
     if ($('billing:fax')) {
         $('billing:fax').addClassName('validate-phone-br');
-        $('billing:fax').observe('keypress', function(event) {
+        $('billing:fax').observe('keyup', function(event) {
             this.maxLength = 15;
             mascara(this, mtel);
         });
@@ -341,40 +341,40 @@
         });
     }
     if ($('billing:street1')) {
-        $('billing:street1').observe('keypress', function(event) {
+        $('billing:street1').observe('keyup', function(event) {
             this.maxLength = 40;
         });
     }
     if ($('billing:street2')) {
-        $('billing:street2').observe('keypress', function(event) {
+        $('billing:street2').observe('keyup', function(event) {
             this.maxLength = 5;
         });
     }
     if ($('billing:street3')) {
-        $('billing:street3').observe('keypress', function(event) {
+        $('billing:street3').observe('keyup', function(event) {
             this.maxLength = 20;
         });
     }
     if ($('billing:street4')) {
-        $('billing:street4').observe('keypress', function(event) {
+        $('billing:street4').observe('keyup', function(event) {
             this.maxLength = 20;
         });
     }
     if ($('billing:city')) {
-        $('billing:city').observe('keypress', function(event) {
+        $('billing:city').observe('keyup', function(event) {
             this.maxLength = 30;
         });
     }
     if ($('billing:day')) {
-        $('billing:day').observe('keypress', function(event) {
+        $('billing:day').observe('keyup', function(event) {
             this.maxLength = 2;
             mascara(this, sonumeros);
         });
-        $('billing:month').observe('keypress', function(event) {
+        $('billing:month').observe('keyup', function(event) {
             this.maxLength = 2;
             mascara(this, sonumeros);
         });
-        $('billing:year').observe('keypress', function(event) {
+        $('billing:year').observe('keyup', function(event) {
             this.maxLength = 4;
             mascara(this, sonumeros);
 
