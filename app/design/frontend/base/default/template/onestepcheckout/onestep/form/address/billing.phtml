@@ -71,6 +71,12 @@
                                 <?php echo $this->getTaxvatHtml() ?>
                             </li>
                         <?php endif; ?>
+                        <li class="wide">
+                            <label for="billing:ie" class="required"><?php echo $this->__('IE (Inscrição Estadual)') ?></label>
+                            <div class="input-box">
+                                <input type="text" id="billing:ie" name="billing[ie]" title="<?php echo $this->__('IE (Inscrição Estadual)') ?>" class="input-text" value="<?php echo $this->getDataFromSession('ie'); ?>" />
+                            </div>
+                        </li>
                         <li>
                             <ul id="osc-billing-tipopessoa-area"  style="overflow: hidden;display:block;">
                                 <li class="wide">
@@ -209,30 +215,34 @@
     //<![CDATA[
     var billingRegionUpdater = new RegionUpdater('billing:country_id', 'billing:region', 'billing:region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'billing:postcode');
     <?php if (!$this->isCustomerLoggedIn()) : ?>
-        $$("[name*=billing[radio_tipopessoa]]").invoke('on', 'click',function(){
+        $$("input[name*='radio_tipopessoa']").invoke('on', 'click', function() {
             var sel = $('billing:tipopessoa');
             setTipopessoaArea(this.value);
-            for(var i=0; i<sel.options.length; i++){
-                if(sel.options[i].text == this.value){
-                    sel.options[i].selected=true;
+            for (var i = 0; i < sel.options.length; i++) {
+                if (sel.options[i].text == this.value) {
+                    sel.options[i].selected = true;
                 }
             }
-            
+
         });
         function setTipopessoaArea(arg){
-            if(arg=='Jurídica') {
+
+            if (arg == 'Jurídica') {
                 if ($('billing:taxvat')) {
+                    $('billing:taxvat').maxLength = 18;
+                    $('billing:ie').maxLength = 30;
+                    $$('label[for="billing:ie"]').first().update('<em>*</em>IE (Inscrição Estadual)');
                     $$('label[for="billing:taxvat"]').first().update('<em>*</em>CNPJ');
-                    $('billing:taxvat').maxLength=18;
                     $$('label[for="billing:firstname"]').first().update('<em>*</em>Razão social');
-                    $$('label[for="billing:lastname"]').first().update('<em>*</em>Nome Fantansia');
+                    $$('label[for="billing:lastname"]').first().update('<em>*</em>N. Fantasia');
                     $('osc-billing-tipopessoa-area').hide();
                 }
-            }else{
+            } else {
                 if ($('billing:taxvat')) {
-                    $('billing:taxvat').maxLength=14;
+                    $('billing:taxvat').maxLength = 14;
+                    $('billing:ie').maxLength = 30;
                     $$('label[for="billing:taxvat"]').first().update('<em>*</em>CPF');
-                    $$('label[for="billing:taxvat"]').first().update('<em>*</em>CPF');
+                    $$('label[for="billing:ie"]').first().update('<em>*</em>RG');
                     $$('label[for="billing:firstname"]').first().update('<em>*</em>Nome');
                     $$('label[for="billing:lastname"]').first().update('<em>*</em>Sobrenome');
                     $('osc-billing-tipopessoa-area').show();
