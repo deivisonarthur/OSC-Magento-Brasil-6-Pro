@@ -144,6 +144,15 @@
     </div>
 </form>
 <script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+    new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+    Validation.add('validate-zip-br', '<?php echo $this->__('Please enter a valid zip code. e.g. 12345678.') ?>', function(v) {
+        return Validation.get('IsEmpty').test(v) || /(^\d{8}$)|(^\d{5}-\d{3}$)/.test(v);
+    });
+    Validation.add('validate-phone-br', '<?php echo $this->__('Please enter a valid phone number. for example, (xx) x4567-8900.') ?>', function(v) {
+        return Validation.get('IsEmpty').test(v) || /^(\()?\d{2}(\))?(-|\s)?\d{5}(-|\s)\d{4}|(\()?\d{2}(\))?(-|\s)?\d{4}(-|\s)\d{4}$/.test(v);
+    });
     if (jQuery('#telephone')) {
         jQuery('#telephone').addClass('validate-phone-br');
         jQuery('#telephone').on('keyup', function(event) {
@@ -190,15 +199,5 @@
             this.maxLength = 30;
         });
     }
-//<![CDATA[
-    var dataForm = new VarienForm('form-validate', true);
-    new RegionUpdater('country_id', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
-    Validation.add('validate-zip-br', '<?php echo $this->__('Please enter a valid zip code. e.g. 12345678.') ?>', function(v) {
-        return Validation.get('IsEmpty').test(v) || /(^\d{8}$)|(^\d{5}-\d{3}$)/.test(v);
-    });
-    Validation.add('validate-phone-br', '<?php echo $this->__('Please enter a valid phone number. for example, (xx) x4567-8900.') ?>', function(v) {
-        return Validation.get('IsEmpty').test(v) || /^(\()?\d{2}(\))?(-|\s)?\d{5}(-|\s)\d{4}|(\()?\d{2}(\))?(-|\s)?\d{4}(-|\s)\d{4}$/.test(v);
-    });
-    
 //]]>
 </script>
