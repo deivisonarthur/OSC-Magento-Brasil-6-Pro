@@ -59,7 +59,7 @@
                         <div class="field">
                             <label for="telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
                             <div class="input-box">
-                                <input type="text" name="telephone" title="<?php echo $this->__('Telephone') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" id="telephone" value="<?php echo $this->getFormData()->getTelephone(); ?>" autocomplete="off"/>
+                                <input type="tel" name="telephone" title="<?php echo $this->__('Telephone') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" id="telephone" value="<?php echo $this->getFormData()->getTelephone(); ?>" autocomplete="off"/>
                             </div>
                         </div>
                         <div class="field">
