@@ -1,3 +1,8 @@
+.col2-set:after,
+.col3-set:after,
+.col3-layout .product-options-bottom .price-box:after,
+.col4-set:after { display:block; content:"."; clear:both; font-size:0; line-height:0; height:0; overflow:hidden; }
+
 .opc .step{padding: 10px 8px;margin-bottom: 10px;}
 .form-list li.fields {margin-bottom: 10px;}
 .customer-account-create .scaffold-form label:first-child{width: auto !important;}
@@ -14,15 +19,15 @@ input[type=email], input[type=search], input[type=number], input[type=password],
 .form-list .field .input-box{width:100%;}
 .form-list select{border-radius: 2px;border: 1px solid silver;background: #FFFFFF;font-size: 15px;width: 100% !important;padding: 0 8px;height: 30px;margin-top: 0px !important;}
 .form-list .customer-dob .dob-month,
-.form-list .customer-dob .dob-day {width: 24% !important;}
+.form-list .customer-dob .dob-day {width: 24% !important;margin-right: 7px !important;}
 .form-list .customer-dob .dob-year {width: 46% !important;}
 .checkbox + label, .radio + label {max-width: 100% !important;}
 .hide {display: none;}
 .nao-sei-cep {cursor: help;font-size: 11px;margin-left: 10px; position: relative; padding-top: 11px; display: block;}
 .sp-methods .form-list{padding-left: 0px;}
-.col3-set .col-1 { float:left; width:32%; }
-.col3-set .col-2 { float:left; width:32%; margin-left:2%; }
-.col3-set .col-3 { float:right; width:32%; }
+.col3-set .col-1 { float:left; width:32%;}
+.col3-set .col-2 { float:left;width:32%;margin-left:2%; }
+.col3-set .col-3 { float:right; width:32%;}
 .onestepcheckout-postcod-process{display: none;margin-left: -15px;position: absolute;width: 16px;height: 16px;}
 #acp-overlay{z-index: 995;}
 .onestepcheckout-overlay-48{background-image: url('../images/ajax-loader-48px.gif');background-repeat: no-repeat;background-position: center center;}
@@ -55,3 +60,21 @@ input[type=email], input[type=search], input[type=number], input[type=password],
 .onestepcheckout-cart-table tbody td,.onestepcheckout-cart-table tfoot td,.onestepcheckout-cart-table tfoot th{border-bottom: thin solid #BEBCB7;padding: 3px 8px;}
 .onestepcheckout-cart-table .btn-remove{display: none;}
 .onestepcheckout-cart-table .btn-remove2{display: block;width: 16px;height: 16px;font-size: 0;line-height: 0;background: url(../../images/btn_trash.gif) 0 0 no-repeat;text-indent: -999em;overflow: hidden;}
+@media only screen and (max-width: 770px) {
+    .col3-set .col-1, .col3-set .col-2, .col3-set .col-3{
+        float: none;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+}
+@media only screen and (max-width: 479px) {
+    .col3-set .col-1, .col3-set .col-2, .col3-set .col-3{
+        float: none;
+        width: auto;
+        border: 0;
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
