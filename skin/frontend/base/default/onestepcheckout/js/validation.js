@@ -98,15 +98,15 @@ function checkCNPJ(vCNPJ) {
     var mControle = "";
     var aTabCNPJ = new Array(5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2);
     for (i = 1; i <= 2; i++) {
-        mSoma = 0;
+        var mSoma = 0;
         for (j = 0; j < vCNPJ.length; j++)
             mSoma = mSoma + (vCNPJ.substring(j, j + 1) * aTabCNPJ[j]);
         if (i == 2)
             mSoma = mSoma + (2 * mDigito);
-        mDigito = (mSoma * 10) % 11;
+        var mDigito = (mSoma * 10) % 11;
         if (mDigito == 10)
             mDigito = 0;
-        mControle1 = mControle;
+        var mControle1 = mControle;
         mControle = mDigito;
         aTabCNPJ = new Array(6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3);
     }
@@ -116,7 +116,7 @@ function checkCPF(vCPF) {
     var mControle = ""
     var mContIni = 2, mContFim = 10, mDigito = 0;
     for (j = 1; j <= 2; j++) {
-        mSoma = 0;
+        var mSoma = 0;
         for (i = mContIni; i <= mContFim; i++)
             mSoma = mSoma + (vCPF.substring((i - j - 1), (i - j)) * (mContFim + 1 + j - i));
         if (j == 2)
@@ -124,7 +124,7 @@ function checkCPF(vCPF) {
         mDigito = (mSoma * 10) % 11;
         if (mDigito == 10)
             mDigito = 0;
-        mControle1 = mControle;
+        var mControle1 = mControle;
         mControle = mDigito;
         mContIni = 3;
         mContFim = 11;
