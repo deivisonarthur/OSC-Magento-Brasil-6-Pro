@@ -2,10 +2,28 @@
 <config>
     <modules>
         <Inovarti_Onestepcheckout>
-            <version>2.0.1</version>
+            <version>2.0.2</version>
         </Inovarti_Onestepcheckout>
     </modules>
     <global>
+        <fieldsets>
+            <checkout_onepage_quote>
+                <customer_tipopessoa>
+                    <to_customer>tipopessoa</to_customer>
+                </customer_tipopessoa>
+                <customer_ie>
+                    <to_customer>ie</to_customer>
+                </customer_ie>
+            </checkout_onepage_quote>
+            <customer_account>
+                <tipopessoa>
+                    <to_quote>customer_tipopessoa</to_quote>
+                </tipopessoa>
+                <ie>
+                    <to_quote>customer_ie</to_quote>
+                </ie>
+            </customer_account>
+        </fieldsets>
         <blocks>
             <onestepcheckout>
                 <class>Inovarti_Onestepcheckout_Block</class>
@@ -133,7 +151,7 @@
                 <is_use_billing_as_shipping>0</is_use_billing_as_shipping>
                 <title>One Step Checkout</title>
                 <description>Por favor, informe seus dados abaixo para concluir a compra.</description>
-                <is_jquery>1</is_jquery>
+                <is_jquery>0</is_jquery>
                 <is_block_numbering>1</is_block_numbering>
                 <is_show_titles>1</is_show_titles>
                 <default_payment_method></default_payment_method>
@@ -141,11 +159,11 @@
                 <is_cart_editable>0</is_cart_editable>
             </general>
             <exclude_include_fields>
-                <is_company>1</is_company>
+                <is_company>0</is_company>
                 <is_fax>1</is_fax>
-                <is_coupon>1</is_coupon>
-                <is_comments>1</is_comments>
-                <is_newsletter>1</is_newsletter>
+                <is_coupon>0</is_coupon>
+                <is_comments>0</is_comments>
+                <is_newsletter>0</is_newsletter>
             </exclude_include_fields>
             <frontend>
                 <display_apply_coupon_button>0</display_apply_coupon_button>

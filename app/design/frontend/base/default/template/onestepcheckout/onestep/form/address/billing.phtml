@@ -71,12 +71,12 @@
                                 <?php echo $this->getTaxvatHtml() ?>
                             </li>
                         <?php endif; ?>
-                        <li class="wide">
-                            <label for="billing:ie" class="required"><?php echo $this->__('IE (Inscrição Estadual)') ?></label>
-                            <div class="input-box">
-                                <input type="text" id="billing:ie" name="billing[ie]" title="<?php echo $this->__('IE (Inscrição Estadual)') ?>" class="input-text" value="<?php echo $this->getDataFromSession('ie'); ?>" />
-                            </div>
-                        </li>
+                        <?php $_ie = $this->getLayout()->createBlock('onestepcheckout/widget_ie') ?>
+                        <?php if ($_ie->isEnabled()): ?>
+                            <li class="wide">
+                                <?php echo $_ie->setDate($this->getQuote()->getCustomerIe())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?>
+                            </li>
+                        <?php endif ?>
                         <li>
                             <ul id="osc-billing-tipopessoa-area"  style="overflow: hidden;display:block;">
                                 <li class="wide">

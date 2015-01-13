@@ -154,12 +154,12 @@
                 <?php if ($_taxvat->isEnabled()): ?>
                     <li><?php echo $_taxvat->setTaxvat($this->getFormData()->getTaxvat())->toHtml() ?></li>
                 <?php endif ?>
-                <li class="wide" class="required">
-                    <label for="ie"><?php echo $this->__('IE (Inscrição Estadual)') ?></label>
-                    <div class="input-box">
-                        <input type="text" id="ie" name="ie" title="<?php echo $this->__('IE (Inscrição Estadual)') ?>" class="input-text" value="<?php echo $this->getFormData()->getIe(); ?>" />
-                    </div>
-                </li>
+                <?php $_ie = $this->getLayout()->createBlock('onestepcheckout/widget_ie') ?>
+                <?php if ($_ie->isEnabled()): ?>
+                    <li class="wide">
+                        <?php echo $_ie->setDate($this->getQuote()->getCustomerIe())->setFieldIdFormat('%s')->setFieldNameFormat('%s')->toHtml() ?>
+                    </li>
+                <?php endif ?>
                 <li>
                     <ul id="tipopessoa-area"  style="display:block;">
                         <?php $_dob = $this->getLayout()->createBlock('onestepcheckout/widget_dob') ?>

@@ -137,9 +137,9 @@ function buscaCep(quale) {
    if (!quale){
        var cep = jQuery('input[name*="postcode"]').val();
         if (cep != '' && cep.length == 8) {
-           // loadposthideshow(true, '.postcod-process');
+            loadposthideshow(true, '.onestepcheckout-postcod-process');
             jQuery.getScript("/onestepcheckout/ajax/busca_cep?cep="+ cep + "", function() {
-                //loadposthideshow(false, '.postcod-process');
+                loadposthideshow(false, '.onestepcheckout-postcod-process');
                 if (resultadoCEP["resultado"] != 0) {
                     jQuery('input[name*="street[]"]').val(unescape(resultadoCEP["tipo_logradouro"]) + " "+ unescape(resultadoCEP["logradouro"]));
                     jQuery('input[name*="street[4]"]').val(unescape(resultadoCEP["bairro"]));
@@ -158,9 +158,9 @@ function buscaCep(quale) {
    }else{
         var cep = jQuery('input[name*="' + quale + '[postcode]"]').val();
         if (cep != '' && cep.length == 8) {
-           // loadposthideshow(true, '.postcod-process');
+            loadposthideshow(true, '.onestepcheckout-postcod-process');
             jQuery.getScript("/onestepcheckout/ajax/busca_cep?cep="+ cep + "", function() {
-                //loadposthideshow(false, '.postcod-process');
+                loadposthideshow(false, '.onestepcheckout-postcod-process');
                 if (resultadoCEP["resultado"] != 0) {
                     jQuery('input[name*="' + quale + '[street][]"]').val(unescape(resultadoCEP["tipo_logradouro"]) + " "+ unescape(resultadoCEP["logradouro"]));
                     jQuery('input[name*="' + quale + '[street][4]"]').val(unescape(resultadoCEP["bairro"]));
@@ -218,13 +218,15 @@ function estadoBR(uf) {
     return estado;
 }
 function loadposthideshow(show, classe, eq) {
-    if (show) {
-        if (eq >= 0) {
-            jQuery(classe).eq(eq).show();
+    jQuery(document).ready(function ($) {
+        if (show) {
+            if (eq >= 0) {
+                $(classe).eq(eq).show();
+            } else {
+                $(classe).show();
+            }
         } else {
-            jQuery(classe).show();
+            $(classe).hide();
         }
-    } else {
-        jQuery(classe).hide();
-    }
+    });
 }
