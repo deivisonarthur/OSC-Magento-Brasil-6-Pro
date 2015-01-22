@@ -728,7 +728,14 @@ class Inovarti_Onestepcheckout_AjaxController extends Mage_Checkout_Controller_A
             $cep = $this->getRequest()->getQuery('cep', false);
         }
         $webservice = 'http://cep.republicavirtual.com.br/web_cep.php';
-        $resultado = file_get_contents($webservice . '?cep=' . urlencode($cep) . '&formato=javascript');
+
+        $ch = curl_init();
+        curl_setopt ($ch, CURLOPT_URL, $webservice . '?cep=' . urlencode($cep) . '&formato=javascript');
+        curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, 5);
+
+        $resultado = curl_exec($ch);
+        curl_close($ch);
 
         echo $resultado;
     }
