@@ -366,8 +366,19 @@ class Inovarti_Onestepcheckout_AjaxController extends Mage_Checkout_Controller_A
                         $saveResult = $saveBillingResult;
                     }
 
+                    //chamar evento gift
+                    Mage::dispatchEvent(
+                        'checkout_controller_onepage_save_shipping_method',
+                        array(
+                             'request' => $this->getRequest(),
+                             'quote'   => $this->getOnepage()->getQuote()
+                        )
+                    );
                     if (isset($saveResult['error'])) {
                         $result['success'] = false;
+                        if (!is_array($saveResult['message'])) {
+                            $saveResult['message'] = array($saveResult['message']);
+                        }
                         $result['messages'] = array_merge($result['messages'], $saveResult['message']);
                     } else {
                         // check agreements

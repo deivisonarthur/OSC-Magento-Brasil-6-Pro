@@ -39,7 +39,7 @@
 
                 <!-- MIDDLE COLUMN -->
                 <block type="onestepcheckout/onestep_form_shippingmethod" name="onestepcheckout.onestep.form.shippingmethod" as="shippingmethod" template="onestepcheckout/onestep/form/shipping_method.phtml">
-                    <block type="core/text_list" name="onestepcheckout.onestep.form.shippingmethod.extra" as="extra"/>
+                    <block type="checkout/onepage_shipping_method_additional" name="onestepcheckout.onestep.form.shippingmethod.extra" as="extra" template="checkout/onepage/shipping_method/additional.phtml"/>
                 </block>
                 <block type="onestepcheckout/onestep_form_paymentmethod" name="onestepcheckout.onestep.form.paymentmethod" as="paymentmethod" template="onestepcheckout/onestep/form/payment_method.phtml">
                     <block type="core/text_list" name="onestepcheckout.onestep.form.paymentmethod.extra" as="extra"/>
