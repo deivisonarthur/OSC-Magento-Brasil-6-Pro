@@ -141,9 +141,9 @@ function buscaCep(quale) {
             jQuery.getScript("/onestepcheckout/ajax/busca_cep?cep="+ cep + "", function() {
                 loadposthideshow(false, '.onestepcheckout-postcod-process');
                 if (resultadoCEP["resultado"] != 0) {
-                    jQuery('input[name*="street[]"]').val(unescape(resultadoCEP["tipo_logradouro"]) + " "+ unescape(resultadoCEP["logradouro"]));
-                    jQuery('input[name*="street[4]"]').val(unescape(resultadoCEP["bairro"]));
-                    jQuery('input[name*="city"]').val(unescape(resultadoCEP["cidade"]));
+                    if (unescape(resultadoCEP["logradouro"])) jQuery('input[name*="street[]"]').val(unescape(resultadoCEP["tipo_logradouro"]) + " "+ unescape(resultadoCEP["logradouro"]));
+                    if (unescape(resultadoCEP["bairro"])) jQuery('input[name*="street[4]"]').val(unescape(resultadoCEP["bairro"]));
+                    if (unescape(resultadoCEP["cidade"])) jQuery('input[name*="city"]').val(unescape(resultadoCEP["cidade"]));
                     jQuery('select[name*="region_id"]').find('option').each(function() {
                         if (this.text == estadoBR(unescape(resultadoCEP["uf"]))) {
                             this.selected = true;
@@ -162,9 +162,9 @@ function buscaCep(quale) {
             jQuery.getScript("/onestepcheckout/ajax/busca_cep?cep="+ cep + "", function() {
                 loadposthideshow(false, '.onestepcheckout-postcod-process');
                 if (resultadoCEP["resultado"] != 0) {
-                    jQuery('input[name*="' + quale + '[street][]"]').val(unescape(resultadoCEP["tipo_logradouro"]) + " "+ unescape(resultadoCEP["logradouro"]));
-                    jQuery('input[name*="' + quale + '[street][4]"]').val(unescape(resultadoCEP["bairro"]));
-                    jQuery('input[name*="' + quale + '[city]"]').val(unescape(resultadoCEP["cidade"]));
+                    if (unescape(resultadoCEP["logradouro"])) jQuery('input[name*="' + quale + '[street][]"]').val(unescape(resultadoCEP["tipo_logradouro"]) + " "+ unescape(resultadoCEP["logradouro"]));
+                    if (unescape(resultadoCEP["bairro"])) jQuery('input[name*="' + quale + '[street][4]"]').val(unescape(resultadoCEP["bairro"]));
+                    if (unescape(resultadoCEP["cidade"])) jQuery('input[name*="' + quale + '[city]"]').val(unescape(resultadoCEP["cidade"]));
                     jQuery('select[name*="' + quale + '[region_id]"]').find('option').each(function() {
                         if (this.text == estadoBR(unescape(resultadoCEP["uf"]))) {
                             this.selected = true;
