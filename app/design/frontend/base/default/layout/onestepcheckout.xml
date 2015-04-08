@@ -9,17 +9,16 @@
             <action method="setTemplate"><template>page/1column.phtml</template></action>
         </reference>
         <reference name="head">
-            <action method="addJs" ifconfig="onestepcheckout/general/is_jquery"><script>onestepcheckout/jquery.min.js</script></action>
-            <action method="addJs"><script>onestepcheckout/validation.js</script></action>
-            <action method="addJs"><script>onestepcheckout/onestepcheckout.js</script></action>
-            <action method="addJs"><script>onestepcheckout/login.js</script></action>
-            <action method="addJs"><script>onestepcheckout/address.js</script></action>
-            <action method="addJs"><script>onestepcheckout/shipment.js</script></action>
-            <action method="addJs"><script>onestepcheckout/payment.js</script></action>
-            <action method="addJs"><script>onestepcheckout/review.js</script></action>
-            <action method="addJs"><script>onestepcheckout/form.js</script></action>
+            <action method="addItem" ifconfig="onestepcheckout/general/is_jquery"><type>skin_js</type><name>onestepcheckout/js/jquery.min.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>onestepcheckout/js/validation.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>onestepcheckout/js/onestepcheckout.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>onestepcheckout/js/login.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>onestepcheckout/js/address.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>onestepcheckout/js/shipment.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>onestepcheckout/js/payment.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>onestepcheckout/js/review.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>onestepcheckout/js/form.js</name></action>
             <action method="addItem"><type>skin_css</type><name>onestepcheckout/css/onestepcheckout.css</name></action>
-
         </reference>
         <reference name="content">
             <block type="onestepcheckout/onestep" name="onestepcheckout.onestep" template="onestepcheckout/onestep.phtml">
@@ -40,7 +39,7 @@
 
                 <!-- MIDDLE COLUMN -->
                 <block type="onestepcheckout/onestep_form_shippingmethod" name="onestepcheckout.onestep.form.shippingmethod" as="shippingmethod" template="onestepcheckout/onestep/form/shipping_method.phtml">
-                    <block type="core/text_list" name="onestepcheckout.onestep.form.shippingmethod.extra" as="extra"/>
+                    <block type="checkout/onepage_shipping_method_additional" name="onestepcheckout.onestep.form.shippingmethod.extra" as="extra" template="checkout/onepage/shipping_method/additional.phtml"/>
                 </block>
                 <block type="onestepcheckout/onestep_form_paymentmethod" name="onestepcheckout.onestep.form.paymentmethod" as="paymentmethod" template="onestepcheckout/onestep/form/payment_method.phtml">
                     <block type="core/text_list" name="onestepcheckout.onestep.form.paymentmethod.extra" as="extra"/>
@@ -122,8 +121,8 @@
     </onestepcheckout_index_index>
     <customer_account_edit translate="label">
         <reference name="head">
-            <action method="addJs" ifconfig="onestepcheckout/general/is_jquery"><script>onestepcheckout/jquery.min.js</script></action>
-            <action method="addJs" ifconfig="onestepcheckout/general/is_enabled"><script>onestepcheckout/validation.js</script></action>
+            <action method="addItem" ifconfig="onestepcheckout/general/is_jquery"><type>skin_js</type><name>onestepcheckout/js/jquery.min.js</name></action>
+            <action method="addItem" ifconfig="onestepcheckout/general/is_enabled"><type>skin_js</type><name>onestepcheckout/js/validation.js</name></action>
             <action method="addItem" ifconfig="onestepcheckout/general/is_enabled"><type>skin_css</type><name>onestepcheckout/css/onestepcheckout.css</name></action>
         </reference>
         <reference name="customer_edit">
@@ -133,8 +132,8 @@
 
     <customer_address_form translate="label">
         <reference name="head">
-            <action method="addJs" ifconfig="onestepcheckout/general/is_jquery"><script>onestepcheckout/jquery.min.js</script></action>
-            <action method="addJs" ifconfig="onestepcheckout/general/is_enabled"><script>onestepcheckout/validation.js</script></action>
+            <action method="addItem" ifconfig="onestepcheckout/general/is_jquery"><type>skin_js</type><name>onestepcheckout/js/jquery.min.js</name></action>
+            <action method="addItem" ifconfig="onestepcheckout/general/is_enabled"><type>skin_js</type><name>onestepcheckout/js/validation.js</name></action>
             <action method="addItem" ifconfig="onestepcheckout/general/is_enabled"><type>skin_css</type><name>onestepcheckout/css/onestepcheckout.css</name></action>
         </reference>
         <reference name="customer_address_edit">
@@ -143,8 +142,8 @@
     </customer_address_form>
     <customer_account_create>
         <reference name="head">
-            <action method="addJs" ifconfig="onestepcheckout/general/is_jquery"><script>onestepcheckout/jquery.min.js</script></action>
-            <action method="addJs" ifconfig="onestepcheckout/general/is_enabled"><script>onestepcheckout/validation.js</script></action>
+            <action method="addItem" ifconfig="onestepcheckout/general/is_jquery"><type>skin_js</type><name>onestepcheckout/js/jquery.min.js</name></action>
+            <action method="addItem" ifconfig="onestepcheckout/general/is_enabled"><type>skin_js</type><name>onestepcheckout/js/validation.js</name></action>
             <action method="addItem" ifconfig="onestepcheckout/general/is_enabled"><type>skin_css</type><name>onestepcheckout/css/onestepcheckout.css</name></action>
         </reference>
         <reference name="customer_form_register">

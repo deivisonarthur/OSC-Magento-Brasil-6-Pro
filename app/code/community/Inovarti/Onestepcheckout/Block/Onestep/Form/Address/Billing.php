@@ -54,7 +54,7 @@ class Inovarti_Onestepcheckout_Block_Onestep_Form_Address_Billing extends Mage_C
             $select = $this->getLayout()->createBlock('core/html_select')
                     ->setName($type . '_address_id')
                     ->setId($type . '-address-select')
-                    ->setClass('address-select')
+                    ->setClass('input-text form-control address-select')
                     ->setValue($addressId)
                     ->setOptions($options);
 
@@ -104,7 +104,7 @@ class Inovarti_Onestepcheckout_Block_Onestep_Form_Address_Billing extends Mage_C
 
     public function getCustomerWidgetDateOfBirth() {
         return $this->getLayout()
-                        ->createBlock('customer/widget_dob')
+                        ->createBlock('onestepcheckout/widget_dob')
                         ->setDate($this->_getDateForDOBWidget())
                         ->setFieldIdFormat('billing:%s')
                         ->setFieldNameFormat('billing[%s]');
@@ -112,7 +112,7 @@ class Inovarti_Onestepcheckout_Block_Onestep_Form_Address_Billing extends Mage_C
 
     public function getCustomerWidgetGender() {
         return $this->getLayout()
-                        ->createBlock('customer/widget_gender')
+                        ->createBlock('onestepcheckout/widget_gender')
                         ->setGender($this->getDataFromSession('gender'))
                         ->setFieldIdFormat('billing:%s')
                         ->setFieldNameFormat('billing[%s]');
@@ -127,7 +127,7 @@ class Inovarti_Onestepcheckout_Block_Onestep_Form_Address_Billing extends Mage_C
                 ->setName($type . '[country_id]')
                 ->setId($type . ':country_id')
                 ->setTitle($this->__('Country'))
-                ->setClass('validate-select')
+                ->setClass('input-text form-control validate-select')
                 ->setValue($countryId)
                 ->setOptions($this->getCountryOptions());
         return $select->getHtml();

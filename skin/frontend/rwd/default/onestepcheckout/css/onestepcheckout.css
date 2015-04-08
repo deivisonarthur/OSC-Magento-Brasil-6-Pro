@@ -1,0 +1,80 @@
+.col2-set:after,
+.col3-set:after,
+.col3-layout .product-options-bottom .price-box:after,
+.col4-set:after { display:block; content:"."; clear:both; font-size:0; line-height:0; height:0; overflow:hidden; }
+
+.opc .step{padding: 10px 8px;margin-bottom: 10px;}
+.form-list li.fields {margin-bottom: 10px;}
+.customer-account-create .scaffold-form label:first-child{width: auto !important;}
+.customer-account-create .buttons-set {max-width: 100% !important}
+.form-list li.tipopessoa label{float:left; margin-right: 5%;}
+.form-list .control label, .sp-methods dt label, #checkout-shipping-method-load .sp-methods dd label, #co-shipping-method-form .sp-methods dd label, .product-options ul.options-list label {background-color:transparent!important ;min-width: 44% !important;padding: 6px 10px 6px 6px !important;}
+.form-list .control input.radio, .form-list .control input.checkbox{float: left;margin-right: -40px;margin-top: 11px !important;margin-left: -13px !important;}
+input[type=email], input[type=search], input[type=number], input[type=password], input[type=tel], input[type=text]{width: 100% !important;}
+.form-list .wide {clear: both;}
+.form-list li.wide .input-box{width:100%;}
+.form-list li.wide input.input-text,.form-list li.wide select{width:95%;}
+.form-list .customer-dob .dob-day, .form-list .customer-dob .dob-month, .form-list .customer-dob .dob-year{padding-right: 0px;}
+.form-list .field{width: 48%;float: left;margin-right: 5px;}
+.form-list .field .input-box{width:100%;}
+.form-list select{border-radius: 2px;border: 1px solid silver;background: #FFFFFF;font-size: 15px;width: 100% !important;padding: 0 8px;height: 30px;margin-top: 0px !important;}
+.form-list .customer-dob .dob-month,
+.form-list .customer-dob .dob-day {width: 24% !important;margin-right: 7px !important;}
+.form-list .customer-dob .dob-year {width: 46% !important;}
+.checkbox + label, .radio + label {max-width: 100% !important;}
+.hide {display: none;}
+.nao-sei-cep {cursor: help;font-size: 11px;margin-left: 10px; position: relative; padding-top: 11px; display: block;}
+.sp-methods .form-list{padding-left: 0px;}
+.col3-set .col-1 { float:left; width:32%;}
+.col3-set .col-2 { float:left;width:32%;margin-left:2%; }
+.col3-set .col-3 { float:right; width:32%;}
+.onestepcheckout-postcod-process{display: none;margin-left: -15px;position: absolute;width: 16px;height: 16px;}
+#acp-overlay{z-index: 995;}
+.onestepcheckout-overlay-48{background-image: url('../images/ajax-loader-48px.gif');background-repeat: no-repeat;background-position: center center;}
+.onestepcheckout-overlay-24{background-image: url('../images/ajax-loader-24px.gif');background-repeat: no-repeat;background-position: center center;}
+.onestepcheckout-overlay-16{background-image: url('../images/ajax-loader-16px.gif');background-repeat: no-repeat;background-position: center center;}
+.onestepcheckout-add-loader-into-this-block,#onestepcheckout-order-review-cart-wrapper,#onestepcheckout-order-review-coupon-wrapper{position: relative;}
+.osc-title{border-bottom: 1px solid #ececec;width: 100%;border-top: 1px solid #ececec;position: relative;cursor: default;color: #3399cc;font-size: 14px;font-weight: 200;line-height: 40px;height: 40px;float: left;margin: 0px 4px 0px 0px;clear: both;}
+#onestepcheckout-authentification-button{border-top: 1px solid #D8D2C7;}
+#onestepcheckout-authentification{overflow: hidden;min-height: 99px;}
+#onestepcheckout-authentification-container{height: 120px;position: relative;top: 0px;}
+#onestepcheckout-authentification .validation-advice{position: absolute;width: 163px;}
+#onestepcheckout-login-form, #onestepcheckout-forgot-password-form, #onestepcheckout-forgot-password-success{display: block;padding-top:5px;min-height: 120px;}
+#onestepcheckout-login-form .form-list, #onestepcheckout-forgot-password-form .form-list, #onestepcheckout-forgot-password-success{padding-bottom: 5px}
+.onestepcheckout-auth-form-block{display:inline-block;padding-right: 10px;vertical-align: bottom;}
+.onestepcheckout-auth-form-block.forgot_password{padding-top: 18px;}
+.onestepcheckout-auth-form-block .input-box{width:180px;}
+.onestepcheckout-auth-form-block input.input-text {width:174px;}
+#onestepcheckout-login-forgot-link{cursor: pointer;}
+#onestepcheckout-forgot-password-form p, #onestepcheckout-forgot-password-success p{margin:0;padding:0;}
+#onestepcheckout-authentification label{width: auto;text-align: left;padding: 0;}
+#onestepcheckout-authentification label.required em {float: right;font-style: normal;color: #eb340a;position: relative;right: -4px;margin-right: 0;}
+#onestepcheckout-authentification .form-list .input-box{float: none;}
+#onestepcheckout-authentification .form-list .input-box input{float: none;}
+.onestepcheckout-place-order-please-wait{float: none;color: #555;text-align: center;font-size: 13px;margin-top: 5px;z-index: 5;position: relative;display:none;}
+.onestepcheckout-place-order-please-wait img{width: 15px;height: 15px;position: relative;top: 3px;}
+.onestepcheckout-cart-table {width: 100%;font-size: 12px;}
+.onestepcheckout-cart-table thead th {border-top: thin solid #BEBCB7;border-bottom: thin solid #BEBCB7;font-weight: bold;padding: 2px 8px;color: #0a263c;white-space: nowrap;vertical-align: middle;}
+.onestepcheckout-cart-table thead th.qty{text-align: center;}
+.onestepcheckout-cart-table thead th.total{text-align: right;}
+.onestepcheckout-cart-table tbody td,.onestepcheckout-cart-table tfoot td,.onestepcheckout-cart-table tfoot th{border-bottom: thin solid #BEBCB7;padding: 3px 8px;}
+.onestepcheckout-cart-table .btn-remove{display: none;}
+.onestepcheckout-cart-table .btn-remove2{display: block;width: 16px;height: 16px;font-size: 0;line-height: 0;background: url(../../images/btn_trash.gif) 0 0 no-repeat;text-indent: -999em;overflow: hidden;}
+@media only screen and (max-width: 770px) {
+    .col3-set .col-1, .col3-set .col-2, .col3-set .col-3{
+        float: none;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+}
+@media only screen and (max-width: 479px) {
+    .col3-set .col-1, .col3-set .col-2, .col3-set .col-3{
+        float: none;
+        width: auto;
+        border: 0;
+        padding-right: 0;
+        padding-left: 0;
+    }
+}

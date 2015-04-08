@@ -10,6 +10,11 @@
 <?php if (Mage::helper('onestepcheckout/config')->getIsCartEditable()): ?>
     <td><a href="<?php echo $this->getDeleteUrl()?>" title="<?php echo $this->__('Remove item')?>" class="btn-remove2"><?php echo $this->__('Remove item')?></a></td>
 <?php endif;?>
+<td class="a-center lc-thumbnails">
+	<a href="<?php echo $this->getProductUrl() ?>" title="<?php echo $this->htmlEscape($this->getProductName()) ?>">
+		<img src="<?php echo $this->getProductThumbnail()->resize(25,25); ?>" width="25" height="25" alt="<?php echo $this->htmlEscape($this->getProductName()) ?>" />
+	</a>
+</td>					
 <td><h3 class="product-name"><?php echo $this->htmlEscape($this->getProductName()) ?></h3>
     <?php if ($_options = $this->getOptionList()):?>
         <dl class="item-options">

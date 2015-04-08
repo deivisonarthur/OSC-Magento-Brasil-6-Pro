@@ -22,12 +22,14 @@
             <li class="fields">
                 <?php echo $this->getNameBlockHtml() ?>
             </li>
+            <?php if (Mage::helper('onestepcheckout/config')->isCompany()): ?>
             <li class="wide">
                 <label for="company"><?php echo $this->__('Company') ?></label>
                 <div class="input-box">
                     <input type="text" name="company" id="company" title="<?php echo $this->__('Company') ?>" value="<?php echo $this->escapeHtml($this->getAddress()->getCompany()) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('company') ?>" />
                 </div>
             </li>
+            <?php endif; ?>
             <li class="fields">
                 <div class="field">
                     <label for="telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
@@ -144,16 +146,25 @@
     </div>
 </form>
 <script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+    new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+    Validation.add('validate-zip-br', '<?php echo $this->__('Please enter a valid zip code. e.g. 12345678.') ?>', function(v) {
+        return Validation.get('IsEmpty').test(v) || /(^\d{8}$)|(^\d{5}-\d{3}$)/.test(v);
+    });
+    Validation.add('validate-phone-br', '<?php echo $this->__('Please enter a valid phone number. for example, (xx) x4567-8900.') ?>', function(v) {
+        return Validation.get('IsEmpty').test(v) || /^(\()?\d{2}(\))?(-|\s)?\d{5}(-|\s)\d{4}|(\()?\d{2}(\))?(-|\s)?\d{4}(-|\s)\d{4}$/.test(v);
+    });
     if (jQuery('#telephone')) {
         jQuery('#telephone').addClass('validate-phone-br');
-        jQuery('#telephone').on('keypress', function(event) {
+        jQuery('#telephone').on('keyup', function(event) {
             this.maxLength = 15;
             mascara(this, mtel);
         });
     }
     if (jQuery('#fax')) {
         jQuery('#fax').addClass('validate-phone-br');
-        jQuery('#fax').on('keypress', function(event) {
+        jQuery('#fax').on('keyup', function(event) {
             this.maxLength = 15;
             mascara(this, mtel);
         });
@@ -166,39 +177,29 @@
         });
     }
     if (jQuery('#street_1')) {
-        jQuery('#street_1').on('keypress', function(event) {
+        jQuery('#street_1').on('keyup', function(event) {
             this.maxLength = 40;
         });
     }
     if (jQuery('#street_2')) {
-        jQuery('#street_2').on('keypress', function(event) {
+        jQuery('#street_2').on('keyup', function(event) {
             this.maxLength = 5;
         });
     }
     if (jQuery('#street_3')) {
-        jQuery('#street_3').on('keypress', function(event) {
+        jQuery('#street_3').on('keyup', function(event) {
             this.maxLength = 20;
         });
     }
     if (jQuery('#street_4')) {
-        jQuery('#street_4').on('keypress', function(event) {
+        jQuery('#street_4').on('keyup', function(event) {
             this.maxLength = 20;
         });
     }
     if (jQuery('#city')) {
-        jQuery('#city').on('keypress', function(event) {
+        jQuery('#city').on('keyup', function(event) {
             this.maxLength = 30;
         });
     }
-//<![CDATA[
-    var dataForm = new VarienForm('form-validate', true);
-    new RegionUpdater('country_id', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
-    Validation.add('validate-zip-br', '<?php echo $this->__('Please enter a valid zip code. e.g. 12345678.') ?>', function(v) {
-        return Validation.get('IsEmpty').test(v) || /(^\d{8}$)|(^\d{5}-\d{3}$)/.test(v);
-    });
-    Validation.add('validate-phone-br', '<?php echo $this->__('Please enter a valid phone number. for example, (xx) x4567-8900.') ?>', function(v) {
-        return Validation.get('IsEmpty').test(v) || /^(\()?\d{2}(\))?(-|\s)?\d{5}(-|\s)\d{4}|(\()?\d{2}(\))?(-|\s)?\d{4}(-|\s)\d{4}$/.test(v);
-    });
-    
 //]]>
 </script>

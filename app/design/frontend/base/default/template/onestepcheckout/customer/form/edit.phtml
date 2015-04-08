@@ -45,7 +45,7 @@
             <li>
                 <label for="current_password" class="required"><em>*</em><?php echo $this->__('Current Password') ?></label>
                 <div class="input-box">
-                    <!-- This is a dummy hidden field to trick firefox from auto filling the password -->
+                    <!-- Este é um campo fictício escondido para enganar o Firefox no auto preenchimento de senha -->
                     <input type="text" class="input-text no-display" name="dummy" id="dummy" />
                     <input type="password" title="<?php echo $this->__('Current Password') ?>" class="input-text" name="current_password" id="current_password" />
                 </div>
@@ -73,22 +73,28 @@
             <?php if ($_taxvat->isEnabled()): ?>
                 <li><?php echo $_taxvat->setTaxvat($this->getCustomer()->getTaxvat())->toHtml() ?></li>
             <?php endif ?>
-            <li class="wide" id="tipojuridica-area" style="display: none">
-                <label for="ie"><?php echo $this->__('IE (Inscrição Estadual)') ?></label>
-                <div class="input-box">
-                    <input type="text" id="ie" name="ie" title="<?php echo $this->__('IE (Inscrição Estadual)') ?>" class="input-text" value="<?php echo $this->getCustomer()->getIe(); ?>" />
-                </div>
+            <li class="wide">
+                <?php $_ie = $this->getLayout()->createBlock('onestepcheckout/widget_ie') ?>
+                <?php if ($_ie->isEnabled()): ?>
+                    <?php echo $_ie->setDate($this->getCustomer()->getIe())->toHtml() ?>
+                <?php endif ?>
             </li>
             <li>
                 <ul id="tipopessoa-area"  style="overflow: hidden;display:block;">
-                    <?php $_dob = $this->getLayout()->createBlock('onestepcheckout/widget_dob') ?>
-                    <?php if ($_dob->isEnabled()): ?>
-                        <li><?php echo $_dob->setDate($this->getCustomer()->getDob())->toHtml() ?></li>
-                    <?php endif ?>
-                    <?php $_gender = $this->getLayout()->createBlock('onestepcheckout/widget_gender') ?>
-                    <?php if ($_gender->isEnabled()): ?>
-                        <li><?php echo $_gender->setGender($this->getCustomer()->getGender())->toHtml() ?></li>
-                    <?php endif ?>
+                    <li class="fields">
+                        <div class="field">
+                            <?php $_dob = $this->getLayout()->createBlock('onestepcheckout/widget_dob') ?>
+                            <?php if ($_dob->isEnabled()): ?>
+                                <?php echo $_dob->setDate($this->getCustomer()->getDob())->toHtml() ?>
+                            <?php endif ?>
+                        </div>
+                        <div class="field">
+                            <?php $_gender = $this->getLayout()->createBlock('onestepcheckout/widget_gender') ?>
+                            <?php if ($_gender->isEnabled()): ?>
+                                <?php echo $_gender->setGender($this->getCustomer()->getGender())->toHtml() ?>
+                            <?php endif ?>
+                        </div>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -113,20 +119,31 @@
     function setTipopessoaArea(arg) {
         if (arg == 'Jurídica') {
             if ($('taxvat')) {
-                $$('label[for="taxvat"]').first().update('<em>*</em>CNPJ');
                 $('taxvat').maxLength = 18;
+                $('ie').maxLength = 30;
+                $$('label[for="ie"]').first().update('<em>*</em>IE (Inscrição Estadual)');
+                $$('label[for="taxvat"]').first().update('<em>*</em>CNPJ');
                 $$('label[for="firstname"]').first().update('<em>*</em>Razão social');
                 $$('label[for="lastname"]').first().update('<em>*</em>N. Fantasia');
+                $$('input[name="taxvat"]').first().writeAttribute('title','CNPJ');
+                $$('input[name="ie"]').first().writeAttribute('title','IE (Inscrição Estadual)');
+                $$('input[name="firstname"]').first().writeAttribute('title','Razão social');
+                $$('input[name="lastname"]').first().writeAttribute('title','N. Fantasia');
                 $('tipopessoa-area').hide();
                 $('tipojuridica-area').show();
             }
         } else {
             if ($('taxvat')) {
                 $('taxvat').maxLength = 14;
+                $('ie').maxLength = 30;
                 $$('label[for="taxvat"]').first().update('<em>*</em>CPF');
-                $$('label[for="taxvat"]').first().update('<em>*</em>CPF');
+                $$('label[for="ie"]').first().update('<em>*</em>RG');
                 $$('label[for="firstname"]').first().update('<em>*</em>Nome');
                 $$('label[for="lastname"]').first().update('<em>*</em>Sobrenome');
+                $$('input[name="taxvat"]').first().writeAttribute('title','CPF');
+                $$('input[name="ie"]').first().writeAttribute('title','RG');
+                $$('input[name="firstname"]').first().writeAttribute('title','Nome');
+                $$('input[name="lastname"]').first().writeAttribute('title','Sobrenome');
                 $('tipopessoa-area').show();
                 $('tipojuridica-area').hide();
             }
@@ -148,7 +165,7 @@
     }
     if ($('taxvat')) {
         $('taxvat').addClassName('validate-taxvat');
-        $('taxvat').observe('keypress', function(event) {
+        $('taxvat').observe('keyup', function(event) {
             mascara(this, mdocumento);
         });
     }

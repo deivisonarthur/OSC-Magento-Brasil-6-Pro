@@ -366,8 +366,19 @@ class Inovarti_Onestepcheckout_AjaxController extends Mage_Checkout_Controller_A
                         $saveResult = $saveBillingResult;
                     }
 
+                    //chamar evento gift
+                    Mage::dispatchEvent(
+                        'checkout_controller_onepage_save_shipping_method',
+                        array(
+                             'request' => $this->getRequest(),
+                             'quote'   => $this->getOnepage()->getQuote()
+                        )
+                    );
                     if (isset($saveResult['error'])) {
                         $result['success'] = false;
+                        if (!is_array($saveResult['message'])) {
+                            $saveResult['message'] = array($saveResult['message']);
+                        }
                         $result['messages'] = array_merge($result['messages'], $saveResult['message']);
                     } else {
                         // check agreements
@@ -693,60 +704,34 @@ class Inovarti_Onestepcheckout_AjaxController extends Mage_Checkout_Controller_A
         $this->getResponse()->setBody(Zend_Json::encode($data));
     }
 
-    public function check_taxvatAction() {
-        $post = $this->getRequest()->getPost();
-        if ($post) {
-            $taxvat = $this->getRequest()->getPost('taxvat', false);
-            $flag = 0;
-            $data['result'] = 'clean';
-            $cli = Mage::getModel('customer/customer')->getCollection()->addAttributeToFilter('taxvat', array('eq' => $taxvat));
-            foreach ($cli as $customer) {
-                $dataTaxvat = $customer->getTaxvat();
-                if ($dataTaxvat == $taxvat)
-                    $flag |= 1;
-            }
-            if ($flag) {
+    public function check_taxvatAction()
+    {
+
+        $taxvat = $this->getRequest()->getParam('taxvat');
+        $data['result'] = 'clean';
+        if ($taxvat) {
+            $storeId = Mage::app()->getStore()->getId();
+            $cli = Mage::getResourceModel('customer/customer_collection')
+                ->addAttributeToFilter('taxvat', array('eq' => $taxvat))
+                ->addAttributeToFilter('store_id', $storeId)
+                ->setPageSize(1)
+                ->count();
+            if ($cli) {
                 $data['result'] = 'exists';
             } else {
                 $taxvat = preg_replace("/[^0-9]/", "", $taxvat);
-                $cli = Mage::getModel('customer/customer')->getCollection()->addAttributeToFilter('taxvat', array('eq' => $taxvat));
-                foreach ($cli as $customer) {
-                    $dataTaxvat = $customer->getTaxvat();
-                    if ($dataTaxvat == $taxvat)
-                        $flag |= 1;
-                }
-                if ($flag) {
+                $cli = Mage::getResourceModel('customer/customer_collection')
+                    ->addAttributeToFilter('taxvat', array('eq' => $taxvat))
+                    ->addAttributeToFilter('store_id', $storeId)
+                    ->getSize();
+                if ($cli) {
                     $data['result'] = 'exists';
                 }
             }
-            $this->getResponse()->setBody(Zend_Json::encode($data));
-        } else {
-            $taxvat = $this->getRequest()->getQuery('taxvat', false);
-            $flag = 0;
-            $data['result'] = 'clean';
-            $cli = Mage::getModel('customer/customer')->getCollection()->addAttributeToFilter('taxvat', array('eq' => $taxvat));
-            foreach ($cli as $customer) {
-                $dataTaxvat = $customer->getTaxvat();
-                if ($dataTaxvat == $taxvat)
-                    $flag |= 1;
-            }
-            if ($flag) {
-                $data['result'] = 'exists';
-            } else {
-                $taxvat = preg_replace("/[^0-9]/", "", $taxvat);
-                $cli = Mage::getModel('customer/customer')->getCollection()->addAttributeToFilter('taxvat', array('eq' => $taxvat));
-                foreach ($cli as $customer) {
-                    $dataTaxvat = $customer->getTaxvat();
-                    if ($dataTaxvat == $taxvat)
-                        $flag |= 1;
-                }
-                if ($flag) {
-                    $data['result'] = 'exists';
-                }
-            }
-            $this->getResponse()->setBody(Zend_Json::encode($data));
         }
+        $this->getResponse()->setBody(Zend_Json::encode($data));
     }
+
     public function busca_cepAction() {
         if ($this->getRequest()->getPost()) {
             $cep = $this->getRequest()->getPost('cep', false);
@@ -754,7 +739,14 @@ class Inovarti_Onestepcheckout_AjaxController extends Mage_Checkout_Controller_A
             $cep = $this->getRequest()->getQuery('cep', false);
         }
         $webservice = 'http://cep.republicavirtual.com.br/web_cep.php';
-        $resultado = file_get_contents($webservice . '?cep=' . urlencode($cep) . '&formato=javascript');
+
+        $ch = curl_init();
+        curl_setopt ($ch, CURLOPT_URL, $webservice . '?cep=' . urlencode($cep) . '&formato=javascript');
+        curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, 5);
+
+        $resultado = curl_exec($ch);
+        curl_close($ch);
 
         echo $resultado;
     }

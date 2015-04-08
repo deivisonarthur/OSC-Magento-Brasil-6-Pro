@@ -49,12 +49,14 @@
                 <input type="hidden" name="create_address" value="1" />
                 <h2 class="legend"><?php echo $this->__('Address Information') ?></h2>
                 <ul class="form-list">
+                    <?php if (Mage::helper('onestepcheckout/config')->isCompany()): ?>
                     <li class="wide">
                         <label for="company"><?php echo $this->__('Company') ?></label>
                         <div class="input-box">
                             <input type="text" name="company" id="company" value="<?php echo $this->escapeHtml($this->getFormData()->getCompany()) ?>" title="<?php echo $this->__('Company') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('company') ?>" />
                         </div>
                     </li>
+                    <?php endif; ?>
                     <li class="fields">
                         <div class="field">
                             <label for="telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
@@ -80,7 +82,8 @@
                     <?php for ($_i = 2, $_n = $this->helper('customer/address')->getStreetLines(); $_i <= $_n; $_i++): ?>
                         <li class="wide">
                             <div class="input-box">
-                                <input type="text" name="street[]" value="<?php echo $this->escapeHtml($this->getFormData()->getStreet($_i)) ?>" title="<?php echo $this->__('Street Address %s', $_i) ?>" id="street_<?php echo $_i ?>" class="input-text <?php echo $_streetValidationClass ?>" />
+                                <label for="street<?php echo $_i ?>" <?php if ($_i != 3): ?> class="required" <?php endif; ?>><?php if ($_i != 3): ?> <em>*</em> <?php endif; ?><?php echo $this->__('Street Address '.$_i) ?></label>
+                                <input type="text" name="street[<?php echo $_i ?>]" value="<?php echo $this->escapeHtml($this->getFormData()->getStreet($_i)) ?>" title="<?php echo $this->__('Street Address %s', $_i) ?>" id="street_<?php echo $_i ?>" class="input-text <?php if ($_i != 3): ?>required-entry<?php endif; ?> <?php echo $_streetValidationClass ?>" />
                             </div>
                         </li>
                     <?php endfor; ?>
@@ -154,12 +157,12 @@
                 <?php if ($_taxvat->isEnabled()): ?>
                     <li><?php echo $_taxvat->setTaxvat($this->getFormData()->getTaxvat())->toHtml() ?></li>
                 <?php endif ?>
-                <li class="wide" id="tipojuridica-area" style="display: none">
-                    <label for="ie"><?php echo $this->__('IE (Inscrição Estadual)') ?></label>
-                    <div class="input-box">
-                        <input type="text" id="ie" name="ie" title="<?php echo $this->__('IE (Inscrição Estadual)') ?>" class="input-text" value="<?php echo $this->getFormData()->getIe(); ?>" />
-                    </div>
-                </li>
+                <?php $_ie = $this->getLayout()->createBlock('onestepcheckout/widget_ie') ?>
+                <?php if ($_ie->isEnabled()): ?>
+                    <li class="wide">
+                        <?php echo $_ie->setDate($this->getFormData()->getIe())->toHtml() ?>
+                    </li>
+                <?php endif ?>
                 <li>
                     <ul id="tipopessoa-area"  style="display:block;">
                         <?php $_dob = $this->getLayout()->createBlock('onestepcheckout/widget_dob') ?>
@@ -218,22 +221,31 @@
         function setTipopessoaArea(arg) {
             if (arg == 'Jurídica') {
                 if ($('taxvat')) {
-                    $$('label[for="taxvat"]').first().update('<em>*</em>CNPJ');
                     $('taxvat').maxLength = 18;
+                    $('ie').maxLength = 30;
+                    $$('label[for="ie"]').first().update('<em>*</em>IE (Inscrição Estadual)');
+                    $$('label[for="taxvat"]').first().update('<em>*</em>CNPJ');
                     $$('label[for="firstname"]').first().update('<em>*</em>Razão social');
                     $$('label[for="lastname"]').first().update('<em>*</em>N. Fantasia');
+                    $$('input[name="taxvat"]').first().writeAttribute('title','CNPJ');
+                    $$('input[name="ie"]').first().writeAttribute('title','IE (Inscrição Estadual)');
+                    $$('input[name="firstname"]').first().writeAttribute('title','Razão social');
+                    $$('input[name="lastname"]').first().writeAttribute('title','N. Fantasia');
                     $('tipopessoa-area').hide();
-                    $('tipojuridica-area').show();
                 }
             } else {
                 if ($('taxvat')) {
                     $('taxvat').maxLength = 14;
+                    $('ie').maxLength = 30;
                     $$('label[for="taxvat"]').first().update('<em>*</em>CPF');
-                    $$('label[for="taxvat"]').first().update('<em>*</em>CPF');
+                    $$('label[for="ie"]').first().update('<em>*</em>RG');
                     $$('label[for="firstname"]').first().update('<em>*</em>Nome');
                     $$('label[for="lastname"]').first().update('<em>*</em>Sobrenome');
+                    $$('input[name="taxvat"]').first().writeAttribute('title','CPF');
+                    $$('input[name="ie"]').first().writeAttribute('title','RG');
+                    $$('input[name="firstname"]').first().writeAttribute('title','Nome');
+                    $$('input[name="lastname"]').first().writeAttribute('title','Sobrenome');
                     $('tipopessoa-area').show();
-                    $('tipojuridica-area').hide();
                 }
             }
         }
@@ -311,21 +323,21 @@
 
         if ($('taxvat')) {
             $('taxvat').addClassName('validate-taxvat');
-            $('taxvat').observe('keypress', function(event) {
+            $('taxvat').observe('keyup', function(event) {
                 mascara(this, mdocumento);
             });
         }
 
         if ($('telephone')) {
             $('telephone').addClassName('validate-phone-br');
-            $('telephone').observe('keypress', function(event) {
+            $('telephone').observe('keyup', function(event) {
                 this.maxLength = 15;
                 mascara(this, mtel);
             });
         }
         if ($('fax')) {
             $('fax').addClassName('validate-phone-br');
-            $('fax').observe('keypress', function(event) {
+            $('fax').observe('keyup', function(event) {
                 this.maxLength = 15;
                 mascara(this, mtel);
             });
@@ -339,27 +351,27 @@
                 });
             }
             if ($('street1')) {
-                $('street1').observe('keypress', function(event) {
+                $('street1').observe('keyup', function(event) {
                     this.maxLength = 40;
                 });
             }
             if ($('street2')) {
-                $('street2').observe('keypress', function(event) {
+                $('street2').observe('keyup', function(event) {
                     this.maxLength = 5;
                 });
             }
             if ($('street3')) {
-                $('street3').observe('keypress', function(event) {
+                $('street3').observe('keyup', function(event) {
                     this.maxLength = 20;
                 });
             }
             if ($('street4')) {
-                $('street4').observe('keypress', function(event) {
+                $('street4').observe('keyup', function(event) {
                     this.maxLength = 20;
                 });
             }
             if ($('city')) {
-                $('city').observe('keypress', function(event) {
+                $('city').observe('keyup', function(event) {
                     this.maxLength = 30;
                 });
             }
