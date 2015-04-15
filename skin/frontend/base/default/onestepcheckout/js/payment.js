@@ -174,6 +174,20 @@ OnestepcheckoutPayment.prototype = {
         });
     },
 
+    forcesavePayment: function() {
+        var block = this.methodAdditionalContainerIdPrefix + this.currentMethod;
+        [block + '_before', block, block + '_after'].each(function(el) {
+            var element = $(el);
+            if (!element) {
+                return;
+            }
+        });
+        OnestepcheckoutCore.updater.startRequest(this.savePaymentUrl, {
+            method: 'post',
+            parameters: Form.serialize(this.container, true)
+        });
+    },
+
     savePayment: function() {
         var me = this;
         var isValid = true;
