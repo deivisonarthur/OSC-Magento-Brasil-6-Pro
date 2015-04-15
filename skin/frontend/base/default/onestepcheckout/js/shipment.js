@@ -22,6 +22,11 @@ OnestepcheckoutShipment.prototype = {
     initObservers: function() {
         var me = this;
         this.switchMethodInputs.each(function(element) {
+
+            if (element.checked) {
+                me.switchToMethod(element.value);
+            }
+
             element.observe('click', function(e) {
                 me.switchToMethod(element.value);
             });
