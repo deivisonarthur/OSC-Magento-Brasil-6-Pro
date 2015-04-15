@@ -33,6 +33,15 @@ function mtel(v) {
     v = v.replace(/(\d)(\d{4})$/, "$1-$2");
     return v;
 }
+function valor(v) {
+    v = v.replace(/\D/g, "");
+    v = v.replace(/[0-9]{15}/, "invÃ¡lido");
+    v = v.replace(/(\d{1})(\d{11})$/, "$1.$2");
+    v = v.replace(/(\d{1})(\d{8})$/, "$1.$2");
+    v = v.replace(/(\d{1})(\d{5})$/, "$1.$2");
+    v = v.replace(/(\d{1})(\d{1,2})$/, "$1,$2");
+    return v;
+}
 function sonumeros(v) {
     v = v.replace(/\D/g, "");
     return v;
