@@ -217,7 +217,7 @@ var OnestepcheckoutCoreUpdater = {
 
     onRequestCompleteFn: function(transport) {
         try {
-            eval("var response = " +  transport.responseText);
+            var response = JSON.parse(transport.responseText.replace(/\n/g,""));
         } catch(e) {
             //error
             var response = {
