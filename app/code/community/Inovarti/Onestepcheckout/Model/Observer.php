@@ -87,4 +87,18 @@ class Inovarti_Onestepcheckout_Model_Observer {
         }
     }
 
+    /**
+     * @fire customer_register_success
+     *
+     * @param Varien_Event_Observer $observer
+     */
+    public function customerRegisterSuccess(Varien_Event_Observer $observer) {
+        $customerSession = Mage::getSingleton('customer/session');
+
+        if (Mage::helper('onestepcheckout/config')->isEnabled() && Mage::helper('checkout/cart')->getItemsCount() > 0) {
+            $url = Mage::getUrl('onestepcheckout/index/', array('_secure' => true));
+            $customerSession->setBeforeAuthUrl($url);
+        }
+    }
+
 }

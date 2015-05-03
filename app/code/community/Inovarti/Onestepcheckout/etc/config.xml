@@ -133,6 +133,14 @@
                     </onestepcheckout_osc_placeorder_controller_postdispatch>
                 </observers>
             </controller_action_postdispatch_onestepcheckout_ajax_placeOrder>
+            <customer_register_success>
+                <observers>
+                    <onestepcheckout_customer_register_success>
+                        <class>onestepcheckout/observer</class>
+                        <method>customerRegisterSuccess</method>
+                    </onestepcheckout_customer_register_success>
+                </observers>
+            </customer_register_success>
         </events>
         <translate>
             <modules>
@@ -145,6 +153,11 @@
         </translate>
     </frontend>
     <default>
+        <customer>
+            <startup>
+                <redirect_dashboard>0</redirect_dashboard>
+            </startup>
+        </customer>
         <onestepcheckout>
             <general>
                 <is_enabled>1</is_enabled>
