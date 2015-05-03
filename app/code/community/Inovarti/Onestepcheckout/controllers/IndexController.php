@@ -31,13 +31,11 @@ class Inovarti_Onestepcheckout_IndexController extends Mage_Checkout_Controller_
     }
 
     public function indexAction() {
-
         if (Mage::getStoreConfig('onestepcheckout/general/is_authenticate_before')) {
             if (!Mage::getSingleton('customer/session')->isLoggedIn()) {
                 $url = Mage::getUrl('onestepcheckout/index/', array('_secure' => true));
-                Mage::getSingleton('customer/session')->setBeforeAuthUrl($url);
-                $this->_redirectSuccess($url);
-                $this->_redirect('customer/account/login/referer/' . Mage::helper('core')->urlEncode($url));
+
+                $this->_redirect('customer/account/login',array(Mage_Customer_Helper_Data::REFERER_QUERY_PARAM_NAME => Mage::helper('core')->urlEncode($url)));
             }
         }
 
