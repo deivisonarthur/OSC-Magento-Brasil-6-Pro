@@ -232,6 +232,9 @@ var OnestepcheckoutCoreUpdater = {
             var args = this.requestQueue.shift();
             this.runRequest(args[0], args[1]);
         }
+
+        // payment form reload fix
+        OSCPayment.initObservers();
     },
 
     _registerBlockNameForUpdate: function(name, selector) {
