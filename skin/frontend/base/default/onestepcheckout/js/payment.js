@@ -64,7 +64,9 @@ OnestepcheckoutPayment.prototype = {
                     return;
                 }
                 Form.getElements(element).each(function(formElement){
-                    formElement.observe('change', function(e){
+                    var event = formElement.tagName.toUpperCase () == 'SELECT' ? 'change' : 'blur';
+                    formElement.observe(event, function(e){
+                    //formElement.observe('change', function(e){
                         me.savePayment();
                         Validation.reset(formElement);
                     });
@@ -129,7 +131,7 @@ OnestepcheckoutPayment.prototype = {
                 //Event fix for payment methods without form like "Check / Money order"
                 document.body.fire('payment-method:switched', {method_code : methodCode});
             }
-            this.currentMethod = methodCode;
+            OSCPayment.currentMethod = this.currentMethod = methodCode;
             this.savePayment();
         }
     },
