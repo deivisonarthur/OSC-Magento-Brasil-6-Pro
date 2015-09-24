@@ -42,6 +42,11 @@ function valor(v) {
     v = v.replace(/(\d{1})(\d{1,2})$/, "$1,$2");
     return v;
 }
+function filterFloat(v) {
+    if (!v) return false;
+    v = v.replace('R$', "");
+    return v;
+}
 function sonumeros(v) {
     v = v.replace(/\D/g, "");
     return v;

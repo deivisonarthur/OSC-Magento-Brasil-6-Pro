@@ -4,19 +4,27 @@ OnestepcheckoutPayment.prototype = {
         this.container = $$(config.containerSelector).first();
         this.wrapContainer = $$(config.wrapContainerSelector).first();
         this.switchMethodInputs = $$(config.switchMethodInputsSelector);
-        this.enterpriseRewardsCheckbox = $(config.enterpriseRewardsSelector);
         this.methodAdditionalContainerIdPrefix = config.methodAdditionalContainerIdPrefix;
         this.savePaymentUrl = config.savePaymentUrl;
         this.storedData = {};
 
         this.cvv = {};
-        this.cvv.tooltip = $$(config.cvv.tooltipSelector).first(),
-        this.cvv.closeEl = $$(config.cvv.closeElSelector).first(),
+        this.cvv.tooltip = $$(config.cvv.tooltipSelector).first();
+        this.cvv.closeEl = $$(config.cvv.closeElSelector).first();
         this.cvv.triggerEls = $$(config.cvv.triggerElsSelector);
 
-        this.initMock();
-        this.init();
-        this.initObservers();
+        if (navigator.userAgent.indexOf("MSIE 8.0") == -1) {
+            this.initMock();
+            this.init();
+            this.initObservers();
+        } else {
+            var me = this;
+            Event.observe(window, 'load', function(e){
+                me.initMock();
+                me.init();
+                me.initObservers();
+            });
+        }
     },
 
     initMock: function() {
@@ -72,13 +80,6 @@ OnestepcheckoutPayment.prototype = {
             });
         });
 
-        // rewards applied
-        if (this.enterpriseRewardsCheckbox) {
-            this.enterpriseRewardsCheckbox.observe('change', function(e){
-                me.savePayment();
-            });
-        }
-
         //on block update
         var me = this;
         if (!this.wrapContainer.addActionBlocksToQueueAfterFn) {
@@ -118,6 +119,7 @@ OnestepcheckoutPayment.prototype = {
     switchToMethod: function(methodCode) {
         var prefix = this.methodAdditionalContainerIdPrefix;
         if (this.currentMethod !== methodCode) {
+
             if (this.currentMethod && $(prefix + this.currentMethod)) {
                 this.hideAdditionalInfo(this.currentMethod);
                 $(prefix + this.currentMethod).fire('payment-method:switched-off', {method_code : this.currentMethod});

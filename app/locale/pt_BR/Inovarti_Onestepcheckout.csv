@@ -7,8 +7,8 @@
 "ACCEPT","ACEITA"
 "Access Information","Informações de Acesso"
 "Account Information","Informações da Conta"
-"Add to Cart","Adicionar ao carrinho"
-"Add to Compare","Adicionar para comparar"
+"Add to Cart",Comprar
+"Add to Compare",Comparar
 "Add to Wishlist","Adicionar à Lista de Desejos"
 "Always Use Billing Address as a Shipping Address","Use sempre Endereço de cobrança como um endereço de entrega"
 "Authenticate Before","Autenticar antes"
@@ -52,7 +52,7 @@
 "Enabled","Ativado"
 "Exclude / Include Fields","Incluir / Excluir Campos"
 "Fax","Celular"
-"Female","Femino"
+"Female",Feminino
 "Field %s is required","Campo %s é obrigatório"
 "firstname","Nome"
 "Forgot your password?","Esqueceu sua senha?"
@@ -114,7 +114,7 @@
 "Related Products","Produtos Relacionados"
 "Related Products:","Produtos Relacionados:"
 "Return to Login","Voltar para o Login"
-"Save in address book","Salvar no catálogo de endereços"
+"Save in address book",Salvar em meus endereços
 "Select a billing address from your address book or enter a new address.","Selecione um endereço de cobrança da sua lista de endereços ou informe um novo endereço."
 "Select a shipping address from your address book or enter a new address.","Selecione um endereço para envio ou digitar um novo endereço."
 "Ship to same address","Enviar para o mesmo endereço"
@@ -124,7 +124,7 @@
 "Show Blocks Numbering","Mostrar blocos de numeração"
 "Show Titles","Mostrar Títulos"
 "Sign up for Newsletter","Receber novidades"
-"Sorry, no quotes are available for this order at this time.","Desculpe, não houve formas disponíveis para esta pedido no momento."
+"Sorry, no quotes are available for this order at this time.","Não foi possível calcular o frete, consulte os dados informados. Se o problema persistir entre em contato <a href=/central-de-atendimento>conosco</a>."
 "Specified delivery date is invalid.","Data de entrega especificada é inválido."
 "State/Province","Estado"
 "Street Address","Endereço"

@@ -63,6 +63,7 @@
                     <div id="onestepcheckout-place-order">
                         <button type="button" class="button btn-proceed-checkout btn-checkout" title="<?php echo $this->__('Place Order Now'); ?>" id="onestepcheckout-place-order-button">
                             <span><span class="onestepcheckout-place-order-title"><?php echo $this->__('Place Order'); ?></span></span>
+                            <span class="onestepcheckout-place-order-amount hide hidden" ><?php echo $this->getGrandTotal(); ?></span>
                         </button>
                         <div class="onestepcheckout-place-order-please-wait">
                             <img src="<?php echo $this->getSkinUrl('onestepcheckout/images/ajax-loader.gif') ?>" />
@@ -96,6 +97,7 @@
             //place order functionality
             placeOrderUrl: '<?php echo $this->getPlaceOrderUrl(); ?>',
             successUrl: '<?php echo $this->getUrl('checkout/onepage/success'); ?>',
+            granTotalAmountSelector: '.onestepcheckout-place-order-amount',
             placeOrderButtonSelector: 'onestepcheckout-place-order-button',
             pleaseWaitNoticeSelector: '.onestepcheckout-place-order-please-wait',
             overlayId: 'onestepcheckout-place-order-overlay',

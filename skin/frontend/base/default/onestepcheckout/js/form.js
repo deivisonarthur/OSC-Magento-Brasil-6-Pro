@@ -16,6 +16,7 @@ OnestepcheckoutForm.prototype = {
         this.placeOrderUrl = config.placeOrderUrl;
         this.successUrl = config.successUrl;
         this.placeOrderButton = $(config.placeOrderButtonSelector);
+        this.granTotalAmount = this.placeOrderButton.select(config.granTotalAmountSelector).first(),
         this.pleaseWaitNotice = $$(config.pleaseWaitNoticeSelector).first(),
         this.disabledClassName = config.disabledClassName;
         this.popup = new OnestepcheckoutUIPopup(config.popup);
@@ -37,6 +38,9 @@ OnestepcheckoutForm.prototype = {
         var origFn = this.cartContainer.removeActionBlocksFromQueueAfterFn || Prototype.emptyFunction;
         this.cartContainer.removeActionBlocksFromQueueAfterFn = function(response){
             origFn();
+            if ('grand_total' in response) {
+                me.granTotalAmount.update(response.grand_total);
+            }
             me.enablePlaceOrderButton();
             me.hidePriceChangeProcess();
         };
@@ -119,7 +123,7 @@ OnestepcheckoutForm.prototype = {
                     $('iframe-warning').show();
                 });
             } else {
-                var msg = response.messages;
+                var msg = response.messages || response.message;
                 if (typeof(msg) == 'object') {
                     msg = msg.join("\n");
                 }

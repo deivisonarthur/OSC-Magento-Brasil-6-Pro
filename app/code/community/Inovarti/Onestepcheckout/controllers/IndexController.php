@@ -60,8 +60,8 @@ class Inovarti_Onestepcheckout_IndexController extends Mage_Checkout_Controller_
         Mage::helper('onestepcheckout/address')->initAddress();
         Mage::helper('onestepcheckout/shipping')->initShippingMethod();
         Mage::helper('onestepcheckout/payment')->initPaymentMethod();
-        $this->getOnepage()->getQuote()->setTotalsCollectedFlag(false);
-        $this->getOnepage()->getQuote()->collectTotals()->save();
+        //$this->getOnepage()->getQuote()->setTotalsCollectedFlag(false);
+        //$this->getOnepage()->getQuote()->collectTotals()->save();
         $this->loadLayout();
         $this->_initLayoutMessages('customer/session');
         $this->getLayout()->getBlock('head')->setTitle($this->__('Checkout'));
