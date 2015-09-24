@@ -7,7 +7,7 @@
  */
 ?>
 
-<label for="<?php echo $this->getFieldId('ie')?>"<?php if ($this->isRequired()) echo ' class="required"' ?>><?php if ($this->isRequired()) echo '<em>*</em>' ?><?php echo $this->__('IE (Inscrição Estadual)') ?></label>
+<label for="<?php echo $this->getFieldId('ie')?>" class="required"><em>*</em><?php echo $this->__('Label IE/RG. Se você está lendo esta mensagem, provavelmente tem um erro de configuração ou JS.') ?></label>
 <div class="input-box">
-    <input type="text" id="<?php echo $this->getFieldId('ie')?>" name="<?php echo $this->getFieldName('ie')?>" title="<?php echo $this->__('IE (Inscrição Estadual)') ?>" class="input-text" value="<?php echo $this->getCustomer()->getIe(); ?>" />
+    <input type="text" id="<?php echo $this->getFieldId('ie')?>" name="<?php echo $this->getFieldName('ie')?>" title="<?php echo $this->__('IE (Inscrição Estadual)') ?>" class="input-text required-entry" value="<?php echo $this->getCustomer()->getIe(); ?>" />
 </div>
