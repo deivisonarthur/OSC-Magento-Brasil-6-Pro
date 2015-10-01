@@ -147,11 +147,11 @@ function checkCPF(vCPF) {
     return((mControle1 * 10) + mControle);
 }
 function buscaCep(quale) {
-    
+
+    var urlBase = window.location.href.slice(0, -6);
    if (!quale){
        var cep = jQuery('input[name*="postcode"]').val();
        //baseurl - /index
-       var urlBase = window.location.href.slice(0, -6);
         if (cep != '' && cep.length == 8) {
             loadposthideshow(true, '.onestepcheckout-postcod-process');
             jQuery.getScript(urlBase + "ajax/busca_cep?cep="+ cep + "", function() {
