@@ -11,11 +11,12 @@
         <h1><?php echo $this->__('Create an Account') ?></h1>
     </div>
     <?php echo $this->getChildHtml('form_fields_before') ?>
-    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php echo $this->getMessagesBlock()->toHtml() ?>
     <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="form-validate">
         <div class="fieldset">
             <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
             <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+            <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
             <h2 class="legend"><?php echo $this->__('Account Information') ?></h2>
             <ul class="form-list">
                 <?php $_tipopessoa = $this->getLayout()->createBlock('onestepcheckout/widget_tipopessoa');?>
@@ -188,7 +189,7 @@
         <div class="buttons-set">
             <p class="required"><?php echo $this->__('* Required Fields') ?></p>
             <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>" class="back-link"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
-            <button type="submit" title="<?php echo $this->__('Submit') ?>" class="button"><span><span><?php echo $this->__('Submit') ?></span></span></button>
+            <button type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Submit')) ?>" class="button"><span><span><?php echo $this->__('Submit') ?></span></span></button>
         </div>
         <?php if (Mage::helper('checkout')->isContextCheckout()): ?>
             <input name="context" type="hidden" value="checkout" />
@@ -324,14 +325,14 @@
 
         if ($('taxvat')) {
             $('taxvat').addClassName('validate-taxvat');
-            $('taxvat').observe('keyup', function(event) {
+            $('taxvat').observe('keyup', function() {
                 mascara(this, mdocumento);
             });
         }
 
         if ($('telephone')) {
             $('telephone').addClassName('validate-phone-br');
-            $('telephone').observe('keyup', function(event) {
+            $('telephone').observe('keyup', function() {
                 this.maxLength = 15;
                 mascara(this, mtel);
             });
@@ -343,40 +344,40 @@
                 mascara(this, mtel);
             });
         }
-<?php if ($this->getShowAddressFields()): ?>
-            if ($('postcode')) {
-                $('postcode').addClassName('validate-zip-br');
-                $('postcode').observe('keyup', function(event) {
-                    this.maxLength = 8;
-                    mascara(this, sonumeros);
-                });
-            }
-            if ($('street1')) {
-                $('street1').observe('keyup', function(event) {
-                    this.maxLength = 40;
-                });
-            }
-            if ($('street2')) {
-                $('street2').observe('keyup', function(event) {
-                    this.maxLength = 5;
-                });
-            }
-            if ($('street3')) {
-                $('street3').observe('keyup', function(event) {
-                    this.maxLength = 20;
-                });
-            }
-            if ($('street4')) {
-                $('street4').observe('keyup', function(event) {
-                    this.maxLength = 20;
-                });
-            }
-            if ($('city')) {
-                $('city').observe('keyup', function(event) {
-                    this.maxLength = 30;
-                });
-            }
-<?php endif; ?>
+        <?php if ($this->getShowAddressFields()): ?>
+        if ($('postcode')) {
+            $('postcode').addClassName('validate-zip-br');
+            $('postcode').observe('keyup', function() {
+                this.maxLength = 8;
+                mascara(this, sonumeros);
+            });
+        }
+        if ($('street1')) {
+            $('street1').observe('keyup', function() {
+                this.maxLength = 40;
+            });
+        }
+        if ($('street2')) {
+            $('street2').observe('keyup', function() {
+                this.maxLength = 5;
+            });
+        }
+        if ($('street3')) {
+            $('street3').observe('keyup', function() {
+                this.maxLength = 20;
+            });
+        }
+        if ($('street4')) {
+            $('street4').observe('keyup', function() {
+                this.maxLength = 20;
+            });
+        }
+        if ($('city')) {
+            $('city').observe('keyup', function() {
+                this.maxLength = 30;
+            });
+        }
+        <?php endif; ?>
         //]]>
     </script>
 </div>

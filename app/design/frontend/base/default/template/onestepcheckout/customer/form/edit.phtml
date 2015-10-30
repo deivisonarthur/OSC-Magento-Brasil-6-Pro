@@ -76,7 +76,7 @@
             <li class="wide">
                 <?php $_ie = $this->getLayout()->createBlock('onestepcheckout/widget_ie') ?>
                 <?php if ($_ie->isEnabled()): ?>
-                    <?php echo $_ie->setDate($this->getCustomer()->getIe())->toHtml() ?>
+                    <?php echo $_ie->setIe($this->getCustomer()->getIe())->toHtml() ?>
                 <?php endif ?>
             </li>
             <li>

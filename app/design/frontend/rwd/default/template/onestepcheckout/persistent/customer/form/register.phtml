@@ -20,6 +20,7 @@
                 <div class="fieldset">
                     <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
                     <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+            	    <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
                     <h2 class="legend"><?php echo $this->__('Account Information') ?></h2>
                     <ul class="form-list">
                     <?php $_tipopessoa = $this->getLayout()->createBlock('onestepcheckout/widget_tipopessoa');?>
@@ -168,7 +169,7 @@
 	                <?php $_ie = $this->getLayout()->createBlock('onestepcheckout/widget_ie') ?>
 	                <?php if ($_ie->isEnabled()): ?>
 	                    <li class="fields">
-	                        <?php echo $_ie->setDate($this->getFormData()->getIe())->toHtml() ?>
+	                        <?php echo $_ie->setIe($this->getFormData()->getIe())->toHtml() ?>
 	                    </li>
 	                <?php endif ?>
                         <li class="fields">
@@ -330,14 +331,14 @@
 
         if ($('taxvat')) {
             $('taxvat').addClassName('validate-taxvat');
-            $('taxvat').observe('keyup', function(event) {
+            $('taxvat').observe('keyup', function() {
                 mascara(this, mdocumento);
             });
         }
 
         if ($('telephone')) {
             $('telephone').addClassName('validate-phone-br');
-            $('telephone').observe('keyup', function(event) {
+            $('telephone').observe('keyup', function() {
                 this.maxLength = 15;
                 mascara(this, mtel);
             });
@@ -350,38 +351,38 @@
             });
         }
         <?php if ($this->getShowAddressFields()): ?>
-            if ($('postcode')) {
-                $('postcode').addClassName('validate-zip-br');
-                $('postcode').observe('keyup', function(event) {
-                    this.maxLength = 8;
-                    mascara(this, sonumeros);
-                });
-            }
-            if ($('street1')) {
-                $('street1').observe('keyup', function(event) {
-                    this.maxLength = 40;
-                });
-            }
-            if ($('street2')) {
-                $('street2').observe('keyup', function(event) {
-                    this.maxLength = 5;
-                });
-            }
-            if ($('street3')) {
-                $('street3').observe('keyup', function(event) {
-                    this.maxLength = 20;
-                });
-            }
-            if ($('street4')) {
-                $('street4').observe('keyup', function(event) {
-                    this.maxLength = 20;
-                });
-            }
-            if ($('city')) {
-                $('city').observe('keyup', function(event) {
-                    this.maxLength = 30;
-                });
-            }
+        if ($('postcode')) {
+            $('postcode').addClassName('validate-zip-br');
+            $('postcode').observe('keyup', function() {
+                this.maxLength = 8;
+                mascara(this, sonumeros);
+            });
+        }
+        if ($('street1')) {
+            $('street1').observe('keyup', function() {
+                this.maxLength = 40;
+            });
+        }
+        if ($('street2')) {
+            $('street2').observe('keyup', function() {
+                this.maxLength = 5;
+            });
+        }
+        if ($('street3')) {
+            $('street3').observe('keyup', function() {
+                this.maxLength = 20;
+            });
+        }
+        if ($('street4')) {
+            $('street4').observe('keyup', function() {
+                this.maxLength = 20;
+            });
+        }
+        if ($('city')) {
+            $('city').observe('keyup', function() {
+                this.maxLength = 30;
+            });
+        }
         <?php endif; ?>
         //]]>
     </script>

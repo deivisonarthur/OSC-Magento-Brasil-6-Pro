@@ -157,47 +157,47 @@
     });
     if (jQuery('#telephone')) {
         jQuery('#telephone').addClass('validate-phone-br');
-        jQuery('#telephone').on('keyup', function(event) {
+        jQuery('#telephone').on('keyup', function() {
             this.maxLength = 15;
             mascara(this, mtel);
         });
     }
     if (jQuery('#fax')) {
         jQuery('#fax').addClass('validate-phone-br');
-        jQuery('#fax').on('keyup', function(event) {
+        jQuery('#fax').on('keyup', function() {
             this.maxLength = 15;
             mascara(this, mtel);
         });
     }
     if (jQuery('#postcode')) {
         jQuery('#postcode').addClass('validate-zip-br');
-        jQuery('#postcode').on('keyup', function(event) {
+        jQuery('#postcode').on('keyup', function() {
             this.maxLength = 8;
             mascara(this, sonumeros);
         });
     }
     if (jQuery('#street_1')) {
-        jQuery('#street_1').on('keyup', function(event) {
+        jQuery('#street_1').on('keyup', function() {
             this.maxLength = 40;
         });
     }
     if (jQuery('#street_2')) {
-        jQuery('#street_2').on('keyup', function(event) {
+        jQuery('#street_2').on('keyup', function() {
             this.maxLength = 5;
         });
     }
     if (jQuery('#street_3')) {
-        jQuery('#street_3').on('keyup', function(event) {
+        jQuery('#street_3').on('keyup', function() {
             this.maxLength = 20;
         });
     }
     if (jQuery('#street_4')) {
-        jQuery('#street_4').on('keyup', function(event) {
+        jQuery('#street_4').on('keyup', function() {
             this.maxLength = 20;
         });
     }
     if (jQuery('#city')) {
-        jQuery('#city').on('keyup', function(event) {
+        jQuery('#city').on('keyup', function() {
             this.maxLength = 30;
         });
     }
