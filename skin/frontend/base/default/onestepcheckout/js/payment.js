@@ -176,8 +176,7 @@ OnestepcheckoutPayment.prototype = {
                 //enable elements
                 element.select('input', 'select', 'textarea', 'button').each(function(field) {
 
-                    if (0 > field.name.indexOf('hash'))
-                        field.value = '';
+                    //if (0 > field.name.indexOf('hash')) field.value = '';
                     field.disabled = false;
                 });
             }
