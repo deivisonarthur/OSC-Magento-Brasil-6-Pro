@@ -16,8 +16,8 @@ OnestepcheckoutForm.prototype = {
         this.placeOrderUrl = config.placeOrderUrl;
         this.successUrl = config.successUrl;
         this.placeOrderButton = $(config.placeOrderButtonSelector);
-        this.granTotalAmount = this.placeOrderButton.select(config.granTotalAmountSelector).first(),
-        this.pleaseWaitNotice = $$(config.pleaseWaitNoticeSelector).first(),
+        this.granTotalAmount = this.placeOrderButton.select(config.granTotalAmountSelector).first();
+        this.pleaseWaitNotice = $$(config.pleaseWaitNoticeSelector).first();
         this.disabledClassName = config.disabledClassName;
         this.popup = new OnestepcheckoutUIPopup(config.popup);
 
