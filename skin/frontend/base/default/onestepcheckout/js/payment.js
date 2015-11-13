@@ -4,6 +4,7 @@ OnestepcheckoutPayment.prototype = {
         this.container = $$(config.containerSelector).first();
         this.wrapContainer = $$(config.wrapContainerSelector).first();
         this.switchMethodInputs = $$(config.switchMethodInputsSelector);
+        this.cvvInput = $$(config.cvvInputSelector).first();
         this.methodAdditionalContainerIdPrefix = config.methodAdditionalContainerIdPrefix;
         this.savePaymentUrl = config.savePaymentUrl;
         this.storedData = {};
@@ -58,6 +59,27 @@ OnestepcheckoutPayment.prototype = {
         });
         if(this.cvv.closeEl){
             this.cvv.closeEl.observe('click', me.onTooltipTriggerElClick.bind(me));
+        }
+        //CID Jump
+        if (this.cvvInput){
+            this.cvvInput.observe('keyup', function(){
+                var ccTypeContainer = $(this.id.substr(0,this.id.indexOf('_cc_cid')) + '_cc_type');
+                var ccCidContainer = $(this.id.substr(0,this.id.indexOf('_cc_cid')) + '_cc_cid');
+
+                if (!ccTypeContainer) {
+                    return true;
+                }
+                var ccType = ccTypeContainer.value;
+
+                if (typeof Validation.creditCartTypes.get(ccType) == 'undefined') {
+                    return false;
+                }
+                var re = Validation.creditCartTypes.get(ccType)[1];
+
+                if(re.test(ccCidContainer.value)){
+                    OSCForm.placeOrderButton.focus();
+                }
+            });
         }
 
         //method changed
@@ -153,6 +175,9 @@ OnestepcheckoutPayment.prototype = {
 
                 //enable elements
                 element.select('input', 'select', 'textarea', 'button').each(function(field) {
+
+                    if (0 > field.name.indexOf('hash'))
+                        field.value = '';
                     field.disabled = false;
                 });
             }
