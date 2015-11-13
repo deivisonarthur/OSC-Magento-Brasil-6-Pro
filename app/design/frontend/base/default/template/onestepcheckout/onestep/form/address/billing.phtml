@@ -74,7 +74,7 @@
                         <?php $_ie = $this->getLayout()->createBlock('onestepcheckout/widget_ie') ?>
                         <?php if ($_ie->isEnabled()): ?>
                             <li class="wide">
-                                <?php echo $_ie->setDate($this->getQuote()->getCustomerIe())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?>
+                                <?php echo $_ie->setIe($this->getQuote()->getCustomerIe())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?>
                             </li>
                         <?php endif ?>
                         <li>
