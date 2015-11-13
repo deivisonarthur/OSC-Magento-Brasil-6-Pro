@@ -345,7 +345,7 @@
         }
         if ($('fax')) {
             $('fax').addClassName('validate-phone-br');
-            $('fax').observe('keyup', function(event) {
+            $('fax').observe('keyup', function() {
                 this.maxLength = 15;
                 mascara(this, mtel);
             });
