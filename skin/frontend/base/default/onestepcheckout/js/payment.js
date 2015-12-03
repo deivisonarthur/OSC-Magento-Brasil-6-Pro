@@ -186,7 +186,7 @@ OnestepcheckoutPayment.prototype = {
         });
         OnestepcheckoutCore.updater.startRequest(this.savePaymentUrl, {
             method: 'post',
-            parameters: Form.serialize(this.container, true)
+            parameters: Form.serialize(this.container.id, true)
         });
     },
 
@@ -221,7 +221,7 @@ OnestepcheckoutPayment.prototype = {
         }
         OnestepcheckoutCore.updater.startRequest(this.savePaymentUrl, {
             method: 'post',
-            parameters: Form.serialize(this.container, true)
+            parameters: Form.serialize(this.container.id, true)
         });
     },
 
