@@ -235,6 +235,9 @@ var OnestepcheckoutCoreUpdater = {
 
         // payment form reload fix
         OSCPayment.initObservers();
+
+        // for Discount purpose...
+        OSCShipment.switchToMethod();
     },
 
     _registerBlockNameForUpdate: function(name, selector) {
