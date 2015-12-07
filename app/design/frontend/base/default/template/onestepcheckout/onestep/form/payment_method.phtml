@@ -57,3 +57,11 @@
         <?php echo $this->getChildHtml('extra'); ?>
     </div>
 </div>
+<script type="text/javascript">
+$$('input[name="payment[method]"]').each(function(item,index){
+    Element.observe(item,'change',function(){
+        OSCShipment.switchToMethod(); // for Discount purpose...
+    });
+});
+</script>
+
