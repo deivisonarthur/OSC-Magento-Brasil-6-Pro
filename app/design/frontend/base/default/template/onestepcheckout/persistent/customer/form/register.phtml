@@ -259,7 +259,7 @@
         Validation.add('validate-email-exist', '<?php echo $this->__('Please enter a valid email address. For example johndoe@domain.com.') ?>', function(value) {
             if (checkMail(value)) {
                 var ok = false;
-                var url = '/onestepcheckout/ajax/check_email/';
+                var url = '<?php echo Mage::getBaseUrl(); ?>onestepcheckout/ajax/check_email/';
                 new Ajax.Request(url, {
                     method: 'post',
                     asynchronous: false,
@@ -288,7 +288,7 @@
         Validation.add('validate-taxvat', '<?php echo $this->__('This is a required field.') ?>', function(value) {
             if (validaCPF(value,0)) {
                 var ok = false;
-                var url = '/onestepcheckout/ajax/check_taxvat/';
+                var url = '<?php echo Mage::getBaseUrl(); ?>onestepcheckout/ajax/check_taxvat/';
                 new Ajax.Request(url, {
                     method: 'post',
                     asynchronous: false,
