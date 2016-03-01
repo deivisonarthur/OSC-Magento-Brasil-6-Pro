@@ -162,7 +162,7 @@ function buscaCep(quale) {
        //baseurl - /index
         if (cep != '' && cep.length == 8) {
             loadposthideshow(true, '.onestepcheckout-postcod-process');
-            jQuery.getScript(urlBase + "ajax/busca_cep?cep="+ cep + "", function() {
+            jQuery.getScript(BASE_URL + "onestepcheckout/ajax/busca_cep?cep="+ cep + "", function() {
                 loadposthideshow(false, '.onestepcheckout-postcod-process');
                 if (resultadoCEP["resultado"] != 0) {
                     if (unescape(resultadoCEP["logradouro"])) jQuery('input[name*="street[]"]').val(unescape(resultadoCEP["tipo_logradouro"]) + " "+ unescape(resultadoCEP["logradouro"]));
@@ -183,7 +183,7 @@ function buscaCep(quale) {
         var cep = jQuery('input[name*="' + quale + '[postcode]"]').val();
         if (cep != '' && cep.length == 8) {
             loadposthideshow(true, '.onestepcheckout-postcod-process');
-            jQuery.getScript(urlBase + "ajax/busca_cep?cep="+ cep + "", function() {
+            jQuery.getScript(BASE_URL + "onestepcheckout/ajax/busca_cep?cep="+ cep + "", function() {
                 loadposthideshow(false, '.onestepcheckout-postcod-process');
                 if (resultadoCEP["resultado"] != 0) {
                     if (unescape(resultadoCEP["logradouro"])) jQuery('input[name*="' + quale + '[street][]"]').val(unescape(resultadoCEP["tipo_logradouro"]) + " "+ unescape(resultadoCEP["logradouro"]));
