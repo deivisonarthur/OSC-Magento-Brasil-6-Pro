@@ -749,14 +749,17 @@ class Inovarti_Onestepcheckout_AjaxController extends Mage_Checkout_Controller_A
 
         try {
 
-            $clientSoap = new SoapClient("https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl" );
-            $result = $clientSoap->consultaCep($soapArgs);
-            $dados = $result->return;
+            $ch = curl_init("http://cep.republicavirtual.com.br/web_cep.php?cep={$cep}&formato=json");
+            curl_setopt_array($ch, array(
+                CURLOPT_RETURNTRANSFER => 1
+            ));
+            $ret = curl_exec($ch);
 
-            if (is_soap_fault($result)) {
+            if (curl_errno($ch)) {
                 $return = "var resultadoCEP = { 'uf' : '', 'cidade' : '', 'bairro' : '', 'tipo_logradouro' : '', 'logradouro' : '', 'resultado' : '0', 'resultado_txt' : 'cep nao encontrado' }";
             }else{
-                $return = "var resultadoCEP = { 'uf' : '".$dados->uf."', 'cidade' : '".$dados->cidade."', 'bairro' : '".$dados->bairro."', 'tipo_logradouro' : '', 'logradouro' : '".$dados->end."', 'resultado' : '1', 'resultado_txt' : 'sucesso%20-%20cep%20completo' }";
+//                $return = "var resultadoCEP = { 'uf' : '".$dados->uf."', 'cidade' : '".$dados->cidade."', 'bairro' : '".$dados->bairro."', 'tipo_logradouro' : '', 'logradouro' : '".$dados->end."', 'resultado' : '1', 'resultado_txt' : 'sucesso%20-%20cep%20completo' }";
+                $return = "var resultadoCEP = $ret";
             }
 
         } catch (SoapFault $e) {
