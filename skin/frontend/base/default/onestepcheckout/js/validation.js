@@ -157,6 +157,7 @@ function checkCPF(vCPF) {
 function buscaCep(quale) {
 
     var urlBase = window.location.href.slice(0, -6);
+    var BASE_URL = window.location.protocol + "//" + window.location.host + "/";
    if (!quale){
        var cep = jQuery('input[name*="postcode"]').val();
        //baseurl - /index
