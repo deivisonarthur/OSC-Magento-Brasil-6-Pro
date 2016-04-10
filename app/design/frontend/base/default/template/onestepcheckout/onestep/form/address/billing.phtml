@@ -24,7 +24,8 @@
                     <?php if ($_tipopessoa->isEnabled()): ?>
                         <li class="control tipopessoa">
                             <input type="radio" name="billing[radio_tipopessoa]" value="Física" id="billing:fisica" class="radio" title="CPF" <?php if ($this->getDataFromSession('radio_tipopessoa') == 'Física'): ?> checked="checked"<?php endif; ?>/><label for="billing:fisica"><?php echo $this->__('Pessoa Física') ?></label>
-                            <input type="radio" name="billing[radio_tipopessoa]" value="Jurídica" id="billing:juridica" class="radio" title="CNPJ" <?php if ($this->getDataFromSession('radio_tipopessoa') == 'Jurídica'): ?> checked="checked"<?php endif; ?>/><label for="billing:juridica"><?php echo $this->__('Pessoa Jurídica') ?></label>
+                            <br></br>
+							<input type="radio" name="billing[radio_tipopessoa]" value="Jurídica" id="billing:juridica" class="radio" title="CNPJ" <?php if ($this->getDataFromSession('radio_tipopessoa') == 'Jurídica'): ?> checked="checked"<?php endif; ?>/><label for="billing:juridica"><?php echo $this->__('Pessoa Jurídica') ?></label>
                         </li>
                         <li class="wide hidden">
                             <?php echo $_tipopessoa->setTipopessoa($this->getDataFromSession('tipopessoa'))->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?>
