@@ -60,7 +60,9 @@
 <script type="text/javascript">
 $$('input[name="payment[method]"]').each(function(item,index){
     Element.observe(item,'change',function(){
-        OSCShipment.switchToMethod(); // for Discount purpose...
+        // for Discount purpose...
+        OSCPayment.forcesavePayment();
+        OSCShipment.switchToMethod(OSCShipment.currentMethod, true);
     });
 });
 </script>
