@@ -234,10 +234,10 @@ var OnestepcheckoutCoreUpdater = {
         }
 
         // payment form reload fix
-        OSCPayment.initObservers();
+        this.initObservers();
 
         // for Discount purpose...
-        OSCShipment.switchToMethod();
+        // OSCShipment.switchToMethod();
     },
 
     _registerBlockNameForUpdate: function(name, selector) {

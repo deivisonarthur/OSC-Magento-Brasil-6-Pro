@@ -131,7 +131,7 @@ OnestepcheckoutPayment.prototype = {
                 //Event fix for payment methods without form like "Check / Money order"
                 document.body.fire('payment-method:switched', {method_code : methodCode});
             }
-            OSCPayment.currentMethod = this.currentMethod = methodCode;
+            this.currentMethod = methodCode;
             this.savePayment();
         }
     },
