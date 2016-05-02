@@ -234,7 +234,7 @@ var OnestepcheckoutCoreUpdater = {
         }
 
         // payment form reload fix
-        this.initObservers();
+        OSCPayment.initObservers();
 
         // for Discount purpose...
         // OSCShipment.switchToMethod();

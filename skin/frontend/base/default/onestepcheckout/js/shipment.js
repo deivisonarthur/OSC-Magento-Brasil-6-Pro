@@ -39,7 +39,7 @@ OnestepcheckoutShipment.prototype = {
                 method: 'post',
                 parameters: Form.serialize(this.container.id, true)
             });
-            this.currentMethod = methodCode;
+            OSCShipment.currentMethod = this.currentMethod = methodCode;
         }
     }
 };
