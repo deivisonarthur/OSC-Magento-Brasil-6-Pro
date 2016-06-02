@@ -33,13 +33,13 @@ OnestepcheckoutShipment.prototype = {
         })
     },
 
-    switchToMethod: function(methodCode, forced = false) {
-        if (this.currentMethod !== methodCode || forced) {
+    switchToMethod: function(methodCode) {
+        if (this.currentMethod !== methodCode) {
             OnestepcheckoutCore.updater.startRequest(this.saveShipmentUrl, {
                 method: 'post',
                 parameters: Form.serialize(this.container.id, true)
             });
-            OSCShipment.currentMethod = this.currentMethod = methodCode;
+            this.currentMethod = methodCode;
         }
     }
 };
