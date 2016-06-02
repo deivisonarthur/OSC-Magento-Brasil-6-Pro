@@ -749,7 +749,11 @@ class Inovarti_Onestepcheckout_AjaxController extends Mage_Checkout_Controller_A
 
         try {
 
-            $clientSoap = new SoapClient("https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl" );
+            $clientSoap = new SoapClient("https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl", array(
+                'soap_version' => SOAP_1_1, 'encoding' => 'utf-8', 'trace' => true, 'exceptions' => true,
+                'cache_wsdl' => WSDL_CACHE_BOTH, 'connection_timeout' => 5
+            ));
+
             $result = $clientSoap->consultaCep($soapArgs);
             $dados = $result->return;
 
