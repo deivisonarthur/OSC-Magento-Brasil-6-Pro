@@ -33,7 +33,7 @@ OnestepcheckoutShipment.prototype = {
         })
     },
 
-    switchToMethod: function(methodCode, forced = false) {
+    switchToMethod: function(methodCode, forced) {
         if (this.currentMethod !== methodCode || forced) {
             OnestepcheckoutCore.updater.startRequest(this.saveShipmentUrl, {
                 method: 'post',
