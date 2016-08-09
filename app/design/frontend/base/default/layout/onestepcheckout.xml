@@ -19,6 +19,7 @@
             <action method="addItem"><type>skin_js</type><name>onestepcheckout/js/review.js</name></action>
             <action method="addItem"><type>skin_js</type><name>onestepcheckout/js/form.js</name></action>
             <action method="addItem"><type>skin_css</type><name>onestepcheckout/css/onestepcheckout.css</name></action>
+            <action method="addJs"><script>lib/ccard.js</script></action>
         </reference>
         <reference name="content">
             <block type="onestepcheckout/onestep" name="onestepcheckout.onestep" template="onestepcheckout/onestep.phtml">
