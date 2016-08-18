@@ -731,6 +731,7 @@ class Inovarti_Onestepcheckout_AjaxController extends Mage_Checkout_Controller_A
         }
         $this->getResponse()->setBody(Zend_Json::encode($data));
     }
+    
     public function busca_cepAction() {
         if ($this->getRequest()->getPost()) {
             $cep = $this->getRequest()->getPost('cep', false);
@@ -747,29 +748,34 @@ class Inovarti_Onestepcheckout_AjaxController extends Mage_Checkout_Controller_A
         );
         $return = '';
 
-        try {
+        if ( class_exists("SOAPClient") ) {
+          try {
 
-            $clientSoap = new SoapClient("https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl", array(
-                'soap_version' => SOAP_1_1, 'encoding' => 'utf-8', 'trace' => true, 'exceptions' => true,
-                'cache_wsdl' => WSDL_CACHE_BOTH, 'connection_timeout' => 5
-            ));
+              $clientSoap = new SoapClient("https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl", array(
+                  'soap_version' => SOAP_1_1, 'encoding' => 'utf-8', 'trace' => true, 'exceptions' => true,
+                  'cache_wsdl' => WSDL_CACHE_BOTH, 'connection_timeout' => 5
+              ));
 
-            $result = $clientSoap->consultaCep($soapArgs);
-            $dados = $result->return;
+              $result = $clientSoap->consultaCep($soapArgs);
+              $dados = $result->return;
 
-            if (is_soap_fault($result)) {
-                $return = "var resultadoCEP = { 'uf' : '', 'cidade' : '', 'bairro' : '', 'tipo_logradouro' : '', 'logradouro' : '', 'resultado' : '0', 'resultado_txt' : 'cep nao encontrado' }";
-            }else{
-                $return = "var resultadoCEP = { 'uf' : '".$dados->uf."', 'cidade' : '".$dados->cidade."', 'bairro' : '".$dados->bairro."', 'tipo_logradouro' : '', 'logradouro' : '".$dados->end."', 'resultado' : '1', 'resultado_txt' : 'sucesso%20-%20cep%20completo' }";
-            }
+              if (is_soap_fault($result)) {
+                  $return = "var resultadoCEP = { 'uf' : '', 'cidade' : '', 'bairro' : '', 'tipo_logradouro' : '', 'logradouro' : '', 'resultado' : '0', 'resultado_txt' : 'cep nao encontrado' }";
+              }else{
+                  $return = "var resultadoCEP = { 'uf' : '".$dados->uf."', 'cidade' : '".$dados->cidade."', 'bairro' : '".$dados->bairro."', 'tipo_logradouro' : '', 'logradouro' : '".$dados->end."', 'resultado' : '1', 'resultado_txt' : 'sucesso%20-%20cep%20completo' }";
+              }
 
-        } catch (SoapFault $e) {
-            $return = "var resultadoCEP = { 'uf' : '', 'cidade' : '', 'bairro' : '', 'tipo_logradouro' : '', 'logradouro' : '', 'resultado' : '0', 'resultado_txt' : 'cep nao encontrado' }";
-        } catch (Exception $e) {
-            $return = "var resultadoCEP = { 'uf' : '', 'cidade' : '', 'bairro' : '', 'tipo_logradouro' : '', 'logradouro' : '', 'resultado' : '0', 'resultado_txt' : 'cep nao encontrado' }";
+          } catch (SoapFault $e) {
+              $return = "var resultadoCEP = { 'uf' : '', 'cidade' : '', 'bairro' : '', 'tipo_logradouro' : '', 'logradouro' : '', 'resultado' : '0', 'resultado_txt' : 'cep nao encontrado' }";
+          } catch (Exception $e) {
+              $return = "var resultadoCEP = { 'uf' : '', 'cidade' : '', 'bairro' : '', 'tipo_logradouro' : '', 'logradouro' : '', 'resultado' : '0', 'resultado_txt' : 'cep nao encontrado' }";
+          }
+
+          $this->getResponse()->setBody($return);
         }
-
-        $this->getResponse()->setBody($return);
+        else {
+          Mage::log('Módulo SOAPClient desabilitado no PHP.', null, 'onestepcheckout.log');
+        }
     }
 
 }
