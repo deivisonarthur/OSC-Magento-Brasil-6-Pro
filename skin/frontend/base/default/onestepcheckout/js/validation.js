@@ -175,7 +175,7 @@ function buscaCep(quale) {
                     });
                     jQuery('input[name*="street[2]"]').focus();
                 } else {
-                    alert("Endereço não encontrado para o cep ");
+                    alert(resultadoCEP["resultado_txt"]);
                 }
             });
         }
@@ -196,7 +196,7 @@ function buscaCep(quale) {
                     });
                     jQuery('input[name*="' + quale + '[street][2]"]').focus();
                 } else {
-                    alert("Endereço não encontrado para o cep ");
+                   alert(resultadoCEP["resultado_txt"]);
                 }
             });
         }   
