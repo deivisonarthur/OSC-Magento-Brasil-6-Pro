@@ -1,0 +1,9 @@
+{
+    "name": "deivisonarthur/OSC-Magento-Brasil-6-Pro",
+    "description": "Checkout em passo único com alterações para realidade do mercado brasileiro.",
+    "type": "magento-module",
+    "homepage": "https://github.com/deivisonarthur/OSC-Magento-Brasil-6-Pro/",
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}
