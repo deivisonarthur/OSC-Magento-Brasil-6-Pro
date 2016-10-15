@@ -739,32 +739,15 @@ class Inovarti_Onestepcheckout_AjaxController extends Mage_Checkout_Controller_A
         }
 
         $cep = preg_replace('/[^\d]/', '', $cep);
-
-        $soapArgs = array(
-            'cep' => $cep,
-            'encoding' => 'UTF-8',
-            'exceptions' => 0
-        );
         $return = '';
 
         try {
-
-            $clientSoap = new SoapClient("https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl", array(
-                'soap_version' => SOAP_1_1, 'encoding' => 'utf-8', 'trace' => true, 'exceptions' => true,
-                'cache_wsdl' => WSDL_CACHE_BOTH, 'connection_timeout' => 5
-            ));
-
-            $result = $clientSoap->consultaCep($soapArgs);
-            $dados = $result->return;
-
-            if (is_soap_fault($result)) {
-                $return = "var resultadoCEP = { 'uf' : '', 'cidade' : '', 'bairro' : '', 'tipo_logradouro' : '', 'logradouro' : '', 'resultado' : '0', 'resultado_txt' : 'cep nao encontrado' }";
-            }else{
-                $return = "var resultadoCEP = { 'uf' : '".$dados->uf."', 'cidade' : '".$dados->cidade."', 'bairro' : '".$dados->bairro."', 'tipo_logradouro' : '', 'logradouro' : '".$dados->end."', 'resultado' : '1', 'resultado_txt' : 'sucesso%20-%20cep%20completo' }";
+            $result = @file_get_contents('http://api.postmon.com.br/v1/cep/'.$cep);
+            if (! $result) {
+                throw new Exception('Cep não encontrado');
             }
-
-        } catch (SoapFault $e) {
-            $return = "var resultadoCEP = { 'uf' : '', 'cidade' : '', 'bairro' : '', 'tipo_logradouro' : '', 'logradouro' : '', 'resultado' : '0', 'resultado_txt' : 'cep nao encontrado' }";
+            $dados = json_decode($result);
+            $return = "var resultadoCEP = { 'uf' : '".$dados->estado."', 'cidade' : '".$dados->cidade."', 'bairro' : '".$dados->bairro."', 'tipo_logradouro' : '', 'logradouro' : '".$dados->logradouro."', 'resultado' : '1', 'resultado_txt' : 'sucesso%20-%20cep%20completo' }";
         } catch (Exception $e) {
             $return = "var resultadoCEP = { 'uf' : '', 'cidade' : '', 'bairro' : '', 'tipo_logradouro' : '', 'logradouro' : '', 'resultado' : '0', 'resultado_txt' : 'cep nao encontrado' }";
         }
