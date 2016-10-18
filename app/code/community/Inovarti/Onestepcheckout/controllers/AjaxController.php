@@ -146,34 +146,38 @@ class Inovarti_Onestepcheckout_AjaxController extends Mage_Checkout_Controller_A
         if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost('billing', array());
             $customerAddressId = $this->getRequest()->getPost('billing_address_id', false);
-
-            if (isset($data['email'])) {
-                $data['email'] = trim($data['email']);
-            }
-            $saveBillingResult = Mage::helper('onestepcheckout/address')->saveBilling($data, $customerAddressId);
-            $usingCase = isset($data['use_for_shipping']) ? (int) $data['use_for_shipping'] : 0;
-            if ($usingCase === 0) {
-                $data = $this->getRequest()->getPost('shipping', array());
-                $customerAddressId = $this->getRequest()->getPost('shipping_address_id', false);
-                $saveShippingResult = Mage::helper('onestepcheckout/address')->saveShipping($data, $customerAddressId);
-            }
-            if (isset($saveShippingResult)) {
-                $saveResult = array_merge($saveBillingResult, $saveShippingResult);
-            } else {
-                $saveResult = $saveBillingResult;
-            }
-
-            if (isset($saveResult['error'])) {
-                $result['success'] = false;
-                if (is_array($saveResult['message'])) {
-                    $result['messages'] = array_merge($result['messages'], $saveResult['message']);
-                } else {
-                    $result['messages'][] = $saveResult['message'];
+            if (!empty(trim($data['email']))) {
+                if (isset($data['email'])) {
+                    $data['email'] = trim($data['email']);
                 }
+                $saveBillingResult = Mage::helper('onestepcheckout/address')->saveBilling($data, $customerAddressId);
+                $usingCase = isset($data['use_for_shipping']) ? (int) $data['use_for_shipping'] : 0;
+                if ($usingCase === 0) {
+                    $data = $this->getRequest()->getPost('shipping', array());
+                    $customerAddressId = $this->getRequest()->getPost('shipping_address_id', false);
+                    $saveShippingResult = Mage::helper('onestepcheckout/address')->saveShipping($data, $customerAddressId);
+                }
+                if (isset($saveShippingResult)) {
+                    $saveResult = array_merge($saveBillingResult, $saveShippingResult);
+                } else {
+                    $saveResult = $saveBillingResult;
+                }
+
+                if (isset($saveResult['error'])) {
+                    $result['success'] = false;
+                    if (is_array($saveResult['message'])) {
+                        $result['messages'] = array_merge($result['messages'], $saveResult['message']);
+                    } else {
+                        $result['messages'][] = $saveResult['message'];
+                    }
+                }
+                $this->getOnepage()->getQuote()->collectTotals()->save();
+                $result['blocks'] = $this->getUpdater()->getBlocks();
+                $result['grand_total'] = Mage::helper('onestepcheckout')->getGrandTotal($this->getOnepage()->getQuote());
+            } else {
+                $result['success'] = false;
+                $result['messages'][] = $this->__('Please enter your email.');
             }
-            $this->getOnepage()->getQuote()->collectTotals()->save();
-            $result['blocks'] = $this->getUpdater()->getBlocks();
-            $result['grand_total'] = Mage::helper('onestepcheckout')->getGrandTotal($this->getOnepage()->getQuote());
         } else {
             $result['success'] = false;
             $result['messages'][] = $this->__('Please specify billing address information.');
