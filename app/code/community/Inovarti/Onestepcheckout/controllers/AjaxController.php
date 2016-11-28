@@ -67,6 +67,10 @@ class Inovarti_Onestepcheckout_AjaxController extends Mage_Checkout_Controller_A
         }  elseif ($customerSession->isLoggedIn()) {
             $this->_redirect(Mage::helper('checkout/url')->getCheckoutUrl());
         }
+        if ($customerSession->isLoggedIn()) {
+				$result = header('Location: '.Mage::helper('checkout/url')->getCheckoutUrl());
+				die;
+			}
         $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($result));
     }
 
