@@ -97,17 +97,21 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label for="region_id" class="required"><em>*</em><?php echo $this->__('State/Province') ?></label>
+                    <label for="region" class="required"><em>*</em><?php echo $this->__('State/Province') ?></label>
                     <div class="input-box">
-                        <select id="region_id" name="region_id" title="<?php echo $this->__('State/Province') ?>" class="validate-select" style="display:none;">
-                           <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                        <select id="region" name="region" title="<?php echo $this->__('State/Province') ?>" class="validate-select">
+                            <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+							<?php
+								$this->setData('country_id','BR'); 
+								$regions = $this->getRegionCollection();
+								foreach($regions as $region)
+								{
+									echo "<option value='" . $region[region_id] . "'";
+									if($region[region_id] == $this->getAddress()->getRegionId()){ echo " selected"; }
+									echo ">" . $region['name'] . "</option>";
+								}
+							?>
                         </select>
-                        <script type="text/javascript">
-                        //<![CDATA[
-                            $('region_id').setAttribute('defaultValue',  "<?php echo $this->getAddress()->getRegionId() ?>");
-                        //]]>
-                        </script>
-                        <input type="text" id="region" name="region" value="<?php echo $this->escapeHtml($this->getAddress()->getRegion()) ?>"  title="<?php echo $this->__('State/Province') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('region') ?>" />
                     </div>
                 </div>
             </li>
