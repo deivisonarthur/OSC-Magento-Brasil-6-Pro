@@ -72,7 +72,6 @@ app/design/frontend/rwd/default/template/onestepcheckout/persistent/customer/for
 app/etc/modules/Inovarti_Onestepcheckout.xml app/etc/modules/Inovarti_Onestepcheckout.xml
 app/locale/en_US/Inovarti_Onestepcheckout.csv app/locale/en_US/Inovarti_Onestepcheckout.csv
 app/locale/pt_BR/Inovarti_Onestepcheckout.csv app/locale/pt_BR/Inovarti_Onestepcheckout.csv
-README.md README.md
 skin/frontend/base/default/onestepcheckout/css/onestepcheckout.css skin/frontend/base/default/onestepcheckout/css/onestepcheckout.css
 skin/frontend/base/default/onestepcheckout/images/ajax-loader-16px.gif skin/frontend/base/default/onestepcheckout/images/ajax-loader-16px.gif
 skin/frontend/base/default/onestepcheckout/images/ajax-loader-24px.gif skin/frontend/base/default/onestepcheckout/images/ajax-loader-24px.gif
