@@ -739,33 +739,24 @@ class Inovarti_Onestepcheckout_AjaxController extends Mage_Checkout_Controller_A
         }
 
         $cep = preg_replace('/[^\d]/', '', $cep);
+        $endpoint = 'https://viacep.com.br/ws/' . $cep . '/json/';
+        $result = '';
 
-        $soapArgs = array(
-            'cep' => $cep,
-            'encoding' => 'UTF-8',
-            'exceptions' => 0
-        );
-        $return = '';
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $endpoint);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        curl_close($ch);
 
-        try {
+        if (!empty($response)) {
+            $dados = json_decode($response, true);
 
-            $clientSoap = new SoapClient("https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl", array(
-                'soap_version' => SOAP_1_1, 'encoding' => 'utf-8', 'trace' => true, 'exceptions' => true,
-                'cache_wsdl' => WSDL_CACHE_BOTH, 'connection_timeout' => 5
-            ));
-
-            $result = $clientSoap->consultaCep($soapArgs);
-            $dados = $result->return;
-
-            if (is_soap_fault($result)) {
-                $return = "var resultadoCEP = { 'uf' : '', 'cidade' : '', 'bairro' : '', 'tipo_logradouro' : '', 'logradouro' : '', 'resultado' : '0', 'resultado_txt' : 'cep nao encontrado' }";
-            }else{
-                $return = "var resultadoCEP = { 'uf' : '".$dados->uf."', 'cidade' : '".$dados->cidade."', 'bairro' : '".$dados->bairro."', 'tipo_logradouro' : '', 'logradouro' : '".$dados->end."', 'resultado' : '1', 'resultado_txt' : 'sucesso%20-%20cep%20completo' }";
+            if (isset($json['erro'])) {
+                $return = "var resultadoCEP = { 'uf' : '', 'cidade' : '', 'bairro' : '', 'tipo_logradouro' : '', 'logradouro' : '', 'resultado' : '0', 'resultado_txt' : 'CEP não encontrado!' }";
+            } else {
+                $return = "var resultadoCEP = { 'uf' : '".$dados['uf']."', 'cidade' : '".$dados['localidade']."', 'bairro' : '".$dados['bairro']."', 'tipo_logradouro' : '', 'logradouro' : '".$dados['logradouro']."', 'resultado' : '1', 'resultado_txt' : 'sucesso%20-%20cep%20completo' }";
             }
-
-        } catch (SoapFault $e) {
-            $return = "var resultadoCEP = { 'uf' : '', 'cidade' : '', 'bairro' : '', 'tipo_logradouro' : '', 'logradouro' : '', 'resultado' : '0', 'resultado_txt' : 'cep nao encontrado' }";
-        } catch (Exception $e) {
+        } else {
             $return = "var resultadoCEP = { 'uf' : '', 'cidade' : '', 'bairro' : '', 'tipo_logradouro' : '', 'logradouro' : '', 'resultado' : '0', 'resultado_txt' : 'cep nao encontrado' }";
         }
 
