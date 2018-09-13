@@ -110,14 +110,14 @@
                     <div class="field">
                         <label for="billing:telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
                         <div class="input-box">
-                            <input type="text" name="billing[telephone]" title="<?php echo $this->__('Telephone') ?>" class="input-text validate-phone-br <?php echo $this->getAttributeValidationClass('telephone') ?>" id="billing:telephone" value="<?php echo $this->getDataFromSession('telephone'); ?>" placeholder="(xx) 4567-8900" />
+                            <input autocomplete="off" type="tel" name="billing[telephone]" title="<?php echo $this->__('Telephone') ?>" class="input-text validate-phone-br <?php echo $this->getAttributeValidationClass('telephone') ?>" id="billing:telephone" value="<?php echo $this->getDataFromSession('telephone'); ?>" placeholder="(xx) 4567-8900" />
                         </div>
                     </div>
                      <?php if ($this->getConfig()->isFax()): ?>
                         <div class="field">
                             <label for="billing:fax"><?php echo $this->__('Fax') ?></label>
                             <div class="input-box">
-                                <input type="text" name="billing[fax]" title="<?php echo $this->__('Fax') ?>" class="input-text validate-phone-br <?php echo $this->getAttributeValidationClass('fax') ?>" id="billing:fax" value="<?php echo $this->getDataFromSession('fax'); ?>"  placeholder="(xx) x4567-8900" />
+                                <input autocomplete="off" type="tel" name="billing[fax]" title="<?php echo $this->__('Fax') ?>" class="input-text validate-phone-br <?php echo $this->getAttributeValidationClass('fax') ?>" id="billing:fax" value="<?php echo $this->getDataFromSession('fax'); ?>"  placeholder="(xx) x4567-8900" />
                             </div>
                         </div>
                     <?php endif ?>
@@ -127,7 +127,7 @@
                     <div class="field">
                         <label for="billing:postcode" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
                         <div class="input-box">
-                            <input type="text" title="<?php echo $this->__('Zip/Postal Code') ?>" name="billing[postcode]" id="billing:postcode" class="input-text validate-number <?php echo $this->getAttributeValidationClass('postcode') ?>" value="<?php echo $this->getDataFromSession('postcode') ?>" maxlength="8" onblur="buscaCep('billing');" />
+                            <input autocomplete="off" type="tel" title="<?php echo $this->__('Zip/Postal Code') ?>" name="billing[postcode]" id="billing:postcode" class="input-text validate-number <?php echo $this->getAttributeValidationClass('postcode') ?>" value="<?php echo $this->getDataFromSession('postcode') ?>" maxlength="8" onblur="buscaCep('billing');" />
                         </div>
                     </div>
                     <div class="field">
