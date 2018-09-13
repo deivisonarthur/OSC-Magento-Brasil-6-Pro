@@ -149,6 +149,14 @@
                     </onestepcheckout_customer_register_success>
                 </observers>
             </customer_register_success>
+            <checkout_onepage_controller_success_action>
+                <observers>
+                    <onestepheckout_clearing_quote>
+                        <class>onestepcheckout/observer</class>
+                        <method>clearSession</method>
+                    </onestepheckout_clearing_quote>
+                </observers>
+            </checkout_onepage_controller_success_action>
         </events>
         <translate>
             <modules>

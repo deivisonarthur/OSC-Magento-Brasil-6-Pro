@@ -101,4 +101,13 @@ class Inovarti_Onestepcheckout_Model_Observer {
         }
     }
 
+    /*
+    *  Fix for cart active after place order
+    *
+    * @param Varien_Event_Observer $observer
+    */
+    public function clearSession(Varien_Event_Observer $observer) {
+        Mage::getSingleton('checkout/session')->getQuote()->setIsActive(false)->save();
+    }
+
 }
