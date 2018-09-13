@@ -754,7 +754,7 @@ class Inovarti_Onestepcheckout_AjaxController extends Mage_Checkout_Controller_A
             if (isset($json['erro'])) {
                 $return = "var resultadoCEP = { 'uf' : '', 'cidade' : '', 'bairro' : '', 'tipo_logradouro' : '', 'logradouro' : '', 'resultado' : '0', 'resultado_txt' : 'CEP não encontrado!' }";
             } else {
-                $return = "var resultadoCEP = { 'uf' : '".$dados['uf']."', 'cidade' : '".$dados['localidade']."', 'bairro' : '".$dados['bairro']."', 'tipo_logradouro' : '', 'logradouro' : '".$dados['logradouro']."', 'resultado' : '1', 'resultado_txt' : 'sucesso%20-%20cep%20completo' }";
+                $return = "var resultadoCEP = { 'uf' : '".addslashes($dados['uf'])."', 'cidade' : '".addslashes($dados['localidade'])."', 'bairro' : '".addslashes($dados['bairro'])."', 'tipo_logradouro' : '', 'logradouro' : '".$dados['logradouro']."', 'resultado' : '1', 'resultado_txt' : 'sucesso%20-%20cep%20completo' }";
             }
         } else {
             $return = "var resultadoCEP = { 'uf' : '', 'cidade' : '', 'bairro' : '', 'tipo_logradouro' : '', 'logradouro' : '', 'resultado' : '0', 'resultado_txt' : 'cep nao encontrado' }";
