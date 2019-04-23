@@ -135,4 +135,16 @@ class Inovarti_Onestepcheckout_Block_Onestep_Form_Address_Shipping extends Mage_
         return $this->getQuote()->getCustomer();
     }
 
+    public function getObjectForCustomerNameWidget() {
+        $formData = Mage::getSingleton('checkout/session')->getData('onestepcheckout_form_values');
+        $address = Mage::getModel('sales/quote_address');
+        if (isset($formData['shipping'])) {
+            $address->addData($formData['shipping']);
+        }
+        if ($address->getFirstname() || $address->getLastname()) {
+            return $address;
+        }
+        return $this->getQuote()->getCustomer();
+    }
+
 }

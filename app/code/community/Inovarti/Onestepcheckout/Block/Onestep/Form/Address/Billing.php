@@ -212,4 +212,32 @@ class Inovarti_Onestepcheckout_Block_Onestep_Form_Address_Billing extends Mage_C
         return '';
     }
 
+    public function getObjectForCustomerNameWidget() {
+        $formData = Mage::getSingleton('checkout/session')->getData('onestepcheckout_form_values');
+        $address = Mage::getModel('sales/quote_address');
+        if (isset($formData['billing'])) {
+            $address->addData($formData['billing']);
+        }
+        if ($address->getFirstname() || $address->getLastname()) {
+            return $address;
+        }
+        return $this->getQuote()->getCustomer();
+    }
+
+    public function getDateForDOBWidget() {
+        $formData = Mage::getSingleton('checkout/session')->getData('onestepcheckout_form_values');
+        if (isset($formData['billing'])) {
+            $billing = $formData['billing'];
+            if (!empty($billing['year']) && !empty($billing['month']) && !empty($billing['day'])) {
+                $zDate = new Zend_Date(array(
+                    'year' => $billing['year'],
+                    'month' => $billing['month'],
+                    'day' => $billing['day'],
+                ));
+                return $zDate->toString();
+            }
+        }
+        return '';
+    }
+
 }
