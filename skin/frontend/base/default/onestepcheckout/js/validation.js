@@ -165,7 +165,8 @@ function checkCPF(vCPF) {
 }
 function buscaCep(quale) {
 
-    var urlBase = window.location.href.slice(0, -6);
+   var regexURL = /(http:\/\/.*?\/.*?\/)/;
+   var urlBase = regexURL.exec(window.location.href).last();
    if (!quale){
        var cep = jQuery('input[name*="postcode"]').val();
        //baseurl - /index
